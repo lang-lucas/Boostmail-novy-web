@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { inter, instrumentSerif } from "@/lib/fonts";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -30,9 +31,11 @@ export default function RootLayout({
       className={`${inter.variable} ${instrumentSerif.variable}`}
     >
       <body>
-        <Navbar />
-        <main className="pt-16">{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <Navbar />
+          <main className="pt-16">{children}</main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
