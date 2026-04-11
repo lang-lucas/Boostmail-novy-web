@@ -1,18 +1,32 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Brand */
   --color-brand: #398FFF;
-  --color-brand-dark: #2B6FCC;
+  --color-brand-dark: #1A5ADA;
   --color-brand-light: #5EAAFF;
-  --color-surface: #0A0A0A;
-  --color-surface-light: #141414;
-  --color-surface-card: #1A1A1A;
+
+  /* Backgrounds — pure black base */
+  --color-surface: #000000;
+  --color-surface-light: #0a0a0a;
+  --color-surface-card: rgba(255, 255, 255, 0.05);
+  --color-surface-card-hover: rgba(255, 255, 255, 0.08);
+
+  /* Borders */
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.2);
+
+  /* Text */
   --color-text-primary: #FFFFFF;
-  --color-text-secondary: #A0A0A0;
-  --color-text-muted: #666666;
+  --color-text-secondary: rgba(255, 255, 255, 0.8);
+  --color-text-muted: #cdcdcd;
+
+  /* Accent */
   --color-accent: #398FFF;
   --color-cta: #398FFF;
-  --color-cta-hover: #2B6FCC;
+  --color-cta-hover: #1A5ADA;
+
+  /* Fonts */
   --font-heading: "Instrument Serif", serif;
   --font-body: "Inter", sans-serif;
 }
@@ -22,8 +36,8 @@ html {
 }
 
 body {
-  background-color: var(--color-surface);
-  color: var(--color-text-primary);
+  background-color: #000000;
+  color: #ffffff;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -32,4 +46,34 @@ body {
 ::selection {
   background-color: var(--color-brand);
   color: white;
+}
+
+/* Glassmorphic utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hide default cursor on desktop when glass cursor active */
+@media (pointer: fine) {
+  body.cursor-active * {
+    cursor: none !important;
+  }
 }

@@ -9,6 +9,7 @@ export const inter = Inter({
 export const instrumentSerif = Instrument_Serif({
   subsets: ["latin", "latin-ext"],
   weight: "400",
+  style: ["normal", "italic"],
   variable: "--font-heading",
   display: "swap",
 });
