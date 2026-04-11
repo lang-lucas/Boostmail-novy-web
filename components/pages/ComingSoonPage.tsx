@@ -1,7 +1,7 @@
 "use client";
 
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { Button } from "@/components/ui/Button";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { ArrowRight, Check } from "lucide-react";
 
 type ComingSoonPageProps = {
   headline: string;
@@ -15,35 +15,51 @@ export function ComingSoonPage({
   features,
 }: ComingSoonPageProps) {
   return (
-    <div className="flex min-h-[70vh] items-center py-24">
-      <div className="mx-auto max-w-2xl px-6 text-center">
-        <SectionReveal>
-          <div className="mb-6 inline-block rounded-full border border-brand/20 bg-brand/5 px-4 py-1 text-sm text-brand">
+    <div className="flex min-h-[70vh] items-center px-5 py-24 sm:px-8">
+      <div className="mx-auto max-w-2xl text-center">
+        <AnimatedSection>
+          <span
+            className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm text-primary"
+            style={{ background: "rgba(57,143,255,0.12)", border: "1px solid rgba(57,143,255,0.25)" }}
+          >
             Již brzy
-          </div>
-          <h1 className="font-heading text-4xl md:text-5xl">{headline}</h1>
-          <p className="mt-4 text-text-secondary">{description}</p>
-        </SectionReveal>
+          </span>
+          <h1 className="mt-6 text-4xl font-bold tracking-tight md:text-5xl">
+            {headline}
+          </h1>
+          <p className="mt-4 text-text-body">{description}</p>
+        </AnimatedSection>
 
-        <SectionReveal delay={0.2}>
+        <AnimatedSection delay={150}>
           <ul className="mx-auto mt-8 max-w-md space-y-3 text-left">
             {features.map((feature) => (
-              <li key={feature} className="flex items-start gap-3 text-sm text-text-secondary">
-                <span className="mt-0.5 text-brand">&#10003;</span>
+              <li
+                key={feature}
+                className="glass-card flex items-start gap-3 px-5 py-3.5 text-sm text-white/80"
+              >
+                <div
+                  className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded"
+                  style={{ background: "rgba(57,143,255,0.12)", border: "1px solid rgba(57,143,255,0.25)" }}
+                >
+                  <Check className="h-3 w-3 text-primary" />
+                </div>
                 {feature}
               </li>
             ))}
           </ul>
-        </SectionReveal>
+        </AnimatedSection>
 
-        <SectionReveal delay={0.3}>
+        <AnimatedSection delay={250}>
           <div className="mt-12">
             <p className="mb-4 text-sm text-text-muted">
               Chcete vědět, až spustíme?
             </p>
-            <Button href="/kontakt">Dejte nám vědět</Button>
+            <a href="/kontakt" className="neon-button text-sm md:text-base">
+              <span>Dejte nám vědět</span>
+              <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
-        </SectionReveal>
+        </AnimatedSection>
       </div>
     </div>
   );

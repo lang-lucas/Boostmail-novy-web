@@ -24,14 +24,13 @@ export function MetricCounter({
     if (!isInView) return;
 
     const isDecimal = value % 1 !== 0;
-    const start = 0;
     const startTime = performance.now();
 
     function animate(currentTime: number) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      const current = start + (value - start) * eased;
+      const current = value * eased;
 
       if (isDecimal) {
         setDisplay(current.toFixed(1));
@@ -49,11 +48,11 @@ export function MetricCounter({
 
   return (
     <div ref={ref} className="text-center">
-      <div className="font-heading text-4xl font-normal text-brand md:text-5xl">
+      <div className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
         {display}
-        {suffix}
+        <span className="text-brand">{suffix}</span>
       </div>
-      <div className="mt-2 text-sm text-text-secondary">{label}</div>
+      <div className="mt-2 text-sm text-text-muted">{label}</div>
     </div>
   );
 }

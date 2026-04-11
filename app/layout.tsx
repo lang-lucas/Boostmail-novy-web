@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { inter, instrumentSerif } from "@/lib/fonts";
+import { inter } from "@/lib/fonts";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { ReadingProgress } from "@/components/ui/ReadingProgress";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "BoostMail | Automatický retenční marketing",
+    default: "BoostMail | Retenční marketing na autopilotu",
     template: "%s | BoostMail",
   },
   description:
@@ -26,16 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="cs"
-      className={`${inter.variable} ${instrumentSerif.variable}`}
-    >
-      <body>
-        <SmoothScroll>
-          <Navbar />
-          <main className="pt-16">{children}</main>
-          <Footer />
-        </SmoothScroll>
+    <html lang="cs" className={inter.variable}>
+      <body className="font-sans antialiased">
+        <ReadingProgress />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

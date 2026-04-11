@@ -2,7 +2,7 @@ import Link from "next/link";
 
 type ButtonProps = {
   href?: string;
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "default" | "lg";
   children: React.ReactNode;
   className?: string;
@@ -11,14 +11,17 @@ type ButtonProps = {
 };
 
 const variants = {
-  primary: "bg-cta text-white hover:bg-cta-hover",
-  secondary: "bg-surface-card text-text-primary hover:bg-surface-light",
-  outline: "border border-text-muted text-text-primary hover:border-brand",
+  primary:
+    "bg-brand text-white hover:bg-brand-dark hover:shadow-[0_0_24px_rgba(57,143,255,0.25)]",
+  secondary: "bg-surface-card text-white hover:bg-surface-card-hover",
+  outline:
+    "border border-border text-white hover:border-border-hover hover:bg-surface-card",
+  ghost: "text-text-muted hover:text-white",
 } as const;
 
 const sizes = {
-  default: "px-6 py-3 text-sm",
-  lg: "px-8 py-4 text-base",
+  default: "px-5 py-2.5 text-sm",
+  lg: "px-7 py-3.5 text-[15px]",
 } as const;
 
 export function Button({
@@ -30,7 +33,7 @@ export function Button({
   type = "button",
   onClick,
 }: ButtonProps) {
-  const classes = `inline-flex items-center justify-center rounded-full font-medium transition-colors duration-200 ${variants[variant]} ${sizes[size]} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-300 ${variants[variant]} ${sizes[size]} ${className}`;
 
   if (href) {
     return (

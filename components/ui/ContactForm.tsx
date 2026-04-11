@@ -2,9 +2,11 @@
 
 import { useActionState } from "react";
 import { submitContact, type ContactState } from "@/app/kontakt/action";
-import { Button } from "@/components/ui/Button";
 
 const initialState: ContactState = { success: false, error: null };
+
+const inputStyles =
+  "w-full rounded-xl px-4 py-3 text-white outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/20";
 
 export function ContactForm() {
   const [state, formAction, isPending] = useActionState(
@@ -14,9 +16,9 @@ export function ContactForm() {
 
   if (state.success) {
     return (
-      <div className="rounded-2xl border border-brand/20 bg-brand/5 p-8 text-center">
-        <p className="text-lg text-text-primary">Děkujeme za zprávu!</p>
-        <p className="mt-2 text-sm text-text-secondary">
+      <div className="glass-card p-8 text-center">
+        <p className="text-lg font-semibold text-white">Děkujeme za zprávu!</p>
+        <p className="mt-2 text-sm text-text-muted">
           Ozveme se vám do 24 hodin.
         </p>
       </div>
@@ -24,9 +26,9 @@ export function ContactForm() {
   }
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction} className="space-y-5">
       <div>
-        <label htmlFor="name" className="mb-2 block text-sm text-text-secondary">
+        <label htmlFor="name" className="mb-2 block text-sm font-medium text-white">
           Jméno
         </label>
         <input
@@ -34,12 +36,13 @@ export function ContactForm() {
           name="name"
           type="text"
           required
-          className="w-full rounded-xl border border-white/10 bg-surface-card px-4 py-3 text-text-primary outline-none transition-colors focus:border-brand"
+          className={inputStyles}
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="mb-2 block text-sm text-text-secondary">
+        <label htmlFor="email" className="mb-2 block text-sm font-medium text-white">
           Email
         </label>
         <input
@@ -47,21 +50,23 @@ export function ContactForm() {
           name="email"
           type="email"
           required
-          className="w-full rounded-xl border border-white/10 bg-surface-card px-4 py-3 text-text-primary outline-none transition-colors focus:border-brand"
+          className={inputStyles}
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
         />
       </div>
 
       <div>
         <label
           htmlFor="businessType"
-          className="mb-2 block text-sm text-text-secondary"
+          className="mb-2 block text-sm font-medium text-white"
         >
           Typ podnikání
         </label>
         <select
           id="businessType"
           name="businessType"
-          className="w-full rounded-xl border border-white/10 bg-surface-card px-4 py-3 text-text-primary outline-none transition-colors focus:border-brand"
+          className={inputStyles}
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
         >
           <option value="barbershop">Barbershop</option>
           <option value="klinika">Klinika</option>
@@ -72,14 +77,15 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="mb-2 block text-sm text-text-secondary">
+        <label htmlFor="message" className="mb-2 block text-sm font-medium text-white">
           Zpráva (volitelné)
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
-          className="w-full rounded-xl border border-white/10 bg-surface-card px-4 py-3 text-text-primary outline-none transition-colors focus:border-brand"
+          className={inputStyles}
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
         />
       </div>
 
@@ -87,9 +93,9 @@ export function ContactForm() {
         <p className="text-sm text-red-400">{state.error}</p>
       )}
 
-      <Button type="submit" size="lg" className="w-full">
-        {isPending ? "Odesílám..." : "Odeslat zprávu"}
-      </Button>
+      <button type="submit" className="neon-button w-full justify-center py-3.5 text-base">
+        {isPending ? "Odesílám..." : "Odeslat zprávu →"}
+      </button>
     </form>
   );
 }
