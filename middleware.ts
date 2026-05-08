@@ -7,8 +7,8 @@ const PUBLIC_PATHS = new Set([
   "/api/health",
 ]);
 
-const PUBLIC_PREFIXES = ["/_next/", "/api/health/"];
-const PUBLIC_EXTENSIONS = /\.(png|jpg|jpeg|svg|webp|ico|woff2?|ttf|gif|css|js|map|json)$/i;
+const PUBLIC_PREFIXES = ["/_next/", "/api/health/", "/assets/", "/pages/"];
+const PUBLIC_EXTENSIONS = /\.(png|jpg|jpeg|svg|webp|ico|woff2?|ttf|gif|css|js|jsx|map|json|html)$/i;
 
 async function verifyToken(token: string | undefined): Promise<boolean> {
   if (!token) return false;
@@ -36,7 +36,7 @@ async function verifyToken(token: string | undefined): Promise<boolean> {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Public paths
+  // Public paths — login, soul-up report, static assets, .jsx components
   if (
     PUBLIC_PATHS.has(pathname) ||
     PUBLIC_PREFIXES.some((p) => pathname.startsWith(p)) ||

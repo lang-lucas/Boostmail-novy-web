@@ -1,23 +1,15 @@
 import type { Metadata } from "next";
 import { inter } from "@/lib/fonts";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { ReadingProgress } from "@/components/ui/ReadingProgress";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "BoostMail | Retenční marketing na autopilotu",
+    default: "BoostMail",
     template: "%s | BoostMail",
   },
-  description:
-    "Automaticky vracíme zákazníky, zaplňujeme zrušené termíny a dokazujeme každou korunu. Retenční engine pro barbershopy a lokální služby.",
+  description: "BoostMail — retenční marketing na autopilotu.",
   metadataBase: new URL("https://boostmail.cz"),
-  openGraph: {
-    type: "website",
-    locale: "cs_CZ",
-    siteName: "BoostMail",
-  },
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({
@@ -27,12 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="cs" className={inter.variable}>
-      <body className="font-sans antialiased">
-        <ReadingProgress />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }
