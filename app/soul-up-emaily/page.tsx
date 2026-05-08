@@ -172,7 +172,7 @@ export default function SoulUpStatsPage() {
             <KpiCard
               kicker="ODESLANÝCH EMAILŮ"
               value={data.totalSent.toLocaleString("cs-CZ")}
-              sub={`OR ${pct(data.totalOp, data.totalSent)} · CTR ${pct(data.totalCl, data.totalSent)}`}
+              sub={`OR ${pct(data.totalOp, data.totalSent)} · CTR ${pct(data.totalCl, data.totalSent)} *`}
             />
             <KpiCard
               kicker="V KOŠÍKU"
@@ -318,6 +318,49 @@ export default function SoulUpStatsPage() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <MonoLabel n="04" text="EMAIL × VERZE ŠABLON" />
           <h2 style={sectionTitleStyle}>Výkon podle období.</h2>
+
+          {/* Bot inflation disclaimer */}
+          <div
+            style={{
+              padding: "16px 20px",
+              background: `${BM_ACCENT}08`,
+              border: `1px solid ${BM_ACCENT}22`,
+              borderRadius: 10,
+              marginBottom: 24,
+              display: "flex",
+              gap: 14,
+              alignItems: "flex-start",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: FONT_MONO,
+                fontSize: 11,
+                color: BM_ACCENT,
+                letterSpacing: "0.15em",
+                fontWeight: 600,
+                whiteSpace: "nowrap",
+                paddingTop: 2,
+              }}
+            >
+              POZOR ↓
+            </div>
+            <div
+              style={{
+                fontSize: 13,
+                lineHeight: 1.6,
+                color: "rgba(0,0,0,0.7)",
+              }}
+            >
+              <strong>OR a CTR obsahují bot/proxy aktivitu.</strong>{" "}
+              <span style={{ fontFamily: FONT_MONO }}>Apple Mail Privacy Protection</span> pre-fetchne
+              tracking pixel u všech iOS uživatelek (otevřou se pixely i bez reálného otevření). Corporate{" "}
+              <span style={{ fontFamily: FONT_MONO }}>security scannery</span> (Outlook ATP, Gmail) klikají
+              na linky v rámci kontroly. Reálná „human-only" čísla mohou být{" "}
+              <strong>20–35 % nižší</strong>. Trendy mezi verzemi jsou ale spolehlivé — bot inflation se nemění.
+            </div>
+          </div>
+
           <div
             style={{
               background: "#fff",
