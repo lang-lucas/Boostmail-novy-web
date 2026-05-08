@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter } from "@/lib/fonts";
+import { inter, spaceGrotesk, jetbrainsMono, instrumentSerif } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,7 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="cs" className={inter.variable}>
+    <html
+      lang="cs"
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
+    >
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

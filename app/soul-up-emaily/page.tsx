@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
-import { Mail, TrendingUp, Users, ArrowRight } from "lucide-react";
-import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import Image from "next/image";
 import statsData from "@/lib/soul-up-stats.json";
 
 export const metadata: Metadata = {
   title: "SOUL UP — výsledky",
-  description: "Přehled výkonu email funnelu pro SOUL UP. Růst leadů, distribuce archetypů, výkon emailů po verzích šablon.",
+  description:
+    "Přehled výkonu email funnelu pro SOUL UP. Růst leadů, distribuce archetypů, výkon emailů po verzích šablon.",
   robots: { index: false, follow: false },
 };
+
+const BM_ACCENT = "#1a5ada";
+const BM_BG = "#f4f4f4";
+const BM_INK = "#0a0a0a";
+
+const FONT_SANS = "var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif";
+const FONT_MONO = "var(--font-jetbrains-mono), 'JetBrains Mono', monospace";
+const FONT_SERIF = "var(--font-instrument-serif), 'Instrument Serif', Georgia, serif";
 
 const ARCH_NAME: Record<string, string> = {
   b: "Budovatelka",
@@ -37,268 +45,561 @@ export default function SoulUpStatsPage() {
     timeStyle: "short",
   });
 
-  // Sort days, get last 30
   const sortedDays = Object.entries(data.byDay).sort(([a], [b]) => a.localeCompare(b));
   const last30 = sortedDays.slice(-30);
   const maxDay = last30.length ? Math.max(...last30.map(([, c]) => c)) : 1;
 
-  // Sort archetypes by count desc
   const sortedArch = Object.entries(data.arch).sort(([, a], [, b]) => b - a);
 
   return (
-    <div className="px-5 pt-32 pb-24 sm:px-8">
-      <div className="mx-auto max-w-5xl">
-        {/* Header */}
-        <AnimatedSection className="text-center">
-          <div className="mb-5 flex items-center justify-center gap-2 md:mb-7">
-            <Mail className="h-3 w-3 fill-primary/20 text-primary md:h-3.5 md:w-3.5" />
-            <span className="text-xs font-medium uppercase tracking-[0.14em] text-text-label md:text-sm">
-              SOUL UP · interní report
-            </span>
+    <div
+      style={{
+        background: BM_BG,
+        color: BM_INK,
+        fontFamily: FONT_SANS,
+        minHeight: "100vh",
+        WebkitFontSmoothing: "antialiased",
+      }}
+    >
+      {/* HEADER — minimální (logo + interní report mono label) */}
+      <header
+        style={{
+          padding: "20px 56px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "sticky",
+          top: 0,
+          background: "rgba(244,244,244,0.85)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          zIndex: 10,
+          borderBottom: "1px solid rgba(0,0,0,0.06)",
+        }}
+      >
+        <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+          <Image
+            src="/assets/boostmail-logo-black.png"
+            alt="BoostMail"
+            width={128}
+            height={32}
+            style={{ height: 32, width: "auto", display: "block" }}
+            priority
+            unoptimized
+          />
+        </a>
+        <div
+          style={{
+            fontFamily: FONT_MONO,
+            fontSize: 11,
+            letterSpacing: "0.15em",
+            color: BM_ACCENT,
+            fontWeight: 600,
+          }}
+        >
+          SOUL UP · INTERNÍ REPORT
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section style={{ padding: "80px 56px 40px" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
+          <div
+            style={{
+              fontFamily: FONT_MONO,
+              fontSize: 12,
+              letterSpacing: "0.18em",
+              color: BM_ACCENT,
+              fontWeight: 600,
+              marginBottom: 24,
+            }}
+          >
+            VÝSLEDKY · EMAIL FUNNEL
           </div>
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-            Výsledky email <span className="serif-italic text-primary">funnelu</span>
+          <h1
+            style={{
+              fontSize: 56,
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+              margin: 0,
+            }}
+          >
+            Výsledky email{" "}
+            <em
+              style={{
+                fontFamily: FONT_SERIF,
+                fontStyle: "italic",
+                fontWeight: 400,
+                color: BM_ACCENT,
+              }}
+            >
+              funnelu
+            </em>
           </h1>
-          <p className="mt-4 text-text-body">
+          <p
+            style={{
+              fontSize: 17,
+              color: "rgba(0,0,0,0.6)",
+              marginTop: 24,
+              lineHeight: 1.6,
+            }}
+          >
             Přehled výkonu po verzích šablon. Generováno {generated}.
           </p>
-        </AnimatedSection>
+        </div>
+      </section>
 
-        {/* KPI Hero */}
-        <AnimatedSection delay={150}>
-          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+      {/* 01 — HLAVNÍ ČÍSLA */}
+      <section style={{ padding: "40px 56px 60px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <MonoLabel n="01" text="HLAVNÍ ČÍSLA" />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 16,
+              marginTop: 16,
+            }}
+          >
             <KpiCard
-              icon={<Users className="h-5 w-5 text-primary" />}
-              value={data.scans.toString()}
-              label="leadů ze Soul Scanu"
+              kicker="LEADŮ ZE SOUL SCANU"
+              value={data.scans.toLocaleString("cs-CZ")}
               sub={`${data.withName} se jménem (${
                 data.scans ? Math.round((data.withName / data.scans) * 100) : 0
               } %)`}
             />
             <KpiCard
-              icon={<Mail className="h-5 w-5 text-primary" />}
+              kicker="ODESLANÝCH EMAILŮ"
               value={data.totalSent.toLocaleString("cs-CZ")}
-              label="odeslaných emailů"
               sub={`OR ${pct(data.totalOp, data.totalSent)} · CTR ${pct(data.totalCl, data.totalSent)}`}
             />
             <KpiCard
-              icon={<TrendingUp className="h-5 w-5 text-primary" />}
-              value={data.inCart.toString()}
-              label="v košíku"
+              kicker="V KOŠÍKU"
+              value={data.inCart.toLocaleString("cs-CZ")}
               sub={`${data.paid} zaplacených · ${pct(data.inCart, data.scans, 2)} konverze`}
+              highlight
             />
           </div>
-        </AnimatedSection>
+        </div>
+      </section>
 
-        {/* Daily growth */}
-        <AnimatedSection delay={250}>
-          <section className="mt-16">
-            <h2 className="mb-6 text-xl font-semibold tracking-tight">Růst leadů (posledních 30 dnů)</h2>
-            <div className="glass-card p-6">
-              <div className="flex h-52 items-end gap-1.5 pt-6">
-                {last30.map(([d, c]) => {
-                  const h = Math.max(4, Math.round((c / maxDay) * 100));
-                  const dayLabel = d.substring(5).replace("-", "/");
-                  return (
-                    <div
-                      key={d}
-                      className="group relative flex-1 rounded-t bg-primary/40 transition-colors hover:bg-primary"
-                      style={{ height: `${h}%` }}
-                      title={`${d}: ${c} leadů`}
+      {/* 02 — DENNÍ PŘÍRŮSTEK */}
+      <section style={{ padding: "20px 56px 60px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <MonoLabel n="02" text="DENNÍ PŘÍRŮSTEK · 30 DNÍ" />
+          <h2 style={sectionTitleStyle}>Růst leadů ze Soul Scanu.</h2>
+          <Card>
+            <div
+              style={{
+                display: "flex",
+                gap: 4,
+                alignItems: "flex-end",
+                height: 220,
+                paddingTop: 24,
+                paddingBottom: 24,
+              }}
+            >
+              {last30.map(([d, c]) => {
+                const h = Math.max(4, Math.round((c / maxDay) * 100));
+                const dayLabel = d.substring(5).replace("-", "/");
+                return (
+                  <div
+                    key={d}
+                    style={{
+                      flex: 1,
+                      height: `${h}%`,
+                      background: BM_ACCENT,
+                      opacity: 0.7,
+                      borderRadius: "4px 4px 0 0",
+                      position: "relative",
+                      minHeight: 4,
+                    }}
+                    title={`${d}: ${c} leadů`}
+                  >
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: -22,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        fontFamily: FONT_MONO,
+                        fontSize: 11,
+                        fontWeight: 600,
+                        color: BM_ACCENT,
+                      }}
                     >
-                      <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[11px] font-semibold text-primary">
-                        {c}
-                      </span>
-                      <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-text-muted">
-                        {dayLabel}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
+                      {c}
+                    </span>
+                    <span
+                      style={{
+                        position: "absolute",
+                        bottom: -22,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        fontFamily: FONT_MONO,
+                        fontSize: 10,
+                        color: "rgba(0,0,0,0.4)",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {dayLabel}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
-          </section>
-        </AnimatedSection>
+          </Card>
+        </div>
+      </section>
 
-        {/* Archetypes */}
-        <AnimatedSection delay={300}>
-          <section className="mt-16">
-            <h2 className="mb-6 text-xl font-semibold tracking-tight">Distribuce archetypů</h2>
-            <div className="glass-card space-y-3.5 p-6">
+      {/* 03 — ARCHETYPY */}
+      <section style={{ padding: "20px 56px 60px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <MonoLabel n="03" text="ARCHETYPY" />
+          <h2 style={sectionTitleStyle}>Distribuce.</h2>
+          <Card>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {sortedArch.map(([k, v]) => {
                 const p = data.scans ? Math.round((v / data.scans) * 100) : 0;
                 return (
-                  <div key={k} className="flex items-center gap-4">
-                    <div className="w-32 text-sm text-text-secondary">{ARCH_NAME[k]}</div>
-                    <div className="h-7 flex-1 overflow-hidden rounded-md bg-primary/10">
+                  <div
+                    key={k}
+                    style={{ display: "flex", alignItems: "center", gap: 16 }}
+                  >
+                    <div
+                      style={{
+                        width: 140,
+                        fontSize: 14,
+                        fontWeight: 500,
+                        color: BM_INK,
+                      }}
+                    >
+                      {ARCH_NAME[k]}
+                    </div>
+                    <div
+                      style={{
+                        flex: 1,
+                        height: 28,
+                        background: `${BM_ACCENT}10`,
+                        borderRadius: 6,
+                        overflow: "hidden",
+                      }}
+                    >
                       <div
-                        className="h-full bg-gradient-to-r from-primary to-primary-light transition-all"
-                        style={{ width: `${p}%` }}
+                        style={{
+                          height: "100%",
+                          width: `${p}%`,
+                          background: `linear-gradient(90deg, ${BM_ACCENT}, #4d7eee)`,
+                        }}
                       />
                     </div>
-                    <div className="w-24 text-right text-sm text-text-muted">
+                    <div
+                      style={{
+                        width: 110,
+                        textAlign: "right",
+                        fontSize: 13,
+                        color: "rgba(0,0,0,0.65)",
+                        fontFamily: FONT_MONO,
+                      }}
+                    >
                       {v} ({p} %)
                     </div>
                   </div>
                 );
               })}
             </div>
-          </section>
-        </AnimatedSection>
+          </Card>
+        </div>
+      </section>
 
-        {/* Email × version table */}
-        <AnimatedSection delay={350}>
-          <section className="mt-16">
-            <h2 className="mb-6 text-xl font-semibold tracking-tight">Email metriky podle verze šablon</h2>
-            <div className="glass-card overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-white/5 text-left">
-                      <th className="px-4 py-3 text-xs font-medium uppercase tracking-wider text-text-label">
-                        Verze
+      {/* 04 — EMAIL × VERZE */}
+      <section style={{ padding: "20px 56px 80px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <MonoLabel n="04" text="EMAIL × VERZE ŠABLON" />
+          <h2 style={sectionTitleStyle}>Výkon podle období.</h2>
+          <div
+            style={{
+              background: "#fff",
+              border: "1px solid rgba(0,0,0,0.08)",
+              borderRadius: 14,
+              overflow: "hidden",
+            }}
+          >
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                <thead>
+                  <tr
+                    style={{
+                      background: BM_INK,
+                      color: "#fff",
+                    }}
+                  >
+                    <th style={tableHeaderStyle}>VERZE</th>
+                    {(["E1", "E2", "E3", "E4"] as const).map((e) => (
+                      <th key={e} style={tableHeaderStyle}>
+                        {EMAIL_LABELS[e].toUpperCase()}
                       </th>
-                      {(["E1", "E2", "E3", "E4"] as const).map((e) => (
-                        <th
-                          key={e}
-                          className="px-4 py-3 text-xs font-medium uppercase tracking-wider text-text-label"
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.versions.map((v, i) => (
+                    <tr
+                      key={v.name}
+                      style={{
+                        background: "#fff",
+                        borderBottom:
+                          i < data.versions.length - 1
+                            ? "1px solid rgba(0,0,0,0.06)"
+                            : "none",
+                      }}
+                    >
+                      <td style={{ padding: "20px 24px", verticalAlign: "top" }}>
+                        <div
+                          style={{
+                            display: "inline-block",
+                            padding: "4px 10px",
+                            borderRadius: 999,
+                            background: `${BM_ACCENT}12`,
+                            color: BM_ACCENT,
+                            fontSize: 12,
+                            fontWeight: 600,
+                            fontFamily: FONT_MONO,
+                            letterSpacing: "0.04em",
+                            whiteSpace: "nowrap",
+                          }}
                         >
-                          {EMAIL_LABELS[e]}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.versions.map((v) => (
-                      <tr key={v.name} className="border-b border-white/5 last:border-0">
-                        <td className="px-4 py-4">
-                          <span className="inline-block rounded-full bg-primary/15 px-3 py-1 text-xs font-medium text-primary-light">
-                            {v.name}
-                          </span>
-                          <div className="mt-1.5 text-[11px] text-text-muted">
-                            {v.from.substring(0, 10)} → {v.to.startsWith("2099") ? "dnes" : v.to.substring(0, 10)}
-                          </div>
-                        </td>
-                        {(["E1", "E2", "E3", "E4"] as const).map((e) => {
-                          const ev = data.emailVersion as Record<string, { sent: number; op: number; cl: number }>;
-                          const d = ev[`${v.name}|${e}`] || { sent: 0, op: 0, cl: 0 };
-                          if (d.sent === 0) {
-                            return (
-                              <td key={e} className="px-4 py-4 text-text-dimmed">
-                                —
-                              </td>
-                            );
-                          }
+                          {v.name}
+                        </div>
+                        <div
+                          style={{
+                            fontFamily: FONT_MONO,
+                            fontSize: 11,
+                            color: "rgba(0,0,0,0.45)",
+                            marginTop: 6,
+                          }}
+                        >
+                          {v.from.substring(0, 10)} →{" "}
+                          {v.to.startsWith("2099") ? "dnes" : v.to.substring(0, 10)}
+                        </div>
+                      </td>
+                      {(["E1", "E2", "E3", "E4"] as const).map((e) => {
+                        const ev = data.emailVersion as Record<
+                          string,
+                          { sent: number; op: number; cl: number }
+                        >;
+                        const d = ev[`${v.name}|${e}`] || { sent: 0, op: 0, cl: 0 };
+                        if (d.sent === 0) {
                           return (
-                            <td key={e} className="px-4 py-4">
-                              <div className="font-semibold text-text-primary">{d.sent}</div>
-                              <div className="mt-0.5 text-xs text-text-muted">
-                                OR {pct(d.op, d.sent)} · CTR {pct(d.cl, d.sent)}
-                              </div>
+                            <td
+                              key={e}
+                              style={{
+                                padding: "20px 24px",
+                                color: "rgba(0,0,0,0.25)",
+                                fontFamily: FONT_MONO,
+                              }}
+                            >
+                              —
                             </td>
                           );
-                        })}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                        }
+                        return (
+                          <td key={e} style={{ padding: "20px 24px" }}>
+                            <div
+                              style={{
+                                fontSize: 17,
+                                fontWeight: 700,
+                                color: BM_INK,
+                                letterSpacing: "-0.01em",
+                              }}
+                            >
+                              {d.sent}
+                            </div>
+                            <div
+                              style={{
+                                fontFamily: FONT_MONO,
+                                fontSize: 12,
+                                color: "rgba(0,0,0,0.55)",
+                                marginTop: 2,
+                              }}
+                            >
+                              OR {pct(d.op, d.sent)} · CTR {pct(d.cl, d.sent)}
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </section>
-        </AnimatedSection>
-
-        {/* Timeline */}
-        <AnimatedSection delay={400}>
-          <section className="mt-16">
-            <h2 className="mb-6 text-xl font-semibold tracking-tight">Timeline změn</h2>
-            <div className="space-y-2.5">
-              {data.timeline.slice(0, 10).map((t) => (
-                <div
-                  key={t.hash}
-                  className="glass-pill flex items-start gap-5 border-l-2 border-primary/60"
-                  style={{ padding: "1rem 1.25rem" }}
-                >
-                  <div className="min-w-[100px] font-mono text-xs text-text-muted">{t.date}</div>
-                  <div className="flex-1 text-sm text-text-secondary">{t.msg}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </AnimatedSection>
-
-        {/* Insights */}
-        <AnimatedSection delay={450}>
-          <section className="mt-16">
-            <h2 className="mb-6 text-xl font-semibold tracking-tight">Klíčová zjištění</h2>
-            <div className="space-y-3">
-              <Insight>
-                <strong className="text-primary-light">E1 Výsledek funguje</strong> — Open Rate stabilně kolem 45 %
-                napříč verzemi. Předmět emailu ženy zaujme.
-              </Insight>
-              <Insight>
-                <strong className="text-primary-light">CTR propad mezi verzemi</strong> — z ~12 % (Pre-rewrite) na ~1 %
-                (V1 rewrite). Hypotéza: CTA tlačítko (tmavé pozadí + bílé písmo) se nerenderovalo v některých klientech
-                (Outlook, Seznam.cz). V4 vrátilo textový link.
-              </Insight>
-              <Insight>
-                <strong className="text-primary-light">E3 Prodej</strong> má minimum reálných kliků na CTA. Otevírá se
-                kolem 17 %, ale lidé na nákup neklikají. Hrdlem není email — je v copy/UX prodejní stránky nebo v
-                ceně.
-              </Insight>
-              <Insight>
-                <strong className="text-primary-light">Konverze do košíku {data.inCart}/{data.scans}</strong> ={" "}
-                {pct(data.inCart, data.scans, 2)}. Průmyslový benchmark cold-traffic je 1–3 %. Hrdlem je přechod email
-                → checkout.
-              </Insight>
-              <Insight>
-                <strong className="text-primary-light">
-                  Budovatelka {Math.round((data.arch.b / data.scans) * 100)} % leadů
-                </strong>{" "}
-                — copy laděný na ní má největší pákový efekt. Iniciátorka a Průvodkyně (~3 % každá) mají vysoký
-                engagement, ale objem je malý.
-              </Insight>
-            </div>
-          </section>
-        </AnimatedSection>
-
-        {/* Footer */}
-        <div className="mt-16 border-t border-white/5 pt-8 text-sm text-text-muted">
-          <p>
-            Data se generují manuálně pomocí <code className="rounded bg-white/5 px-2 py-0.5 text-text-secondary">node reports/generate.mjs</code> v repu{" "}
-            <code className="rounded bg-white/5 px-2 py-0.5 text-text-secondary">soulup-triggers</code>. Pro aktualizaci stránky aktualizovat{" "}
-            <code className="rounded bg-white/5 px-2 py-0.5 text-text-secondary">lib/soul-up-stats.json</code> v tomto repu a redeployovat.
-          </p>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer
+        style={{
+          borderTop: "1px solid rgba(0,0,0,0.08)",
+          padding: "32px 56px",
+          marginTop: 24,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 16,
+            flexWrap: "wrap",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: FONT_MONO,
+              fontSize: 12,
+              color: "rgba(0,0,0,0.5)",
+            }}
+          >
+            Re-generate:{" "}
+            <code
+              style={{
+                background: "rgba(0,0,0,0.05)",
+                padding: "2px 8px",
+                borderRadius: 4,
+                color: "rgba(0,0,0,0.7)",
+              }}
+            >
+              node reports/generate.mjs
+            </code>
+          </div>
+          <a
+            href="/"
+            style={{
+              fontFamily: FONT_MONO,
+              fontSize: 12,
+              color: BM_ACCENT,
+              textDecoration: "none",
+              fontWeight: 600,
+              letterSpacing: "0.04em",
+            }}
+          >
+            ← BOOSTMAIL.CZ
+          </a>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+// ── Helper styles & components ──────────────────────────────────────────────
+
+const sectionTitleStyle: React.CSSProperties = {
+  fontSize: 36,
+  fontWeight: 700,
+  letterSpacing: "-0.02em",
+  margin: "12px 0 24px",
+  lineHeight: 1.15,
+};
+
+const tableHeaderStyle: React.CSSProperties = {
+  padding: "16px 24px",
+  textAlign: "left",
+  fontFamily: FONT_MONO,
+  fontSize: 12,
+  fontWeight: 600,
+  letterSpacing: "0.08em",
+};
+
+function MonoLabel({ n, text }: { n: string; text: string }) {
+  return (
+    <div
+      style={{
+        fontFamily: FONT_MONO,
+        fontSize: 11,
+        color: BM_ACCENT,
+        letterSpacing: "0.15em",
+        fontWeight: 600,
+      }}
+    >
+      {n} / {text}
+    </div>
+  );
+}
+
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        background: "#fff",
+        border: "1px solid rgba(0,0,0,0.08)",
+        borderRadius: 14,
+        padding: 28,
+      }}
+    >
+      {children}
     </div>
   );
 }
 
 function KpiCard({
-  icon,
+  kicker,
   value,
-  label,
   sub,
+  highlight = false,
 }: {
-  icon: React.ReactNode;
+  kicker: string;
   value: string;
-  label: string;
   sub: string;
+  highlight?: boolean;
 }) {
   return (
-    <div className="glass-card relative overflow-hidden p-6 sm:p-8">
-      <div className="mb-3 flex items-center gap-2">{icon}</div>
-      <div className="text-4xl font-bold tracking-tight text-primary sm:text-5xl">{value}</div>
-      <div className="mt-2 text-text-secondary">{label}</div>
-      <div className="mt-1 text-xs text-text-muted">{sub}</div>
-    </div>
-  );
-}
-
-function Insight({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="glass-pill border-l-2 border-primary/60 text-sm leading-relaxed text-text-body">
-      {children}
+    <div
+      style={{
+        background: highlight ? `${BM_ACCENT}08` : "#fff",
+        border: highlight
+          ? `1px solid ${BM_ACCENT}33`
+          : "1px solid rgba(0,0,0,0.08)",
+        borderRadius: 14,
+        padding: "32px 28px",
+      }}
+    >
+      <div
+        style={{
+          fontFamily: FONT_MONO,
+          fontSize: 11,
+          color: BM_ACCENT,
+          letterSpacing: "0.15em",
+          fontWeight: 600,
+          marginBottom: 12,
+        }}
+      >
+        {kicker}
+      </div>
+      <div
+        style={{
+          fontSize: 64,
+          fontWeight: 700,
+          color: BM_INK,
+          letterSpacing: "-0.03em",
+          lineHeight: 1,
+        }}
+      >
+        {value}
+      </div>
+      <div
+        style={{
+          fontSize: 13,
+          color: "rgba(0,0,0,0.55)",
+          marginTop: 10,
+          fontFamily: FONT_MONO,
+        }}
+      >
+        {sub}
+      </div>
     </div>
   );
 }
