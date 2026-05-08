@@ -1,0 +1,164 @@
+{
+  "generatedAt": "2026-05-08T09:03:55.846Z",
+  "scans": 570,
+  "withName": 336,
+  "inCart": 2,
+  "paid": 0,
+  "totalSent": 1903,
+  "totalOp": 566,
+  "totalCl": 85,
+  "byDay": {
+    "2026-04-17": 29,
+    "2026-04-15": 11,
+    "2026-04-16": 28,
+    "2026-04-18": 26,
+    "2026-04-19": 45,
+    "2026-04-20": 33,
+    "2026-04-21": 17,
+    "2026-04-22": 22,
+    "2026-04-23": 25,
+    "2026-04-24": 18,
+    "2026-04-25": 29,
+    "2026-04-26": 28,
+    "2026-04-27": 19,
+    "2026-04-28": 26,
+    "2026-04-29": 35,
+    "2026-04-30": 20,
+    "2026-05-01": 14,
+    "2026-05-02": 23,
+    "2026-05-03": 24,
+    "2026-05-04": 28,
+    "2026-05-05": 32,
+    "2026-05-06": 18,
+    "2026-05-07": 16,
+    "2026-05-08": 4
+  },
+  "arch": {
+    "b": 291,
+    "v": 105,
+    "g": 20,
+    "i": 23,
+    "m": 131
+  },
+  "emailVersion": {
+    "Pre-rewrite|E1": {
+      "sent": 261,
+      "op": 120,
+      "cl": 29
+    },
+    "Pre-rewrite|E2": {
+      "sent": 224,
+      "op": 43,
+      "cl": 1
+    },
+    "Pre-rewrite|E3": {
+      "sent": 160,
+      "op": 26,
+      "cl": 0
+    },
+    "Pre-rewrite|E4": {
+      "sent": 37,
+      "op": 5,
+      "cl": 0
+    },
+    "V1 rewrite|E1": {
+      "sent": 158,
+      "op": 75,
+      "cl": 1
+    },
+    "V1 rewrite|E4": {
+      "sent": 158,
+      "op": 18,
+      "cl": 1
+    },
+    "V1 rewrite|E3": {
+      "sent": 133,
+      "op": 24,
+      "cl": 0
+    },
+    "V1 rewrite|E2": {
+      "sent": 153,
+      "op": 33,
+      "cl": 0
+    },
+    "V2/V3 cleanup|E1": {
+      "sent": 139,
+      "op": 105,
+      "cl": 52
+    },
+    "V2/V3 cleanup|E4": {
+      "sent": 137,
+      "op": 44,
+      "cl": 0
+    },
+    "V2/V3 cleanup|E3": {
+      "sent": 131,
+      "op": 22,
+      "cl": 0
+    },
+    "V2/V3 cleanup|E2": {
+      "sent": 132,
+      "op": 43,
+      "cl": 0
+    },
+    "V4 conversion-fix|E1": {
+      "sent": 5,
+      "op": 1,
+      "cl": 1
+    },
+    "V4 conversion-fix|E4": {
+      "sent": 34,
+      "op": 1,
+      "cl": 0
+    },
+    "V4 conversion-fix|E3": {
+      "sent": 23,
+      "op": 0,
+      "cl": 0
+    },
+    "V4 conversion-fix|E2": {
+      "sent": 18,
+      "op": 6,
+      "cl": 0
+    }
+  },
+  "timeline": [
+    {
+      "hash": "3264102",
+      "date": "2026-05-08",
+      "msg": "feat: stats report + V4 conversion-fix templates"
+    },
+    {
+      "hash": "9730ad4",
+      "date": "2026-04-25",
+      "msg": "feat(seq1): rewrite all 20 lead-magnet templates — concrete scenes, plural voice"
+    },
+    {
+      "hash": "cf5e540",
+      "date": "2026-04-16",
+      "msg": "feat: {{osloveni}} placeholder with Ahoj fallback"
+    }
+  ],
+  "versions": [
+    {
+      "name": "Pre-rewrite",
+      "from": "2026-04-13T00:00:00Z",
+      "to": "2026-04-25T10:54:00Z"
+    },
+    {
+      "name": "V1 rewrite",
+      "from": "2026-04-25T10:54:00Z",
+      "to": "2026-05-02T00:00:00Z"
+    },
+    {
+      "name": "V2/V3 cleanup",
+      "from": "2026-05-02T00:00:00Z",
+      "to": "2026-05-08T00:00:00Z"
+    },
+    {
+      "name": "V4 conversion-fix",
+      "from": "2026-05-08T00:00:00Z",
+      "to": "2099-01-01T00:00:00Z"
+    }
+  ]
+}
