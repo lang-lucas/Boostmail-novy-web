@@ -1,56 +1,61 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-/**
- * Site-wide HTTP Basic Auth.
- * Configure password via env BASIC_AUTH_PASSWORD on Vercel.
- * Default password (development only): "soulup" — change before publishing.
- *
- * Skipped paths: /_next, /favicon.ico, /api/health.
- */
-export function middleware(request: NextRequest) {
-  // Skip Next.js internals and public health
+const PUBLIC_PATHS = new Set([
+  "/login",
+  "/api/login",
+  "/soul-up-emaily",
+  "/api/health",
+]);
+
+const PUBLIC_PREFIXES = ["/_next/", "/api/health/"];
+const PUBLIC_EXTENSIONS = /\.(png|jpg|jpeg|svg|webp|ico|woff2?|ttf|gif|css|js|map|json)$/i;
+
+async function verifyToken(token: string | undefined): Promise<boolean> {
+  if (!token) return false;
+  const dot = token.lastIndexOf(".");
+  if (dot < 1) return false;
+  const payload = token.slice(0, dot);
+  const sigB64 = token.slice(dot + 1);
+  const expiry = parseInt(payload, 10);
+  if (isNaN(expiry) || Date.now() > expiry) return false;
+
+  const secret = process.env.AUTH_SECRET || "fallback-please-set-AUTH_SECRET";
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw",
+    encoder.encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["verify"],
+  );
+  const padded = sigB64.replace(/-/g, "+").replace(/_/g, "/");
+  const sigBytes = Uint8Array.from(atob(padded), (c) => c.charCodeAt(0));
+  return await crypto.subtle.verify("HMAC", key, sigBytes, encoder.encode(payload));
+}
+
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Public paths
   if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/favicon") ||
-    pathname.startsWith("/api/health") ||
-    pathname.match(/\.(png|jpg|jpeg|svg|webp|ico|woff2?|ttf)$/i)
+    PUBLIC_PATHS.has(pathname) ||
+    PUBLIC_PREFIXES.some((p) => pathname.startsWith(p)) ||
+    PUBLIC_EXTENSIONS.test(pathname) ||
+    pathname === "/favicon.ico"
   ) {
     return NextResponse.next();
   }
 
-  const expectedUser = process.env.BASIC_AUTH_USER || "boostmail";
-  const expectedPass = process.env.BASIC_AUTH_PASSWORD || "soulup";
-
-  const auth = request.headers.get("authorization");
-  if (auth) {
-    const [scheme, encoded] = auth.split(" ");
-    if (scheme === "Basic" && encoded) {
-      const decoded = atob(encoded);
-      const sep = decoded.indexOf(":");
-      const user = decoded.slice(0, sep);
-      const pass = decoded.slice(sep + 1);
-      if (user === expectedUser && pass === expectedPass) {
-        return NextResponse.next();
-      }
-    }
+  const token = request.cookies.get("auth")?.value;
+  if (await verifyToken(token)) {
+    return NextResponse.next();
   }
 
-  return new NextResponse("Authentication required", {
-    status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="boostmail.cz"' },
-  });
+  const loginUrl = new URL("/login", request.url);
+  loginUrl.searchParams.set("redirect", pathname);
+  return NextResponse.redirect(loginUrl);
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except:
-     * - api/health (public uptime check)
-     * - _next/static (static files)
-     * - _next/image (image optimization)
-     * - favicon.ico (favicon)
-     */
-    "/((?!api/health|_next/static|_next/image|favicon\\.ico).*)",
-  ],
+  matcher: ["/((?!_next/static|_next/image|favicon\\.ico).*)"],
 };
