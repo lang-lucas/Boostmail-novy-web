@@ -109,7 +109,7 @@ function SegmentDetailLive({ seg, accent, expandable = false }) {
   );
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', maxWidth: 1100, margin: '0 auto' }}>
+    <div className="v7-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', maxWidth: 1100, margin: '0 auto' }}>
       <div key={seg} style={{ animation: 'segFade 0.4s ease-out' }}>
         <h3 style={{ fontSize: 38, fontWeight: 800, margin: '0 0 24px', letterSpacing: '-0.02em', lineHeight: 1.05 }}>{data.title}</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 28 }}>

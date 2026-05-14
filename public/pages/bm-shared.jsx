@@ -12,9 +12,16 @@ const BM_SEGMENTS = [
 
 function BMNav({ active }) {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  const [mobileMenu, setMobileMenu] = React.useState(false);
+  const [mobileSubOpen, setMobileSubOpen] = React.useState(false);
   const closeTimer = React.useRef(null);
   const openDropdown = () => { clearTimeout(closeTimer.current); setDropdownOpen(true); };
   const closeDropdown = () => { closeTimer.current = setTimeout(() => setDropdownOpen(false), 120); };
+  const closeMobile = () => { setMobileMenu(false); setMobileSubOpen(false); };
+  React.useEffect(() => {
+    document.body.style.overflow = mobileMenu ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenu]);
 
   const links = [
     { href: 'pripadovky.html', label: 'Případovky', key: 'pripadovky', soon: true },
@@ -24,6 +31,7 @@ function BMNav({ active }) {
     { href: 'cenik.html', label: 'Ceník', key: 'cenik', soon: true },
   ];
   return (
+    <>
     <nav className="bm-nav" style={{
       padding: '20px 56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       position: 'sticky', top: 0, background: 'rgba(244,244,244,0.85)', backdropFilter: 'blur(12px)',
@@ -104,14 +112,101 @@ function BMNav({ active }) {
           </a>
         ))}
       </div>
-      <a href="kontakt.html" className="bm-nav-cta" style={{
-        padding: '11px 20px', background: '#0a0a0a', color: '#fff',
-        border: 'none', borderRadius: 999, fontSize: 13, fontWeight: 600,
-        cursor: 'pointer', textDecoration: 'none', whiteSpace: 'nowrap',
-      }}>
-        Spočítáme, kolik vám utíká →
-      </a>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <a href="kontakt.html" className="bm-nav-cta" style={{
+          padding: '11px 20px', background: '#0a0a0a', color: '#fff',
+          border: 'none', borderRadius: 999, fontSize: 13, fontWeight: 600,
+          cursor: 'pointer', textDecoration: 'none', whiteSpace: 'nowrap',
+        }}>
+          <span className="bm-nav-cta-full">Spočítáme, kolik vám utíká →</span>
+          <span className="bm-nav-cta-short">Spočítat →</span>
+        </a>
+        <button
+          className="bm-burger"
+          aria-label={mobileMenu ? 'Zavřít menu' : 'Otevřít menu'}
+          aria-expanded={mobileMenu}
+          onClick={() => setMobileMenu(!mobileMenu)}
+        >
+          <span style={{ display: 'block', width: 16, height: 12, position: 'relative' }}>
+            <span style={{ position: 'absolute', left: 0, right: 0, top: mobileMenu ? 5 : 0, height: 2, background: '#0a0a0a', borderRadius: 2, transition: 'transform 0.2s, top 0.2s', transform: mobileMenu ? 'rotate(45deg)' : 'none' }} />
+            <span style={{ position: 'absolute', left: 0, right: 0, top: 5, height: 2, background: '#0a0a0a', borderRadius: 2, opacity: mobileMenu ? 0 : 1, transition: 'opacity 0.15s' }} />
+            <span style={{ position: 'absolute', left: 0, right: 0, top: mobileMenu ? 5 : 10, height: 2, background: '#0a0a0a', borderRadius: 2, transition: 'transform 0.2s, top 0.2s', transform: mobileMenu ? 'rotate(-45deg)' : 'none' }} />
+          </span>
+        </button>
+      </div>
+      <style>{`
+        .bm-burger { display: none; }
+        .bm-nav-cta-short { display: none; }
+        @media (max-width: 900px) {
+          .bm-burger { display: flex !important; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: transparent; border: 1px solid rgba(0,0,0,0.12); cursor: pointer; padding: 0; flex-shrink: 0; }
+          .bm-nav-cta-full { display: none !important; }
+          .bm-nav-cta-short { display: inline !important; }
+        }
+      `}</style>
     </nav>
+    {mobileMenu && (
+      <div onClick={closeMobile} style={{
+        position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+        background: 'rgba(0,0,0,0.4)', zIndex: 100,
+        animation: 'bmDropdownIn 0.2s ease-out',
+      }}>
+        <div onClick={(e) => e.stopPropagation()} style={{
+          position: 'absolute', top: 64, left: 12, right: 12,
+          background: '#fff', borderRadius: 18,
+          boxShadow: '0 24px 60px -20px rgba(0,0,0,0.35)',
+          padding: '16px 8px',
+          animation: 'bmDropdownIn 0.22s ease-out',
+          maxHeight: 'calc(100vh - 80px)', overflowY: 'auto',
+        }}>
+          <button
+            onClick={() => setMobileSubOpen(!mobileSubOpen)}
+            style={{
+              width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              padding: '14px 18px', background: 'transparent', border: 'none', borderRadius: 12,
+              fontSize: 16, fontWeight: 600, color: '#0a0a0a', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left',
+            }}
+          >
+            <span>Řešení</span>
+            <span style={{ fontSize: 11, transition: 'transform 0.2s', transform: mobileSubOpen ? 'rotate(180deg)' : 'none' }}>▼</span>
+          </button>
+          {mobileSubOpen && (
+            <div style={{ padding: '0 8px 8px' }}>
+              {BM_SEGMENTS.map(s => (
+                <a key={s.key} href={`reseni-${s.key}.html`} onClick={closeMobile} style={{
+                  display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px',
+                  borderRadius: 10, textDecoration: 'none', color: '#0a0a0a', fontSize: 15, fontWeight: 500,
+                }}>
+                  <span style={{ fontSize: 20 }}>{s.icon}</span>
+                  <span style={{ flex: 1 }}>{s.name}</span>
+                  {s.soon && <span style={{ fontSize: 9, padding: '2px 6px', borderRadius: 999, background: 'rgba(0,0,0,0.06)', color: 'rgba(0,0,0,0.5)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 0.5, fontWeight: 700 }}>SOON</span>}
+                </a>
+              ))}
+            </div>
+          )}
+          {links.map(l => (
+            <a key={l.key} href={l.href} onClick={closeMobile} style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              padding: '14px 18px', borderRadius: 12,
+              fontSize: 16, fontWeight: 600, color: '#0a0a0a', textDecoration: 'none',
+            }}>
+              <span>{l.label}</span>
+              {l.soon && <span style={{ fontSize: 9, padding: '3px 7px', borderRadius: 999, background: 'rgba(0,0,0,0.06)', color: 'rgba(0,0,0,0.45)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 0.5, fontWeight: 600 }}>BRZY</span>}
+            </a>
+          ))}
+          <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', marginTop: 8, paddingTop: 12, padding: '12px 8px 4px' }}>
+            <a href="kontakt.html" onClick={closeMobile} style={{
+              display: 'block', textAlign: 'center',
+              padding: '14px 18px', borderRadius: 999,
+              background: '#0a0a0a', color: '#fff',
+              fontSize: 14, fontWeight: 600, textDecoration: 'none',
+            }}>
+              Domluvit hovor →
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 }
 

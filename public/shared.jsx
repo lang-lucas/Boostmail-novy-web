@@ -181,7 +181,8 @@ function EmailMockup({ subject = 'Vaše stálá objednávka čeká 💈', prehea
         borderRadius: 14,
         boxShadow: '0 24px 60px -20px rgba(26,90,218,0.25), 0 8px 20px rgba(0,0,0,0.06)',
         overflow: 'hidden',
-        width: 380,
+        width: '100%',
+        maxWidth: 380,
         border: '1px solid rgba(0,0,0,0.06)',
       }}>
         {/* Mail header */}

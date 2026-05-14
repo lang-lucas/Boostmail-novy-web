@@ -184,20 +184,29 @@ function V2TechSaas() {
 // ── Dashboard mockup ─────────────────────────────────────
 function DashboardMockup() {
   return (
-    <div style={{
+    <div className="v7-dashboard-mockup" style={{
       background: '#0a0a0a',
       borderRadius: 16,
       padding: 18,
       boxShadow: '0 40px 80px -20px rgba(26,90,218,0.3), 0 0 0 1px rgba(255,255,255,0.06)',
       transform: 'rotateX(2deg)',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
     }}>
+      <style>{`
+        @media (max-width: 900px) {
+          .v7-dashboard-mockup { transform: none !important; padding: 12px !important; }
+          .v7-dashboard-mockup .v7-dm-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       <div style={{ display: 'flex', gap: 6, marginBottom: 14 }}>
         <span style={{ width: 11, height: 11, borderRadius: '50%', background: '#ff5f57' }}/>
         <span style={{ width: 11, height: 11, borderRadius: '50%', background: '#ffbd2e' }}/>
         <span style={{ width: 11, height: 11, borderRadius: '50%', background: '#28c941' }}/>
         <div style={{ marginLeft: 'auto', fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: 'JetBrains Mono, monospace' }}>app.boostmail.cz/dashboard</div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 14, background: '#0a0a0a' }}>
+      <div className="v7-dm-grid" style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 14, background: '#0a0a0a' }}>
         {/* Sidebar */}
         <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 10, padding: 14 }}>
           <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginBottom: 10, letterSpacing: 1 }}>FLOWS</div>

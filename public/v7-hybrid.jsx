@@ -25,9 +25,16 @@ function V7Hybrid() {
   const accent = '#1a5ada';
   const [caseStudy, setCaseStudy] = React.useState(null);
   const [navDrop, setNavDrop] = React.useState(false);
+  const [mobileMenu, setMobileMenu] = React.useState(false);
+  const [mobileSubOpen, setMobileSubOpen] = React.useState(false);
   const navDropTimer = React.useRef(null);
   const navOpen = () => { clearTimeout(navDropTimer.current); setNavDrop(true); };
   const navClose = () => { navDropTimer.current = setTimeout(() => setNavDrop(false), 140); };
+  const closeMobile = () => { setMobileMenu(false); setMobileSubOpen(false); };
+  React.useEffect(() => {
+    document.body.style.overflow = mobileMenu ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenu]);
   const [tw, setTweak] = useTweaks(TWEAK_DEFAULTS);
 
   return (
@@ -64,12 +71,22 @@ function V7Hybrid() {
         .v7-day:hover { background: rgba(26,90,218,0.08) !important; }
         .v7-slot:hover { background: ${accent} !important; color: #fff !important; }
 
+        /* DESKTOP: hide hamburger */
+        .v7-burger { display: none; }
+        .v7-nav-cta-short { display: none; }
+
         /* MOBILE OPTIMIZATION */
         @media (max-width: 900px) {
+          .v7-root { overflow-x: hidden; }
           .v7-nav { padding: 14px 18px !important; gap: 10px; }
           .v7-nav-links { display: none !important; }
           .v7-nav-cta { padding: 9px 14px !important; font-size: 12px !important; }
+          .v7-nav-cta-full { display: none !important; }
+          .v7-nav-cta-short { display: inline !important; }
+          .v7-burger { display: flex !important; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: transparent; border: 1px solid rgba(0,0,0,0.12); cursor: pointer; padding: 0; flex-shrink: 0; }
           .v7-nav-logo { height: 24px !important; }
+          .v7-section h3 { font-size: 28px !important; line-height: 1.05 !important; }
+          .v7-section img, .v7-section svg { max-width: 100%; height: auto; }
           .v7-section { padding: 48px 18px !important; }
           .v7-hero { padding: 32px 18px 40px !important; }
           .v7-h1 { font-size: 56px !important; line-height: 0.95 !important; letter-spacing: -0.04em !important; }
@@ -199,10 +216,113 @@ function V7Hybrid() {
             <span style={{ fontSize: 9, padding: '2px 6px', borderRadius: 999, background: 'rgba(0,0,0,0.06)', color: 'rgba(0,0,0,0.45)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 0.5, fontWeight: 600, lineHeight: 1.2 }}>BRZY</span>
           </a>
         </div>
-        <a href="pages/kontakt.html" className="v7-nav-cta" style={{ padding: '11px 20px', background: '#0a0a0a', color: '#fff', border: 'none', borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: 'pointer', textDecoration: 'none' }}>
-          Spočítáme, kolik vám utíká →
-        </a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <a href="pages/kontakt.html" className="v7-nav-cta" style={{ padding: '11px 20px', background: '#0a0a0a', color: '#fff', border: 'none', borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: 'pointer', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+            <span className="v7-nav-cta-full">Spočítáme, kolik vám utíká →</span>
+            <span className="v7-nav-cta-short">Spočítat →</span>
+          </a>
+          <button
+            className="v7-burger"
+            aria-label={mobileMenu ? 'Zavřít menu' : 'Otevřít menu'}
+            aria-expanded={mobileMenu}
+            onClick={() => setMobileMenu(!mobileMenu)}
+            style={{ position: 'relative' }}
+          >
+            <span style={{ display: 'block', width: 16, height: 12, position: 'relative' }}>
+              <span style={{ position: 'absolute', left: 0, right: 0, top: mobileMenu ? 5 : 0, height: 2, background: '#0a0a0a', borderRadius: 2, transition: 'transform 0.2s, top 0.2s, opacity 0.2s', transform: mobileMenu ? 'rotate(45deg)' : 'none' }} />
+              <span style={{ position: 'absolute', left: 0, right: 0, top: 5, height: 2, background: '#0a0a0a', borderRadius: 2, opacity: mobileMenu ? 0 : 1, transition: 'opacity 0.15s' }} />
+              <span style={{ position: 'absolute', left: 0, right: 0, top: mobileMenu ? 5 : 10, height: 2, background: '#0a0a0a', borderRadius: 2, transition: 'transform 0.2s, top 0.2s', transform: mobileMenu ? 'rotate(-45deg)' : 'none' }} />
+            </span>
+          </button>
+        </div>
       </nav>
+
+      {/* MOBILE MENU OVERLAY */}
+      {mobileMenu && (
+        <div
+          onClick={closeMobile}
+          style={{
+            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+            background: 'rgba(0,0,0,0.4)', zIndex: 100,
+            animation: 'v7backdrop 0.2s ease-out',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'absolute', top: 64, left: 12, right: 12,
+              background: '#fff', borderRadius: 18,
+              boxShadow: '0 24px 60px -20px rgba(0,0,0,0.35)',
+              padding: '16px 8px',
+              animation: 'v7DropIn 0.22s ease-out',
+              maxHeight: 'calc(100vh - 80px)', overflowY: 'auto',
+            }}
+          >
+            {/* Řešení s pod-menu */}
+            <button
+              onClick={() => setMobileSubOpen(!mobileSubOpen)}
+              style={{
+                width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: '14px 18px', background: 'transparent', border: 'none', borderRadius: 12,
+                fontSize: 16, fontWeight: 600, color: '#0a0a0a', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left',
+              }}
+            >
+              <span>Řešení</span>
+              <span style={{ fontSize: 11, transition: 'transform 0.2s', transform: mobileSubOpen ? 'rotate(180deg)' : 'none' }}>▼</span>
+            </button>
+            {mobileSubOpen && (
+              <div style={{ padding: '0 8px 8px' }}>
+                {[
+                  { key: 'barber', icon: '💈', name: 'Barbershopy' },
+                  { key: 'beauty', icon: '💅', name: 'Kosmetičky', soon: true },
+                  { key: 'wellness', icon: '🧖', name: 'Wellness', soon: true },
+                  { key: 'auto', icon: '🚗', name: 'Autoservisy', soon: true },
+                ].map(s => (
+                  <a key={s.key} href={s.soon ? '#' : `pages/reseni.html#${s.key}`}
+                     onClick={s.soon ? (e) => { e.preventDefault(); } : closeMobile}
+                     style={{
+                       display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px',
+                       borderRadius: 10, textDecoration: 'none',
+                       color: s.soon ? 'rgba(0,0,0,0.5)' : '#0a0a0a', fontSize: 15, fontWeight: 500,
+                     }}>
+                    <span style={{ fontSize: 20 }}>{s.icon}</span>
+                    <span>{s.name}</span>
+                    {s.soon && <span style={{ marginLeft: 'auto', fontSize: 9, padding: '2px 6px', borderRadius: 999, background: 'rgba(0,0,0,0.06)', color: 'rgba(0,0,0,0.5)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 0.5, fontWeight: 700 }}>JIŽ BRZY</span>}
+                  </a>
+                ))}
+              </div>
+            )}
+            {[
+              { href: 'pages/pripadovky.html', label: 'Případovky', soon: true },
+              { href: 'pages/jak-pracujeme.html', label: 'Jak pracujeme' },
+              { href: 'pages/o-nas.html', label: 'O nás' },
+              { href: 'pages/akademie.html', label: 'Akademie', soon: true },
+              { href: 'pages/cenik.html', label: 'Ceník', soon: true },
+            ].map(l => (
+              <a key={l.href} href={l.href} onClick={closeMobile}
+                 style={{
+                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                   padding: '14px 18px', borderRadius: 12,
+                   fontSize: 16, fontWeight: 600, color: '#0a0a0a', textDecoration: 'none',
+                 }}>
+                <span>{l.label}</span>
+                {l.soon && <span style={{ fontSize: 9, padding: '3px 7px', borderRadius: 999, background: 'rgba(0,0,0,0.06)', color: 'rgba(0,0,0,0.45)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 0.5, fontWeight: 600 }}>BRZY</span>}
+              </a>
+            ))}
+            <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', marginTop: 8, paddingTop: 12, padding: '12px 8px 4px' }}>
+              <a href="pages/kontakt.html" onClick={closeMobile}
+                 style={{
+                   display: 'block', textAlign: 'center',
+                   padding: '14px 18px', borderRadius: 999,
+                   background: '#0a0a0a', color: '#fff',
+                   fontSize: 14, fontWeight: 600, textDecoration: 'none',
+                 }}>
+                Domluvit hovor →
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* HERO */}
       <section className="v7-hero" style={{ padding: '60px 56px 60px', overflow: 'hidden', position: 'relative' }}>
