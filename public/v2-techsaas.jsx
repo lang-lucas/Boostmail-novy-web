@@ -201,7 +201,7 @@ function DashboardMockup() {
         {/* Sidebar */}
         <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 10, padding: 14 }}>
           <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginBottom: 10, letterSpacing: 1 }}>FLOWS</div>
-          {['Win-back 30 dní', 'Repeat purchase', 'Welcome série', 'STK připomínka', 'Fade refresh 💈', 'Birthday 🎂'].map((f, i) => (
+          {['Recommend (cyklus)', 'Reactivation 90+', 'Free slots', 'Cancel rebook', 'Post care'].map((f, i) => (
             <div key={i} style={{
               padding: '8px 10px',
               borderRadius: 6,
@@ -210,7 +210,7 @@ function DashboardMockup() {
               fontSize: 12, marginBottom: 2, display: 'flex', justifyContent: 'space-between',
             }}>
               <span>{f}</span>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: i < 4 ? '#10b981' : 'rgba(255,255,255,0.2)' }}/>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981' }}/>
             </div>
           ))}
         </div>
@@ -218,8 +218,8 @@ function DashboardMockup() {
         <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 10, padding: 18, color: '#fff' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
             <div>
-              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 2 }}>Win-back 30 dní</div>
-              <div style={{ fontSize: 22, fontWeight: 700 }}>Aktivní · 8 247 příjemců</div>
+              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 2 }}>Recommend · Nextlevel</div>
+              <div style={{ fontSize: 22, fontWeight: 700 }}>Aktivní · 878 zákazníků</div>
             </div>
             <div style={{ display: 'flex', gap: 6 }}>
               {['7d', '30d', '90d'].map((d, i) => (
@@ -228,7 +228,7 @@ function DashboardMockup() {
             </div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 16 }}>
-            {[['ODESLÁNO', '8 247'], ['OTEVÍRANOST', '62%'], ['CTR', '18%'], ['REVENUE', '187k Kč']].map(([l, v], i) => (
+            {[['ODESLÁNO', '878'], ['OTEVÍRANOST', '28,6 %'], ['REZERVACE', '58'], ['OBRAT', '45 792 Kč']].map(([l, v], i) => (
               <div key={i} style={{ background: 'rgba(255,255,255,0.04)', padding: 12, borderRadius: 8 }}>
                 <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', marginBottom: 4, letterSpacing: 1 }}>{l}</div>
                 <div style={{ fontSize: 18, fontWeight: 700, color: i === 3 ? '#1a5ada' : '#fff' }}>{v}</div>

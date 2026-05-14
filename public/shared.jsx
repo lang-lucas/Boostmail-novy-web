@@ -7,22 +7,32 @@ const SEGMENTS = [
   { id: 'auto', emoji: '🚗', label: 'Autoservisy', sub: 'STK, servis, sezóna – připomínky', comingSoon: true },
 ];
 
+// 5 reálných situací, kdy posíláme e-mail (Boostware flows v produkci)
+const SITUATIONS = [
+  { n: '01', title: 'Den po střihu', emoji: '✂️', desc: 'Zeptáme se zákazníka, jak byl spokojený. Posbíráme zpětnou vazbu a recenze.' },
+  { n: '02', title: 'Když je čas na další střih', emoji: '🗓', desc: 'Připomeneme se v individuálním cyklu (typicky po 4 až 6 týdnech). Bez slev, jen ve správný moment.' },
+  { n: '03', title: 'Volné okno v rozvrhu', emoji: '⏱', desc: 'Když má barber zítra volno, oslovíme lidi, kteří se chystali. Naplníme termín.' },
+  { n: '04', title: 'Někdo zrušil termín', emoji: '↩', desc: 'Do dvou minut po zrušení oslovíme čekající. Termín neproplave, vy nepřijdete o tržbu.' },
+  { n: '05', title: 'Tři měsíce bez návštěvy', emoji: '💭', desc: 'Zákazníka, který se ztratil, vracíme zpátky. Bez agresivních slev, jen normální zpráva.' },
+];
+
+// 3 kroky onboardingu — co se stane, když řeknete ano
 const PROCESS_STEPS = [
-  { n: '01', title: 'Audit', emoji: '🔍', desc: 'Pochopíme, kde vám utíkají peníze. Analyzujeme nákupní chování, kvalitu databáze a stávající procesy.' },
-  { n: '02', title: 'Strategie', emoji: '🧠', desc: 'Žádné šablony. Navrhneme retenční strategii přesně pro váš byznys – koho, kdy a jak oslovit.' },
-  { n: '03', title: 'Automatizace', emoji: '⚙️', desc: 'Nastavíme technické pozadí a spustíme automatické scénáře, které pracují 24/7 bez vašeho zásahu.' },
-  { n: '04', title: 'Růst', emoji: '📈', desc: 'Sledujeme PNO a LTV. Co funguje, podpoříme. Co nefunguje, vypneme. Reportujeme čistý zisk.' },
+  { n: '01', title: 'Předání databáze', emoji: '🔑', desc: 'Napojíme se na váš rezervační systém (Reservio, Reservanto, MyFox). Stačí přístupy, zbytek řešíme my.' },
+  { n: '02', title: 'Nastavení flow', emoji: '⚙', desc: 'Sepneme jednotlivé situace. První dva týdny ladíme jazyk a timing, ať to sedí na váš barbershop.' },
+  { n: '03', title: 'První report po měsíci', emoji: '📊', desc: 'Posíláme report s počtem rezervací z e-mailu a jejich hodnotou. Vidíte, co děláme, a kolik to přineslo.' },
 ];
 
 const CLIENT_LOGOS = [
-  'NextReality', 'SmartEmailing', 'Autošíma', 'Lázně Vráž', 'TD REAL', 'Lepší grilování', 'Štěstí & Zdraví', 'Ranč u stromů',
+  'Nextlevel', 'Torinos', 'The Drop', 'MNB',
 ];
 
+// Reálná čísla z Nextlevelu, 30 dní
 const STATS = [
-  { value: '+47%', label: 'opakovaných nákupů' },
-  { value: '8.4×', label: 'ROI z retenčních flows' },
-  { value: '23%', label: 'nárůst LTV za 90 dní' },
-  { value: '24/7', label: 'běží automatizace' },
+  { value: '58', label: 'rezervací z e-mailu / měsíc' },
+  { value: '45 792 Kč', label: 'obratu z databáze / měsíc' },
+  { value: '878', label: 'odeslaných e-mailů / měsíc' },
+  { value: '0 Kč', label: 'utraceno za reklamu' },
 ];
 
 // ─── ROI Calculator ──────────────────────────────────────────
@@ -512,7 +522,7 @@ function ClientLogos({ logos = CLIENT_LOGOS, color = 'rgba(0,0,0,0.4)', monochro
 
 // Expose globally
 Object.assign(window, {
-  SEGMENTS, PROCESS_STEPS, CLIENT_LOGOS, STATS,
+  SEGMENTS, PROCESS_STEPS, SITUATIONS, CLIENT_LOGOS, STATS,
   useROI, fmtCZK,
   ContactForm, EmailMockup, ProcessAnimated, SegmentSwitcher, ROICalculator, ClientLogos,
 });

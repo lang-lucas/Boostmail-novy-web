@@ -121,8 +121,8 @@ function V7Hybrid() {
 
       {/* NAV */}
       <nav className="v7-nav" style={{ padding: '20px 56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: 'rgba(244,244,244,0.85)', backdropFilter: 'blur(12px)', zIndex: 10, borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
-        <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <img className="v7-nav-logo" src="/assets/boostmail-logo-black.png" alt="BoostMail" style={{ height: 32, width: 'auto', display: 'block' }} />
+        <a href="Boostmail.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img className="v7-nav-logo" src="assets/boostmail-logo-black.png" alt="BoostMail" style={{ height: 32, width: 'auto', display: 'block' }} />
         </a>
         <div className="v7-nav-links" style={{ display: 'flex', gap: 28, fontSize: 14, fontWeight: 500, alignItems: 'center' }}>
           {/* Řešení s dropdownem */}
@@ -177,39 +177,51 @@ function V7Hybrid() {
                     padding: '10px 14px', borderRadius: 10, textDecoration: 'none',
                     color: accent, fontSize: 13, fontWeight: 600,
                   }}>
-                    <span>🛠 Custom systém na míru</span>
+                    <span>Jiný obor? Promluvíme si.</span>
                     <span>→</span>
                   </a>
                 </div>
               </div>
             )}
           </div>
-          <a href="pages/pripadovky.html" style={{ color: '#0a0a0a', textDecoration: 'none' }}>Případovky</a>
+          <a href="pages/pripadovky.html" style={{ color: '#0a0a0a', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            Případovky
+            <span style={{ fontSize: 9, padding: '2px 6px', borderRadius: 999, background: 'rgba(0,0,0,0.06)', color: 'rgba(0,0,0,0.45)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 0.5, fontWeight: 600, lineHeight: 1.2 }}>BRZY</span>
+          </a>
           <a href="pages/jak-pracujeme.html" style={{ color: '#0a0a0a', textDecoration: 'none' }}>Jak pracujeme</a>
           <a href="pages/o-nas.html" style={{ color: '#0a0a0a', textDecoration: 'none' }}>O nás</a>
-          <a href="pages/akademie.html" style={{ color: '#0a0a0a', textDecoration: 'none' }}>Akademie</a>
-          <a href="pages/cenik.html" style={{ color: '#0a0a0a', textDecoration: 'none' }}>Ceník</a>
+          <a href="pages/akademie.html" style={{ color: '#0a0a0a', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            Akademie
+            <span style={{ fontSize: 9, padding: '2px 6px', borderRadius: 999, background: 'rgba(0,0,0,0.06)', color: 'rgba(0,0,0,0.45)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 0.5, fontWeight: 600, lineHeight: 1.2 }}>BRZY</span>
+          </a>
+          <a href="pages/cenik.html" style={{ color: '#0a0a0a', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            Ceník
+            <span style={{ fontSize: 9, padding: '2px 6px', borderRadius: 999, background: 'rgba(0,0,0,0.06)', color: 'rgba(0,0,0,0.45)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 0.5, fontWeight: 600, lineHeight: 1.2 }}>BRZY</span>
+          </a>
         </div>
         <a href="pages/kontakt.html" className="v7-nav-cta" style={{ padding: '11px 20px', background: '#0a0a0a', color: '#fff', border: 'none', borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: 'pointer', textDecoration: 'none' }}>
-          💸 Ukázka zdarma →
+          Spočítáme, kolik vám utíká →
         </a>
       </nav>
 
       {/* HERO */}
       <section className="v7-hero" style={{ padding: '60px 56px 60px', overflow: 'hidden', position: 'relative' }}>
         <div className="v7-rise" style={{ maxWidth: 1300, margin: '0 auto', position: 'relative' }}>
-          <MonoLabel n="01" text="RETENČNÍ MARKETING / 2026" accent={accent} />
+          <MonoLabel n="01" text="BARBERSHOPY / 2026" accent={accent} />
           <h1 className="v7-h1" style={{ fontSize: 132, lineHeight: 0.85, fontWeight: 700, margin: '24px 0 0', letterSpacing: '-0.05em' }}>
-            Proměňte
+            Méně peněz
+          </h1>
+          <h1 className="v7-h1" style={{ fontSize: 132, lineHeight: 0.95, fontWeight: 700, margin: 0, letterSpacing: '-0.05em' }}>
+            za reklamu.
           </h1>
           <h1 className="v7-h1" style={{ fontSize: 132, lineHeight: 1, fontWeight: 700, margin: 0, letterSpacing: '-0.05em', display: 'flex', alignItems: 'center', gap: tw.arrowGap, flexWrap: 'wrap' }}>
+            <span style={{ fontWeight: 400, fontStyle: 'italic', marginRight: 12 }}>Víc</span>
             <span style={{
               background: `linear-gradient(110deg, ${accent}, #5d8cea, ${accent})`,
               backgroundSize: '200% 100%',
               animation: 'v7gradMove 4s linear infinite',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontStyle: 'italic',
               display: 'inline-block',
               paddingRight: 24,
               paddingTop: 4,
@@ -217,7 +229,7 @@ function V7Hybrid() {
               lineHeight: 1.1,
               marginTop: -8,
               marginBottom: -8,
-            }}>databázi</span>
+            }}>v křesle</span>
             <span className="v7-h1-arrow" style={{
               fontSize: tw.arrowSize,
               color: `rgba(0,0,0,${tw.arrowOpacity})`,
@@ -230,27 +242,23 @@ function V7Hybrid() {
               display: 'inline-block',
             }}>{tw.arrowChar}</span>
           </h1>
-          <h1 className="v7-h1" style={{ fontSize: 132, lineHeight: 0.85, fontWeight: 700, margin: 0, letterSpacing: '-0.05em' }}>
-            ve <em style={{ fontWeight: 400 }}>stroj</em> na 💸
-          </h1>
           <div className="v7-hero-row" style={{ display: 'flex', gap: 64, marginTop: 40, alignItems: 'center', flexWrap: 'wrap' }}>
-            <div className="v7-hero-sub" style={{ fontSize: 17, lineHeight: 1.5, color: 'rgba(0,0,0,0.7)', maxWidth: 460 }}>
-              Specializovaná agentura na retenční marketing a automatizaci. Místo nalévání peněz do reklamy zhodnotíme databázi, kterou už máte.
+            <div className="v7-hero-sub" style={{ fontSize: 17, lineHeight: 1.55, color: 'rgba(0,0,0,0.7)', maxWidth: 520 }}>
+              Vracíme stálé zákazníky barbershopů zpátky do křesla. Nextlevel v Praze takhle dostává <b>58 rezervací z e-mailu měsíčně, 45 792 Kč obratu</b>. Bez reklamy. Bez zbytečných slev.
             </div>
             <div className="v7-hero-ctas" style={{ display: 'flex', gap: 12 }}>
-              <button style={{ padding: '16px 26px', background: accent, color: '#fff', border: 'none', borderRadius: 999, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>
-                💸 Spočítat potenciál →
-              </button>
-              <button className="v7-btn-outline" style={{ padding: '16px 26px', background: 'transparent', color: '#0a0a0a', border: '1px solid rgba(0,0,0,0.2)', borderRadius: 999, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>
-                ▶ 90s ukázka
-              </button>
+              <a href="pages/kontakt.html" style={{ padding: '16px 26px', background: accent, color: '#fff', border: 'none', borderRadius: 999, fontSize: 15, fontWeight: 600, cursor: 'pointer', textDecoration: 'none', display: 'inline-block' }}>
+                Spočítáme, kolik vám utíká →
+              </a>
+              <a href="pages/jak-pracujeme.html" className="v7-btn-outline" style={{ padding: '16px 26px', background: 'transparent', color: '#0a0a0a', border: '1px solid rgba(0,0,0,0.2)', borderRadius: 999, fontSize: 15, fontWeight: 600, cursor: 'pointer', textDecoration: 'none', display: 'inline-block' }}>
+                Jak to děláme
+              </a>
             </div>
           </div>
 
-          {/* Dashboard mockup with live counter overlay */}
+          {/* Dashboard mockup */}
           <div className="v7-dashboard" style={{ marginTop: 64, perspective: 1500, position: 'relative' }}>
             <DashboardMockup />
-            <LiveCounter accent={accent} />
           </div>
         </div>
       </section>
@@ -268,15 +276,15 @@ function V7Hybrid() {
         </div>
       </section>
 
-      {/* ŘEŠENÍ — segments + tilted live email */}
+      {/* PRO KOHO TO DĚLÁME — segments + tilted live email */}
       <section className="v7-section" style={{ padding: '100px 56px' }}>
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <MonoLabel n="02" text="ŘEŠENÍ" accent={accent} center />
+          <MonoLabel n="02" text="PRO KOHO TO DĚLÁME" accent={accent} center />
           <h2 className="v7-section-title" style={{ fontSize: 72, fontWeight: 700, margin: '20px 0 16px', letterSpacing: '-0.04em', lineHeight: 0.95 }}>
-            Řešení přesně pro vás
+            Začínáme u barbershopů.
           </h2>
-          <div style={{ fontSize: 17, color: 'rgba(0,0,0,0.6)', marginBottom: 32 }}>
-            Vyberte segment a podívejte se, jak konkrétně vám pomůžeme.
+          <div style={{ fontSize: 17, color: 'rgba(0,0,0,0.6)', marginBottom: 32, maxWidth: 640, marginLeft: 'auto', marginRight: 'auto' }}>
+            Specializujeme se na podniky, kam lidé chodí pravidelně. Další obory přidáváme postupně.
           </div>
           <SegmentSwitcher active={seg} onChange={setSeg} accent={accent} />
         </div>
@@ -299,13 +307,13 @@ function V7Hybrid() {
           }}>🛠</div>
           <div style={{ flex: 1, minWidth: 280 }}>
             <div style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: accent, letterSpacing: 1.5, marginBottom: 6, fontWeight: 600 }}>
-              JINÝ OBOR? / CUSTOM
+              JINÝ OBOR?
             </div>
             <h3 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 6px', letterSpacing: '-0.01em' }}>
-              Děláme i systémy na míru — pokud to dává smysl pro obě strany.
+              Máte zákazníky, kteří se vracejí? Ozvěte se.
             </h3>
-            <div style={{ fontSize: 14, lineHeight: 1.5, color: 'rgba(0,0,0,0.65)' }}>
-              Máte zajímavou databázi a obor mimo náš seznam? Zavolejte nám. 30 minut, žádný závazek — řekneme rovnou jestli pro to máme řešení.
+            <div style={{ fontSize: 14, lineHeight: 1.55, color: 'rgba(0,0,0,0.65)' }}>
+              Boostmail jedeme zatím jen pro barbershopy, další obory plánujeme. Pokud děláte službu, kam lidé chodí pravidelně, dejte nám vědět. Patnáct minut hovoru a řekneme, kdy bychom se k vám dostali.
             </div>
           </div>
           <a href="pages/kontakt.html" style={{
@@ -313,7 +321,7 @@ function V7Hybrid() {
             borderRadius: 999, fontSize: 14, fontWeight: 600,
             textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0,
           }}>
-            📅 Probrat můj obor →
+            Probrat můj obor →
           </a>
         </div>
       </section>
@@ -323,55 +331,116 @@ function V7Hybrid() {
         <div style={{ display: 'flex', gap: 48, animation: 'v7marqueeRev 25s linear infinite', whiteSpace: 'nowrap', fontSize: 26, fontWeight: 700, letterSpacing: '-0.02em' }}>
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-              💸 RETENCE &gt; AKVIZICE <span style={{ opacity: 0.4 }}>✦</span> NÁKUPNÍ DATA &gt; POCITY <span style={{ opacity: 0.4 }}>✦</span> 8.4× ROI <span style={{ opacity: 0.4 }}>✦</span>
+              BEZ REKLAMY <span style={{ opacity: 0.4 }}>✦</span> BEZ ZBYTEČNÝCH SLEV <span style={{ opacity: 0.4 }}>✦</span> MĚŘENO REZERVACEMI <span style={{ opacity: 0.4 }}>✦</span>
             </span>
           ))}
         </div>
       </section>
 
-      {/* PROCES — manual + packet animation */}
+      {/* KDY POSÍLÁME — 5 reálných situací */}
       <section className="v7-section v7-section-white" style={{ padding: '100px 56px', background: '#fff' }}>
-        <div style={{ textAlign: 'center', marginBottom: 64 }}>
-          <MonoLabel n="03" text="PROCES" accent={accent} center />
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+          <MonoLabel n="03" text="KDY POSÍLÁME E-MAIL" accent={accent} center />
           <h2 className="v7-section-title" style={{ fontSize: 72, fontWeight: 700, margin: '20px 0 12px', letterSpacing: '-0.04em', lineHeight: 0.95 }}>
-            Marketing řízený daty,<br/>ne <em style={{ fontWeight: 400, color: accent }}>pocity.</em>
+            Pět situací, kdy <em style={{ fontWeight: 400, color: accent }}>píšeme.</em>
           </h2>
-          <div style={{ fontSize: 13, color: 'rgba(0,0,0,0.45)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 1 }}>
-            ↓ KLIKNĚTE NA KROK PRO DETAIL
+          <div style={{ fontSize: 17, color: 'rgba(0,0,0,0.6)', maxWidth: 640, margin: '8px auto 0', lineHeight: 1.5 }}>
+            Žádné slevové letáky, žádný spam. Správná zpráva ve správný moment.
           </div>
         </div>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <ProcessAnimatedManual accent={accent} interval={2800} />
-        </div>
-      </section>
-
-      {/* CASE STUDIES — clickable cards in marquee */}
-      <section className="v7-section" style={{ padding: '80px 0 60px', overflow: 'hidden', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <MonoLabel n="04" text="PŘÍPADOVÉ STUDIE" accent={accent} center />
-          <h2 style={{ fontSize: 48, fontWeight: 700, margin: '12px 0 6px', letterSpacing: '-0.03em' }}>
-            40+ značek / ČR + SR
-          </h2>
-          <div style={{ fontSize: 14, color: 'rgba(0,0,0,0.5)' }}>Klikněte na případovku pro detail výsledků</div>
-        </div>
-        <div style={{ display: 'flex', gap: 20, animation: 'v7marquee 50s linear infinite', whiteSpace: 'nowrap', padding: '8px 0' }}>
-          {[...CASE_STUDIES, ...CASE_STUDIES, ...CASE_STUDIES].map((cs, i) => (
-            <CaseStudyCard key={i} cs={cs} accent={accent} onClick={() => setCaseStudy(cs)} />
+        <div style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
+          {SITUATIONS.map(s => (
+            <div key={s.n} style={{
+              padding: 24, background: '#f9f9f9', borderRadius: 14,
+              border: '1px solid rgba(0,0,0,0.06)',
+              display: 'flex', flexDirection: 'column', gap: 12,
+            }}>
+              <div style={{
+                fontSize: 11, fontFamily: 'JetBrains Mono, monospace',
+                color: accent, letterSpacing: 1.5, fontWeight: 600,
+              }}>[{s.n}]</div>
+              <div style={{ fontSize: 36, lineHeight: 1 }}>{s.emoji}</div>
+              <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, letterSpacing: '-0.01em', lineHeight: 1.2 }}>{s.title}</h3>
+              <div style={{ fontSize: 14, lineHeight: 1.55, color: 'rgba(0,0,0,0.7)' }}>{s.desc}</div>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* UKÁZKA — ROI + email */}
+      {/* JAK TO BĚŽÍ — 3 kroky onboardingu */}
+      <section className="v7-section" style={{ padding: '100px 56px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+          <MonoLabel n="04" text="JAK TO BĚŽÍ" accent={accent} center />
+          <h2 className="v7-section-title" style={{ fontSize: 72, fontWeight: 700, margin: '20px 0 12px', letterSpacing: '-0.04em', lineHeight: 0.95 }}>
+            Co se stane, když <em style={{ fontWeight: 400, color: accent }}>řeknete ano.</em>
+          </h2>
+          <div style={{ fontSize: 13, color: 'rgba(0,0,0,0.45)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 1, marginTop: 8 }}>
+            ↓ KLIKNĚTE NA KROK PRO DETAIL
+          </div>
+        </div>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <ProcessAnimatedManual accent={accent} interval={2800} />
+        </div>
+      </section>
+
+      {/* VÝSLEDKY — clickable cards in marquee */}
+      <section className="v7-section" style={{ padding: '80px 0 60px', overflow: 'hidden', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <MonoLabel n="05" text="VÝSLEDKY" accent={accent} center />
+          <h2 style={{ fontSize: 48, fontWeight: 700, margin: '12px 0 6px', letterSpacing: '-0.03em' }}>
+            Čtyři barbershopy. <em style={{ fontWeight: 400, color: accent }}>Jeden příklad.</em>
+          </h2>
+          <div style={{ fontSize: 14, color: 'rgba(0,0,0,0.5)', maxWidth: 540, margin: '8px auto 0', lineHeight: 1.5 }}>
+            Detailní čísla zveřejňujeme zatím jen u Nextlevelu. U dalších klientů čekáme na souhlas se zveřejněním dat.
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 20, animation: 'v7marquee 50s linear infinite', whiteSpace: 'nowrap', padding: '8px 0' }}>
+          {[...CASE_STUDIES, ...CASE_STUDIES, ...CASE_STUDIES].map((cs, i) => (
+            <CaseStudyCard key={i} cs={cs} accent={accent} onClick={() => cs.placeholder ? null : setCaseStudy(cs)} />
+          ))}
+        </div>
+      </section>
+
+      {/* UKÁZKA — callout + email */}
       <section className="v7-section" style={{ padding: '100px 56px', borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
         <div className="v7-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, alignItems: 'start', maxWidth: 1300, margin: '0 auto' }}>
-          <ROICalculator accent={accent} />
           <div>
-            <MonoLabel n="05" text="UKÁZKA" accent={accent} />
+            <MonoLabel n="06" text="CO VÁM ŘEKNEME NA HOVORU" accent={accent} />
             <h3 style={{ fontSize: 40, fontWeight: 700, margin: '20px 0 16px', letterSpacing: '-0.03em', lineHeight: 1 }}>
-              Reálný email, který běží 24/7
+              Patnáct minut. Konkrétně k vašemu barbershopu.
             </h3>
             <div style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(0,0,0,0.65)', marginBottom: 28, maxWidth: 440 }}>
-              Personalizovaný flow podle nákupního chování. Spustí se sám. Otevíranost <span style={{ color: accent, fontWeight: 700 }}>62 %</span>, CTR <span style={{ color: accent, fontWeight: 700 }}>18 %</span>.
+              Žádná obecná prezentace. Podíváme se na vaše čísla a řekneme rovnou, jestli pro vás dává smysl s námi spolupracovat.
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 28 }}>
+              {[
+                'Kolik zákazníků máte v rezervačním systému',
+                'Kolik se jich vám za poslední rok nevrátilo',
+                'Jaký dopad může mít e-mail u podobné velikosti',
+                'Co bychom nastavili jako první a co až potom',
+              ].map((t, i) => (
+                <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                  <div style={{ width: 22, height: 22, borderRadius: '50%', background: accent, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{i + 1}</div>
+                  <div style={{ fontSize: 15, color: 'rgba(0,0,0,0.75)', lineHeight: 1.5 }}>{t}</div>
+                </div>
+              ))}
+            </div>
+            <a href="pages/kontakt.html" style={{
+              display: 'inline-block', padding: '14px 22px',
+              background: '#0a0a0a', color: '#fff',
+              borderRadius: 999, fontSize: 14, fontWeight: 600,
+              textDecoration: 'none',
+            }}>
+              Domluvit patnáctiminutový hovor →
+            </a>
+          </div>
+          <div>
+            <MonoLabel n="07" text="PŘÍKLAD E-MAILU" accent={accent} />
+            <h3 style={{ fontSize: 40, fontWeight: 700, margin: '20px 0 16px', letterSpacing: '-0.03em', lineHeight: 1 }}>
+              Tak vypadá jedna z našich zpráv.
+            </h3>
+            <div style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(0,0,0,0.65)', marginBottom: 28, maxWidth: 440 }}>
+              Jednoduchý e-mail, spočítané načasování, jeden klik na rezervaci. U Nextlevelu otevírá <span style={{ color: accent, fontWeight: 700 }}>28,6 % příjemců</span> (s rezervou na bot inflation v Apple Mail Privacy).
             </div>
             <EmailMockup accent={accent} />
           </div>
@@ -382,12 +451,12 @@ function V7Hybrid() {
       <section className="v7-section" style={{ padding: '100px 56px' }}>
         <div className="v7-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, maxWidth: 1300, margin: '0 auto' }}>
           <div>
-            <MonoLabel n="06" text="KONTAKT" accent={accent} />
+            <MonoLabel n="08" text="KONTAKT" accent={accent} />
             <h2 className="v7-section-title" style={{ fontSize: 72, fontWeight: 700, margin: '20px 0 24px', letterSpacing: '-0.04em', lineHeight: 0.95 }}>
-              Zjistěte, kolik peněz vám leží v <em style={{ fontWeight: 400, color: accent }}>databázi.</em>
+              Pojďme spočítat, kolik vám <em style={{ fontWeight: 400, color: accent }}>utíká.</em>
             </h2>
             <div style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(0,0,0,0.65)', marginBottom: 32 }}>
-              Vyplňte formulář, nebo si rovnou vyberte termín 30min hovoru. Ozveme se vám do 24 hodin.
+              Vyplňte formulář nebo si rovnou vyberte termín patnáctiminutového hovoru. Ozveme se do 24 hodin.
             </div>
             <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 24, marginTop: 24 }}>
               <div style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: 'rgba(0,0,0,0.5)', marginBottom: 6, letterSpacing: 1 }}>TELEFONNÍ ČÍSLO</div>
@@ -399,10 +468,11 @@ function V7Hybrid() {
       </section>
 
       <footer className="v7-footer" style={{ padding: '48px 56px', background: '#0a0a0a', color: 'rgba(255,255,255,0.5)', fontSize: 13, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
-        <img src="/assets/boostmail-logo-white.png" alt="BoostMail" style={{ height: 28, width: 'auto', display: 'block' }} />
-        <div style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
-          <span>© 2026 BoostMail · IČO 23915455</span>
-          <span>+420 604 656 033 · LinkedIn · Instagram</span>
+        <img src="assets/boostmail-logo-white.png" alt="Boostmail" style={{ height: 28, width: 'auto', display: 'block' }} />
+        <div style={{ display: 'flex', gap: 32, alignItems: 'center', flexWrap: 'wrap' }}>
+          <span>© 2026 Boostmail · Lukáš Lang · IČO 23915455</span>
+          <a href="mailto:lang@boostmail.cz" style={{ color: 'rgba(255,255,255,0.65)', textDecoration: 'none' }}>lang@boostmail.cz</a>
+          <a href="tel:+420604656033" style={{ color: 'rgba(255,255,255,0.65)', textDecoration: 'none' }}>+420 604 656 033</a>
         </div>
       </footer>
 
@@ -540,7 +610,7 @@ function ProcessAnimatedManual({ accent = '#1a5ada', interval = 2800 }) {
   React.useEffect(() => {
     if (paused) return;
     const id = setInterval(() => {
-      setActive((a) => (a + 1) % 4);
+      setActive((a) => (a + 1) % PROCESS_STEPS.length);
       setPacketKey((k) => k + 1);
     }, interval);
     return () => clearInterval(id);
@@ -552,30 +622,50 @@ function ProcessAnimatedManual({ accent = '#1a5ada', interval = 2800 }) {
     setPacketKey((k) => k + 1);
   };
 
-  // Detail panel content for each step
+  // Detail panel content for each step (3 kroky onboardingu)
   const details = [
-    { title: 'Co se děje při auditu', items: ['Napojení na databázi (SmartEmailing, Mailchimp, …)', 'Segmentace zákazníků dle RFM', 'Identifikace 3 největších úniků peněz'] },
-    { title: 'Co dostanete ve strategii', items: ['Mapa flows (welcome, win-back, post-purchase)', 'Plán A/B testů na 90 dní', 'Konkrétní KPI cíle a milníky'] },
-    { title: 'Co stavíme v automatizaci', items: ['Trigger flows v editoru (drag & drop scénáře)', 'Šablony emailů s personalizací', 'Reporting dashboard v reálném čase'] },
-    { title: 'Co reportujeme měsíčně', items: ['ROI z retenčních flows + atribuce', 'PNO trend + náklady na akvizici', 'Doporučení další iterace'] },
+    {
+      title: 'Co řešíme při předání databáze',
+      items: [
+        'Napojení na váš rezervační systém (Reservio, Reservanto, MyFox)',
+        'Převzetí historie zákazníků a jejich návštěv',
+        'Kontrola, že máme dost dat na rozjezd flow',
+      ],
+    },
+    {
+      title: 'Co se děje při nastavení flow',
+      items: [
+        'Sepneme jednotlivé situace (post care, recommend, free slots, cancel, reactivation)',
+        'Přizpůsobíme jazyk a timing vašemu barbershopu',
+        'První dva týdny ladíme, než to sedne',
+      ],
+    },
+    {
+      title: 'Co dostanete v prvním reportu',
+      items: [
+        'Počet rezervací, které proběhly po našem e-mailu',
+        'Hodnota těchto rezervací v korunách',
+        'Co fungovalo, co ne, a kde doladíme další měsíc',
+      ],
+    },
   ];
 
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, position: 'relative', marginBottom: 40 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: `repeat(${PROCESS_STEPS.length}, 1fr)`, gap: 16, position: 'relative', marginBottom: 40 }}>
         {/* connecting line */}
-        <div style={{ position: 'absolute', top: 32, left: '12.5%', right: '12.5%', height: 2, background: 'rgba(0,0,0,0.08)', zIndex: 0, overflow: 'visible' }}>
+        <div style={{ position: 'absolute', top: 32, left: `${100 / (2 * PROCESS_STEPS.length)}%`, right: `${100 / (2 * PROCESS_STEPS.length)}%`, height: 2, background: 'rgba(0,0,0,0.08)', zIndex: 0, overflow: 'visible' }}>
           <div style={{
             height: '100%',
             background: accent,
-            width: `${((active + 1) / 4) * 100}%`,
+            width: `${((active + 1) / PROCESS_STEPS.length) * 100}%`,
             transition: 'width 0.6s cubic-bezier(0.65, 0, 0.35, 1)',
           }}/>
           {/* moving packet */}
           <div key={packetKey} style={{
             position: 'absolute', top: -3, left: 0, width: 8, height: 8, borderRadius: '50%',
             background: accent, boxShadow: `0 0 12px ${accent}`,
-            '--v7-packet-dist': `${(active * 25 + 25) * 0.01 * 1000}px`,
+            '--v7-packet-dist': `${((active + 1) / PROCESS_STEPS.length) * 800}px`,
             animation: 'v7packet 1.2s ease-out forwards',
           }}/>
         </div>
@@ -639,16 +729,44 @@ function ProcessAnimatedManual({ accent = '#1a5ada', interval = 2800 }) {
 }
 
 // ─── Case study card + modal ──────────────────────────────
+// Pozn.: Veřejně publikujeme čísla jen u Nextlevelu. Ostatní označené jako placeholder.
 const CASE_STUDIES = [
-  { name: 'Barbershop Mirek', cat: 'Barbershop · Praha', metric: '−62 % no-shows', summary: 'No-show prevention + automatický rebooking. SMS + email 24h před.', kpis: [{ k: 'No-show', v: '−62 %' }, { k: 'Rebook rate', v: '71 %' }, { k: 'NPS', v: '+24' }] },
-  { name: 'BarberHaus', cat: 'Barbershop · Brno', metric: '+8.4× ROI', summary: 'Win-back flow podle typu střihu. Personalizované termíny dle historie.', kpis: [{ k: 'Open rate', v: '64 %' }, { k: 'Booking', v: '+47 %' }, { k: 'ROI', v: '8.4×' }] },
-  { name: 'Old School Cuts', cat: 'Barbershop · Plzeň', metric: '+34 % rezervací', summary: 'Narozeninové vouchery + reaktivace klientů 90+ dní bez návštěvy.', kpis: [{ k: 'Reaktivace', v: '28 %' }, { k: 'Rezervace', v: '+34 %' }, { k: 'CTR', v: '19 %' }] },
-  { name: 'Sharp & Co.', cat: 'Barbershop · Ostrava', metric: '+41 % rebookingu', summary: 'Plán pravidelné péče + automatické připomínky podle růstu vlasů.', kpis: [{ k: 'Rebooking', v: '+41 %' }, { k: 'No-show', v: '−27 %' }, { k: 'LTV', v: '+19 %' }] },
-  { name: 'Holičství Karel', cat: 'Barbershop · Liberec', metric: '+52 % opak. obj.', summary: 'Segmentace dle typu klienta (vous / vlasy / kombo) + cílené nabídky.', kpis: [{ k: 'Open rate', v: '68 %' }, { k: 'Opakované obj.', v: '+52 %' }, { k: 'CTR', v: '22 %' }] },
-  { name: 'Gentlemen\u2019s Club', cat: 'Barbershop · Praha', metric: '+3.2× LTV', summary: 'Onboarding sekvence pro nové klienty. 5 emailů, 30 dní.', kpis: [{ k: 'LTV', v: '3.2×' }, { k: 'Retence 90d', v: '84 %' }, { k: 'Open rate', v: '71 %' }] },
+  {
+    name: 'Nextlevel',
+    cat: 'Barbershop · Praha',
+    metric: '45 792 Kč',
+    metricUnit: 'obratu z e-mailu / měsíc',
+    summary: '58 rezervací proběhlo po našem e-mailu. Z databáze, kterou Nextlevel už dávno měl. Bez reklamy, bez zbytečných slev.',
+    kpis: [
+      { k: 'Rezervace / měsíc', v: '58' },
+      { k: 'Open rate', v: '28,6 %' },
+      { k: 'Reklama', v: '0 Kč' },
+    ],
+  },
+  {
+    name: 'Torinos',
+    cat: 'Barbershop · Praha',
+    summary: 'Stálá spolupráce. Detailní případovka v přípravě, čísla zveřejníme se souhlasem klienta.',
+    placeholder: true,
+  },
+  {
+    name: 'Barbershop v Brně',
+    cat: 'Barbershop · Anonymizováno',
+    summary: 'Reálný klient, jméno nezveřejňujeme. Detailní případovka v přípravě.',
+    placeholder: true,
+    anonymous: true,
+  },
+  {
+    name: 'Barbershop v Praze',
+    cat: 'Barbershop · Anonymizováno',
+    summary: 'Reálný klient, jméno nezveřejňujeme. Detailní případovka v přípravě.',
+    placeholder: true,
+    anonymous: true,
+  },
 ];
 
 function CaseStudyCard({ cs, accent, onClick }) {
+  const isPlaceholder = !!cs.placeholder;
   return (
     <div className="v7-cs-card" onClick={onClick} style={{
       flexShrink: 0,
@@ -660,6 +778,7 @@ function CaseStudyCard({ cs, accent, onClick }) {
       whiteSpace: 'normal',
       cursor: 'pointer',
       display: 'flex', flexDirection: 'column', gap: 14,
+      opacity: isPlaceholder ? 0.85 : 1,
     }}>
       {/* Header: badge + category */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -668,7 +787,7 @@ function CaseStudyCard({ cs, accent, onClick }) {
           background: `${accent}12`, color: accent,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 18,
-        }}>💈</div>
+        }}>{cs.anonymous ? '·' : '💈'}</div>
         <div style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: 'rgba(0,0,0,0.45)', letterSpacing: 0.8 }}>
           {cs.cat.toUpperCase()}
         </div>
@@ -680,50 +799,56 @@ function CaseStudyCard({ cs, accent, onClick }) {
       {/* Summary */}
       <div style={{ fontSize: 13, color: 'rgba(0,0,0,0.6)', lineHeight: 1.45, minHeight: 56 }}>{cs.summary}</div>
 
-      {/* Big metric + sparkline */}
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
-        padding: '14px 16px', borderRadius: 10,
-        background: `${accent}08`, border: `1px solid ${accent}1f`,
-      }}>
-        <div style={{ minWidth: 0, flex: 1 }}>
-          {(() => {
-            const m = cs.metric;
-            const idx = m.indexOf(' ');
-            const value = idx === -1 ? m : m.slice(0, idx);
-            const unit = idx === -1 ? '' : m.slice(idx + 1);
-            return (
-              <>
-                <div style={{
-                  fontSize: 26, fontWeight: 700, color: accent,
-                  letterSpacing: '-0.02em', lineHeight: 1,
-                }}>{value}</div>
-                {unit && (
-                  <div style={{
-                    fontSize: 12, color: 'rgba(0,0,0,0.55)',
-                    marginTop: 4, fontWeight: 500,
-                  }}>{unit}</div>
-                )}
-              </>
-            );
-          })()}
+      {/* Big metric (only if real numbers) */}
+      {!isPlaceholder && (
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+          padding: '14px 16px', borderRadius: 10,
+          background: `${accent}08`, border: `1px solid ${accent}1f`,
+        }}>
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <div style={{
+              fontSize: 26, fontWeight: 700, color: accent,
+              letterSpacing: '-0.02em', lineHeight: 1,
+            }}>{cs.metric}</div>
+            <div style={{
+              fontSize: 12, color: 'rgba(0,0,0,0.55)',
+              marginTop: 4, fontWeight: 500,
+            }}>{cs.metricUnit}</div>
+          </div>
+          <svg viewBox="0 0 80 32" width="72" height="28" style={{ display: 'block', flexShrink: 0 }}>
+            <defs>
+              <linearGradient id={`spark-${cs.name.replace(/\W/g,'')}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={accent} stopOpacity="0.25"/>
+                <stop offset="100%" stopColor={accent} stopOpacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 26 L12 24 L24 22 L36 18 L48 13 L60 9 L72 5 L80 3 L80 32 L0 32 Z" fill={`url(#spark-${cs.name.replace(/\W/g,'')})`}/>
+            <path d="M0 26 L12 24 L24 22 L36 18 L48 13 L60 9 L72 5 L80 3" fill="none" stroke={accent} strokeWidth="1.8" strokeLinecap="round"/>
+          </svg>
         </div>
-        <svg viewBox="0 0 80 32" width="72" height="28" style={{ display: 'block', flexShrink: 0 }}>
-          <defs>
-            <linearGradient id={`spark-${cs.name.replace(/\W/g,'')}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={accent} stopOpacity="0.25"/>
-              <stop offset="100%" stopColor={accent} stopOpacity="0"/>
-            </linearGradient>
-          </defs>
-          <path d="M0 26 L12 24 L24 22 L36 18 L48 13 L60 9 L72 5 L80 3 L80 32 L0 32 Z" fill={`url(#spark-${cs.name.replace(/\W/g,'')})`}/>
-          <path d="M0 26 L12 24 L24 22 L36 18 L48 13 L60 9 L72 5 L80 3" fill="none" stroke={accent} strokeWidth="1.8" strokeLinecap="round"/>
-        </svg>
-      </div>
+      )}
+
+      {/* Placeholder block */}
+      {isPlaceholder && (
+        <div style={{
+          padding: '14px 16px', borderRadius: 10,
+          background: 'rgba(0,0,0,0.03)', border: '1px dashed rgba(0,0,0,0.15)',
+          fontSize: 12, color: 'rgba(0,0,0,0.55)', fontFamily: 'JetBrains Mono, monospace',
+          letterSpacing: 0.5, textAlign: 'center',
+        }}>
+          PŘÍPADOVKA V PŘÍPRAVĚ
+        </div>
+      )}
 
       {/* Footer */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: 12 }}>
-        <div style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: 'rgba(0,0,0,0.4)', letterSpacing: 1 }}>PŘÍPADOVKA</div>
-        <div style={{ fontSize: 13, color: accent, fontWeight: 600 }}>Detail →</div>
+        <div style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: 'rgba(0,0,0,0.4)', letterSpacing: 1 }}>
+          {isPlaceholder ? 'KLIENT' : 'PŘÍPADOVKA'}
+        </div>
+        <div style={{ fontSize: 13, color: accent, fontWeight: 600 }}>
+          {isPlaceholder ? '–' : 'Detail →'}
+        </div>
       </div>
     </div>
   );
@@ -763,11 +888,11 @@ function CaseStudyModal({ cs, accent, onClose }) {
           </div>
         </div>
         <div style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(0,0,0,0.7)', marginBottom: 28 }}>
-          {cs.summary} Stavěli jsme komplexní retenční systém, který běží 24/7 a dodává atribuovatelný revenue přímo do dashboardu klienta.
+          {cs.summary} Měříme to, co proběhlo po našem e-mailu, last-touch attribution. Detailní metodiku najdete v případovce.
         </div>
         {/* fake chart */}
         <div className="v7-card-soft" style={{ marginBottom: 28, padding: '24px 0', background: '#f9f9f9', borderRadius: 12 }}>
-          <div style={{ padding: '0 20px', fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: 'rgba(0,0,0,0.5)', letterSpacing: 1, marginBottom: 14 }}>RŮST METRIKY ZA 90 DNÍ</div>
+          <div style={{ padding: '0 20px', fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: 'rgba(0,0,0,0.5)', letterSpacing: 1, marginBottom: 14 }}>VYBRANE MĚSÍCE · ILUSTRAČNÍ</div>
           <svg viewBox="0 0 600 140" style={{ width: '100%', height: 140, padding: '0 20px', boxSizing: 'border-box' }}>
             <defs>
               <linearGradient id={`grad-${cs.name.replace(/\W/g,'')}`} x1="0" y1="0" x2="0" y2="1">
@@ -797,7 +922,7 @@ function CaseStudyModal({ cs, accent, onClose }) {
           background: accent, color: '#fff', border: 'none', borderRadius: 10,
           fontSize: 15, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
         }}>
-          💸 Chci podobné výsledky →
+          Chci podobné výsledky pro svůj barbershop →
         </button>
       </div>
     </div>
@@ -806,9 +931,9 @@ function CaseStudyModal({ cs, accent, onClose }) {
 
 // ─── Typing indicator ────────────────────────────────────
 function TypingIndicator({ accent }) {
-  const [name, setName] = React.useState('Honza');
+  const [name, setName] = React.useState('Lukáš');
   React.useEffect(() => {
-    const names = ['Honza', 'Markéta', 'Tom', 'Lucka'];
+    const names = ['Lukáš', 'Vojta'];
     const id = setInterval(() => setName(names[Math.floor(Math.random() * names.length)]), 5000);
     return () => clearInterval(id);
   }, []);
@@ -850,7 +975,7 @@ function V7ContactForm({ accent }) {
     if (!data.name.trim()) e.name = 'Jméno je povinné';
     if (!data.email.trim()) e.email = 'Email je povinný';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) e.email = 'Neplatný formát emailu';
-    if (!data.project.trim()) e.project = 'Název projektu je povinný';
+    if (!data.project.trim()) e.project = 'Název barbershopu je povinný';
     return e;
   };
 
@@ -865,10 +990,10 @@ function V7ContactForm({ accent }) {
   const dbHint = (() => {
     const n = parseInt(data.db.replace(/\D/g, ''), 10);
     if (!n) return null;
-    if (n < 1000) return { text: 'Pro <1k zákazníků většinou doporučujeme akvizici dříve než retenci.', tone: 'warn' };
-    if (n < 10000) return { text: '✓ Sweet-spot pro retenci. Většina našich klientů začíná v této velikosti.', tone: 'good' };
-    if (n < 50000) return { text: '✓ Skvělé. Při této velikosti měříme nejvyšší ROI z flows.', tone: 'good' };
-    return { text: '🚀 Velká databáze. Dokážeme dodat náš enterprise tier (custom integrace).', tone: 'good' };
+    if (n < 300) return { text: 'Malý barbershop. Retenční e-mail začíná dávat smysl tak od 300 zákazníků. Klidně se ozvěte dřív, řekneme, jak na to.', tone: 'warn' };
+    if (n < 1500) return { text: 'Slušný start. Retenční flow tady může přivést první desítky rezervací měsíčně. Hodíme se.', tone: 'good' };
+    if (n < 5000) return { text: 'Sweet-spot. Při této velikosti vidíme u barbershopů nejlepší výsledky.', tone: 'good' };
+    return { text: 'Velký barbershop. Hodí se nastavit několik flow paralelně. Probereme na hovoru.', tone: 'good' };
   })();
 
   if (sent && mode === 'form') {
@@ -921,10 +1046,10 @@ function V7ContactForm({ accent }) {
       {/* Mode switcher */}
       <div className="v7-card" style={{ display: 'inline-flex', background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 999, padding: 4, marginBottom: 18 }}>
         <button onClick={() => setMode('form')} style={{ padding: '8px 16px', border: 'none', borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: 'pointer', background: mode === 'form' ? accent : 'transparent', color: mode === 'form' ? '#fff' : '#0a0a0a' }}>
-          ✉ Napsat zprávu
+          Napsat zprávu
         </button>
         <button onClick={() => setMode('cal')} style={{ padding: '8px 16px', border: 'none', borderRadius: 999, fontSize: 13, fontWeight: 600, cursor: 'pointer', background: mode === 'cal' ? accent : 'transparent', color: mode === 'cal' ? '#fff' : '#0a0a0a' }}>
-          📅 Vybrat termín hovoru
+          Vybrat termín hovoru
         </button>
       </div>
 
@@ -932,19 +1057,19 @@ function V7ContactForm({ accent }) {
         <form onSubmit={submit}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {field('name', 'Jméno', 'text', 'Jan Novák')}
-            {field('email', 'Email', 'email', 'jan@firma.cz')}
+            {field('email', 'E-mail', 'email', 'jan@barbershop.cz')}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {field('phone', 'Telefon', 'tel', '+420 …')}
-            {field('project', 'Název projektu', 'text', 'NextReality')}
+            {field('project', 'Název barbershopu', 'text', 'Např. Boostmail Barbershop')}
           </div>
           <div style={{ marginBottom: 14 }}>
-            <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 6, color: 'rgba(0,0,0,0.65)', letterSpacing: 0.3 }}>VELIKOST DATABÁZE (PŘIBLIŽNĚ)</label>
+            <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 6, color: 'rgba(0,0,0,0.65)', letterSpacing: 0.3 }}>KOLIK ZÁKAZNÍKŮ MÁTE V REZERVAČNÍM SYSTÉMU</label>
             <input
               type="text"
               value={data.db}
               onChange={(e) => setData({ ...data, db: e.target.value })}
-              placeholder="např. 8 000"
+              placeholder="např. 1 500"
               style={inputBase}
             />
             {dbHint ? (
@@ -963,7 +1088,7 @@ function V7ContactForm({ accent }) {
               </div>
             ) : (
               <div style={{ marginTop: 8, fontSize: 11, color: 'rgba(0,0,0,0.45)', fontFamily: 'JetBrains Mono, monospace', letterSpacing: 0.5 }}>
-                MEDIÁN NAŠICH KLIENTŮ: 4 800 KONTAKTŮ
+                PRŮMĚR U BARBERSHOPŮ: KOLEM 1 200 ZÁKAZNÍKŮ
               </div>
             )}
           </div>
@@ -973,7 +1098,7 @@ function V7ContactForm({ accent }) {
               value={data.msg}
               onChange={(e) => setData({ ...data, msg: e.target.value })}
               rows={3}
-              placeholder="Co řešíte? S čím vám můžeme pomoct?"
+              placeholder="Co řešíte? Co byste potřebovali?"
               style={{ ...inputBase, resize: 'vertical', fontFamily: 'inherit' }}
             />
           </div>
@@ -982,7 +1107,7 @@ function V7ContactForm({ accent }) {
             background: accent, color: '#fff', border: 'none', borderRadius: 8,
             cursor: 'pointer', fontFamily: 'inherit', letterSpacing: 0.2,
           }}>
-            💸 Chci ukázku zdarma →
+            Spočítáme, kolik vám utíká →
           </button>
         </form>
       )}
@@ -1071,7 +1196,7 @@ function InlineCalendar({ accent, onPick }) {
             type="email"
             value={lead.email}
             onChange={(ev) => setLead({ ...lead, email: ev.target.value })}
-            placeholder="jan@firma.cz"
+            placeholder="jan@barbershop.cz"
             style={{
               width: '100%', padding: '14px 16px', fontSize: 15, fontFamily: 'inherit',
               border: errors.email ? '1px solid #dc2626' : '1px solid rgba(0,0,0,0.12)',
@@ -1102,7 +1227,7 @@ function InlineCalendar({ accent, onPick }) {
           <input
             value={lead.company}
             onChange={(ev) => setLead({ ...lead, company: ev.target.value })}
-            placeholder="např. Barbershop Miroslav"
+            placeholder="např. Boostmail Barbershop"
             style={{
               width: '100%', padding: '14px 16px', fontSize: 15, fontFamily: 'inherit',
               border: errors.company ? '1px solid #dc2626' : '1px solid rgba(0,0,0,0.12)',
@@ -1131,7 +1256,7 @@ function InlineCalendar({ accent, onPick }) {
     <div className="v7-card" style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 14, padding: 24 }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
         <div>
-          <div style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: accent, letterSpacing: 1.5 }}>BOOSTMAIL · 30 MIN HOVOR</div>
+          <div style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: accent, letterSpacing: 1.5 }}>BOOSTMAIL · PATNÁCTIMINUTOVÝ HOVOR</div>
           <div style={{ fontSize: 18, fontWeight: 700, marginTop: 4 }}>Vyberte termín</div>
         </div>
         <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.5)', fontFamily: 'JetBrains Mono, monospace' }}>UTC+1 · PRAHA</div>
