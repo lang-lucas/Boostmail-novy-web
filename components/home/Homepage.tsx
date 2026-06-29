@@ -6,12 +6,10 @@ import { useEffect, useRef, useState } from "react";
 import { HeroShowcase } from "@/components/home/HeroShowcase";
 import { ContactBooking } from "@/components/home/ContactBooking";
 import {
-  HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_PROOF, HP_HONEST, HP_EXPECT, HP_REVIEWS,
+  HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_CASES, HP_HONEST, HP_EXPECT,
   HP_INTEGRATIONS, HP_STEPS, HP_MENTOR, HP_FAQ, HP_FOUNDERS, HP_DEMO_GET, HP_FOOTER_NAV, HP_LEGAL, CONTACT,
 } from "@/lib/hp-data";
 
-const fmtCZK = (n: number) =>
-  Math.round(n).toLocaleString("cs-CZ").replace(/ /g, " ") + " Kč";
 const fmtNum = (n: number) => Math.round(n).toLocaleString("cs-CZ").replace(/ /g, " ");
 
 const scrollToDemo = () => {
@@ -208,6 +206,44 @@ function Faq() {
   );
 }
 
+// ── CASE STUDY CARD (marquee) ──
+function CaseCard({ cs }: { cs: (typeof HP_CASES)[number] }) {
+  const ph = !!cs.placeholder;
+  const card = (
+    <div className="hp-card hp-lift" style={{ width: "100%", height: "100%", padding: 24, whiteSpace: "normal", display: "flex", flexDirection: "column", gap: 14, boxSizing: "border-box" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <div style={{ width: 36, height: 36, borderRadius: 8, background: HP.accentSoft, color: HP.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>{cs.anonymous ? "·" : "💈"}</div>
+        <div style={{ fontSize: 11, fontFamily: HP.mono, color: "rgba(0,0,0,0.45)", letterSpacing: 0.8 }}>{cs.cat.toUpperCase()}</div>
+      </div>
+      <div style={{ fontWeight: 700, fontSize: 19, letterSpacing: "-0.01em", lineHeight: 1.15 }}>{cs.name}</div>
+      <div style={{ fontSize: 13, color: "rgba(0,0,0,0.6)", lineHeight: 1.45, minHeight: 56 }}>{cs.summary}</div>
+      {!ph ? (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "14px 16px", borderRadius: 10, background: "rgba(26,90,218,0.05)", border: "1px solid rgba(26,90,218,0.14)" }}>
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <div style={{ fontSize: 25, fontWeight: 800, color: HP.accent, letterSpacing: "-0.02em", lineHeight: 1, fontFamily: HP.mono }}>{cs.metric}</div>
+            <div style={{ fontSize: 12, color: "rgba(0,0,0,0.55)", marginTop: 4, fontWeight: 500 }}>{cs.metricUnit}</div>
+          </div>
+          <svg viewBox="0 0 80 32" width="72" height="28" style={{ display: "block", flexShrink: 0 }} aria-hidden>
+            <path d="M0 26 L12 24 L24 22 L36 18 L48 13 L60 9 L72 5 L80 3 L80 32 L0 32 Z" fill="rgba(26,90,218,0.12)" />
+            <path d="M0 26 L12 24 L24 22 L36 18 L48 13 L60 9 L72 5 L80 3" fill="none" stroke={HP.accent} strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+        </div>
+      ) : (
+        <div style={{ padding: "14px 16px", borderRadius: 10, background: "rgba(0,0,0,0.03)", border: "1px dashed rgba(0,0,0,0.15)", fontSize: 12, color: "rgba(0,0,0,0.55)", fontFamily: HP.mono, letterSpacing: 0.5, textAlign: "center" }}>PŘÍPADOVKA V PŘÍPRAVĚ</div>
+      )}
+      <div style={{ marginTop: "auto", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(0,0,0,0.06)", paddingTop: 12 }}>
+        <div style={{ fontSize: 11, fontFamily: HP.mono, color: "rgba(0,0,0,0.4)", letterSpacing: 1 }}>{ph ? "KLIENT" : "PŘÍPADOVKA"}</div>
+        <div style={{ fontSize: 13, color: HP.accent, fontWeight: 600 }}>{ph ? "–" : "Detail →"}</div>
+      </div>
+    </div>
+  );
+  return ph ? (
+    <div style={{ flexShrink: 0, width: 300 }}>{card}</div>
+  ) : (
+    <Link href="/pripadovky" style={{ flexShrink: 0, width: 300, display: "block", textDecoration: "none", color: "inherit" }}>{card}</Link>
+  );
+}
+
 // ── PAGE ──
 export default function Homepage() {
   const [seg, setSeg] = useState("barber");
@@ -309,56 +345,21 @@ export default function Homepage() {
           </div>
         </section>
 
-        {/* 04 — DŮKAZ */}
-        <section id="dukaz" style={{ padding: "64px 56px" }}>
-          <div style={wrapA}>
-            <div style={{ marginBottom: 36 }}>
-              <Mono n="04" text="Důkaz" />
-              <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 0", lineHeight: 1 }}>Reálná čísla, ne sliby.</h2>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }} className="hp-proof-grid">
-              {HP_PROOF.map((p, i) => (
-                <div key={i} className="hp-card" style={{ overflow: "hidden" }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-                    <div style={{ position: "relative", height: 150, borderRight: `1px solid ${HP.line}` }}>
-                      <Image src={p.photo} alt={p.shop} fill sizes="(max-width: 1000px) 50vw, 300px" style={{ objectFit: "cover" }} />
-                    </div>
-                    <div style={{ padding: "18px 20px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                      <div style={{ fontSize: 12, fontFamily: HP.mono, letterSpacing: 1, color: "rgba(0,0,0,0.45)", marginBottom: 6 }}>{p.cat.toUpperCase()}</div>
-                      <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em" }}>{p.shop}</div>
-                    </div>
-                  </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: `1px solid ${HP.line}` }}>
-                    <div style={{ padding: "20px 22px", borderRight: `1px solid ${HP.line}` }}>
-                      <div style={{ fontSize: 42, fontWeight: 800, color: HP.accent, fontFamily: HP.mono, lineHeight: 1 }}><Count to={p.bookings} /></div>
-                      <div style={{ fontSize: 13, color: "rgba(0,0,0,0.6)", marginTop: 6 }}>rezervací navíc</div>
-                    </div>
-                    <div style={{ padding: "20px 22px" }}>
-                      <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1, marginTop: 6 }}><Count to={parseInt(p.revenue.replace(/\D/g, ""), 10)} format={fmtCZK} /></div>
-                      <div style={{ fontSize: 13, color: "rgba(0,0,0,0.6)", marginTop: 8 }}>obrat {p.period}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div style={{ marginTop: 20, padding: "16px 20px", background: HP.soft, border: `1px solid ${HP.line}`, borderRadius: 12, display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
+        {/* 04 — VÝSLEDKY (marquee případovek) */}
+        <section id="dukaz" style={{ padding: "64px 0", overflow: "hidden" }}>
+          <div style={{ ...wrapA, padding: "0 56px", marginBottom: 30 }} className="hp-pad">
+            <Mono n="04" text="Výsledky" />
+            <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 10px", lineHeight: 1 }}>Reálná čísla, ne sliby.</h2>
+            <p style={{ fontSize: 16, color: "rgba(0,0,0,0.55)", maxWidth: 620, lineHeight: 1.5 }}>Z provozoven, které vedeme. Jména klientů zveřejníme s jejich souhlasem — detailní případovky připravujeme.</p>
+          </div>
+          <div className="hp-marquee" style={{ display: "flex", gap: 20, whiteSpace: "nowrap", padding: "8px 0", alignItems: "stretch" }}>
+            {[...HP_CASES, ...HP_CASES].map((cs, i) => <CaseCard key={i} cs={cs} />)}
+          </div>
+          <div style={{ ...wrapA, padding: "0 56px", marginTop: 26 }} className="hp-pad">
+            <div style={{ padding: "16px 20px", background: HP.soft, border: `1px solid ${HP.line}`, borderRadius: 12, display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
               <span style={{ fontFamily: HP.mono, fontSize: 11, fontWeight: 700, color: HP.accent, letterSpacing: 1, padding: "4px 8px", background: "#fff", borderRadius: 6, border: `1px solid ${HP.line}`, whiteSpace: "nowrap" }}>POCTIVÁ NOTA</span>
               <span style={{ fontSize: 14, color: "rgba(0,0,0,0.65)", lineHeight: 1.5, flex: 1, minWidth: 240 }}>{HP_HONEST} {HP_EXPECT}</span>
             </div>
-          </div>
-        </section>
-
-        {/* 04b — RECENZE MARQUEE */}
-        <section style={{ padding: "44px 0", background: HP.soft, overflow: "hidden", borderTop: `1px solid ${HP.line}`, borderBottom: `1px solid ${HP.line}` }}>
-          <div style={{ textAlign: "center", marginBottom: 24, padding: "0 24px", fontFamily: HP.mono, fontSize: 11, letterSpacing: 1.6, color: HP.accent, fontWeight: 600, textTransform: "uppercase" }}>Recenze, které vám pomáháme sbírat</div>
-          <div className="hp-marquee" style={{ display: "flex", gap: 18, whiteSpace: "nowrap" }}>
-            {[...HP_REVIEWS, ...HP_REVIEWS].map((r, i) => (
-              <div key={i} className="hp-card" style={{ flex: "0 0 320px", padding: 22, whiteSpace: "normal", display: "flex", flexDirection: "column", gap: 10 }}>
-                <div aria-hidden style={{ color: "#f5a623", fontSize: 14, letterSpacing: 3 }}>★★★★★</div>
-                <div style={{ fontSize: 14.5, color: HP.ink, lineHeight: 1.5, fontWeight: 500 }}>„{r.text}"</div>
-                <div style={{ fontSize: 13, color: "rgba(0,0,0,0.5)", fontFamily: HP.mono }}>— {r.name}</div>
-              </div>
-            ))}
           </div>
         </section>
 

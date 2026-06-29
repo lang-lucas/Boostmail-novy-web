@@ -63,6 +63,7 @@ body {
 .hp-photo:hover .hp-photo-tex { transform: scale(1.07); }
 .hp-float { animation: hpFloat 4.5s ease-in-out infinite; }
 .hp-marquee { animation: hpMarquee 34s linear infinite; width: max-content; }
+.hp-marquee:hover { animation-play-state: paused; }
 .hp-hero-orbit {
   position: absolute; width: 600px; height: 600px; border-radius: 50%;
   background: radial-gradient(circle, rgba(26,90,218,0.22), rgba(26,90,218,0.08) 42%, transparent 70%);
@@ -88,6 +89,7 @@ body {
   .hp-triad, .hp-steps { grid-template-columns: 1fr !important; }
   .hp-seg-cards { grid-template-columns: 1fr 1fr !important; }
   .hp-footer-grid { grid-template-columns: 1fr !important; }
+  .hp-pad { padding-left: 18px !important; padding-right: 18px !important; }
   section, nav, footer > div { padding-left: 18px !important; padding-right: 18px !important; }
   h1 { font-size: 44px !important; line-height: 1.04 !important; }
   h2 { font-size: clamp(28px, 8vw, 40px) !important; line-height: 1.06 !important; }
