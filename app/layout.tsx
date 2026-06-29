@@ -37,16 +37,41 @@ export const metadata: Metadata = {
 
 const ORG_LD = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "BoostMail",
-  url: SITE,
-  description: DESC,
-  email: "nerad@boostmail.cz",
-  telephone: "+420739192790",
-  address: { "@type": "PostalAddress", streetAddress: "Palackého 1232", addressLocality: "Vodňany", postalCode: "389 01", addressCountry: "CZ" },
-  founder: [
-    { "@type": "Person", name: "Lukáš Lang" },
-    { "@type": "Person", name: "Vojtěch Nerad" },
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITE}/#org`,
+      name: "BoostMail",
+      url: SITE,
+      description: DESC,
+      email: "nerad@boostmail.cz",
+      telephone: "+420739192790",
+      priceRange: "Nastavení od 15 000 Kč, péče od 5 000 Kč měsíčně",
+      address: { "@type": "PostalAddress", streetAddress: "Palackého 1232", addressLocality: "Vodňany", postalCode: "389 01", addressCountry: "CZ" },
+      areaServed: { "@type": "Country", name: "Česká republika" },
+      knowsAbout: ["retenční marketing", "e-mail marketing", "marketingová automatizace", "sbírání recenzí", "win-back kampaně", "barbershop", "kosmetika"],
+      founder: [
+        { "@type": "Person", name: "Lukáš Lang" },
+        { "@type": "Person", name: "Vojtěch Nerad" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Služby BoostMail",
+        itemListElement: [
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Retenční e-mail marketing", description: "E-maily a SMS, které vracejí zákazníky a plní kalendář lokálním provozovnám." } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Automatické sbírání recenzí", description: "Žádost o recenzi po návštěvě — víc hodnocení na Googlu, samo." } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Mentor — poradenství z dat", description: "Vyhodnocení dat a konkrétní doporučení, kde a o kolik růst." } },
+        ],
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: "BoostMail",
+      inLanguage: "cs-CZ",
+      publisher: { "@id": `${SITE}/#org` },
+    },
   ],
 };
 

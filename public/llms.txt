@@ -1,0 +1,32 @@
+# BoostMail
+
+> Done-for-you retenční e-mail marketing pro lokální provozovny. Posíláme za majitele e-maily a SMS, které vracejí zákazníky, plní volná okna v kalendáři, sbírají recenze a radí, kde růst. Zaměření: barbershopy a kosmetika (živé), wellness a autoservisy (připravujeme).
+
+## Co BoostMail dělá
+- Napojí se na rezervační systém klienta (Reservio, Reservanto, MyFox) nebo e-mailový nástroj (SmartEmailing, GoHighLevel). Klient nic neinstaluje.
+- Připraví a spustí retenční kampaně: připomínka cyklu („čas na další návštěvu"), win-back spících zákazníků, naplnění volného okna, reakce na zrušený termín, žádost o recenzi.
+- Texty schvaluje klient. Žádné plošné slevové letáky ani spam.
+- Mentor vrstva: vyhodnocuje data provozovny a dává konkrétní doporučení (cena, otevírací doba, vytížení týmu).
+
+## Pro koho
+Lokální služby, kam lidé chodí pravidelně — barbershopy, kosmetika, wellness, autoservisy. Hodí se provozovnám s alespoň ~300 zákazníky v databázi.
+
+## Ceník
+Nastavení od 15 000 Kč, péče od 5 000 Kč měsíčně podle velikosti databáze. Žádné procento z tržeb. Přesná cena podle počtu kontaktů.
+
+## Jak začít
+Nezávazná poptávka přes formulář na webu, nebo 20minutový videohovor, kde se projde situace, zkušenosti z oboru a odhad finančního přínosu. Zdarma a nezávazně.
+
+## Kdo za tím stojí
+Lukáš Lang (software a data) a Vojtěch Nerad (komunikace a řešení problémů). Žádné call centrum ani prostředník. IČO 23915455, neplátce DPH, sídlo Vodňany.
+
+## Kontakt
+- Web: https://boostmail.cz
+- E-mail: nerad@boostmail.cz
+- Telefon: +420 739 192 790
+
+## Stránky
+- Homepage: https://boostmail.cz/
+- Ochrana osobních údajů: https://boostmail.cz/ochrana-udaju
+- Zásady cookies: https://boostmail.cz/cookies
+- Obchodní podmínky: https://boostmail.cz/obchodni-podminky
