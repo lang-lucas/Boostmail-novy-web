@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { CustomerLoop } from "@/components/home/CustomerLoop";
+import { HeroShowcase } from "@/components/home/HeroShowcase";
 import {
   HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_PROOF, HP_HONEST, HP_EXPECT,
   HP_INTEGRATIONS, HP_STEPS, HP_MENTOR, HP_FAQ, HP_FOUNDERS, HP_DEMO_GET, HP_FOOTER_NAV, HP_LEGAL, CONTACT,
@@ -330,7 +330,7 @@ export default function Homepage() {
                   <div style={{ fontSize: 12, color: "rgba(0,0,0,0.55)" }}>{HERO.microProof.sub}</div>
                 </div>
               </div>
-              <CustomerLoop />
+              <HeroShowcase />
             </div>
           </div>
         </section>
