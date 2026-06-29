@@ -190,9 +190,9 @@ function MentorFeed() {
 function MiniCalc() {
   const [db, setDb] = useState(1500);
   const [aov, setAov] = useState(600);
-  // Vychází z reálných dat provozoven, které vedeme: ~9–12 rezervací / 1000 kontaktů měsíčně.
-  // Headline = konzervativní spodní hranice (9 / 1000), medián útraty ~600 Kč.
-  const RATE = 9 / 1000;
+  // Data: ~9–12 rezervací / 1000 kontaktů měsíčně. Kalkulačka počítá ZÁMĚRNĚ pod tímhle
+  // rozpětím (7,2/1000 = 9/1000 − 20 %), ať číslo spíš překvapí nahoru. Medián útraty ~600 Kč.
+  const RATE = 7.2 / 1000;
   const monthly = db * RATE * aov;
   const yearly = monthly * 12;
   const slider = (label: string, val: number, set: (n: number) => void, min: number, max: number, step: number, fmt: (v: number) => string) => (
@@ -220,7 +220,7 @@ function MiniCalc() {
           <div style={{ fontSize: 22, fontWeight: 800, color: "#7aa2f0", fontFamily: HP.mono }}>od {fmtCZK(yearly)}</div>
         </div>
       </div>
-      <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginTop: 12 }}>Orientační odhad, ne závazek. Opřený o naše provozovny (barbershopy a kosmetika): ~9–12 rezervací na 1000 kontaktů měsíčně po náběhu, medián útraty ~600 Kč. U jiných oborů se liší podle frekvence návštěv. Přesně spočítáme z vašeho exportu.</div>
+      <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginTop: 12 }}>Orientační odhad, ne závazek. Naše provozovny (barbershopy a kosmetika) dělají ~9–12 rezervací na 1000 kontaktů měsíčně po náběhu (medián útraty ~600 Kč); kalkulačka počítá záměrně pod tím, ať spíš překvapí nahoru. U jiných oborů se liší podle frekvence návštěv. Přesně spočítáme z vašeho exportu.</div>
     </div>
   );
 }
