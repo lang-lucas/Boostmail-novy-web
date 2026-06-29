@@ -25,6 +25,13 @@ export const metadata: Metadata = {
     siteName: "BoostMail",
     title: "BoostMail — aby se vám zákazníci vraceli",
     description: DESC,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BoostMail — e-mail marketing pro lokální provozovny" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BoostMail — aby se vám zákazníci vraceli",
+    description: DESC,
+    images: ["/og.png"],
   },
 };
 

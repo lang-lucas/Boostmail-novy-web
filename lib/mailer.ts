@@ -1,26 +1,21 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-const SMTP_USER = process.env.SMTP_USER ?? "";
-const SMTP_PASSWORD = process.env.SMTP_PASSWORD ?? "";
-const NOTIFY_TO = process.env.NOTIFY_TO ?? "nerad@boostmail.cz";
-const FROM_NAME = "BoostMail web";
+const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
+const FROM_EMAIL = process.env.RESEND_FROM ?? "BoostMail leady <leady@boostsite.cz>";
+const NOTIFY_TO = (process.env.NOTIFY_TO ?? "nerad@boostmail.cz, lang@boostmail.cz")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 
-export const NOTIFY_EMAIL = NOTIFY_TO;
-export const FROM_EMAIL = SMTP_USER;
+export const NOTIFY_EMAIL = NOTIFY_TO.join(", ");
+export { FROM_EMAIL };
 
-let cached: nodemailer.Transporter | null = null;
+let cached: Resend | null = null;
 
-export function getTransporter() {
+function getResend(): Resend {
   if (cached) return cached;
-  if (!SMTP_USER || !SMTP_PASSWORD) {
-    throw new Error("SMTP_USER or SMTP_PASSWORD is not set");
-  }
-  cached = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: { user: SMTP_USER, pass: SMTP_PASSWORD },
-  });
+  if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY is not set");
+  cached = new Resend(RESEND_API_KEY);
   return cached;
 }
 
@@ -35,15 +30,17 @@ export async function sendNotification({
   text: string;
   replyTo?: string;
 }) {
-  const transporter = getTransporter();
-  return transporter.sendMail({
-    from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
+  const resend = getResend();
+  const { data, error } = await resend.emails.send({
+    from: FROM_EMAIL,
     to: NOTIFY_TO,
-    replyTo: replyTo ?? FROM_EMAIL,
+    replyTo,
     subject,
     text,
     html,
   });
+  if (error) throw new Error(error.message || "Resend send failed");
+  return data;
 }
 
 export function escapeHtml(s: string): string {
