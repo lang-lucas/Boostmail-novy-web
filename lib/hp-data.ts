@@ -24,7 +24,7 @@ export const HERO = {
   title: ["Získejte ze svého", "podnikání"],
   titleAccent: "maximum.",
   sub: "Posíláme za vás e-maily a SMS, co vracejí zákazníky, sbírají recenze a radí, kde růst. Vy pečujete o klienty, zbytek je na nás.",
-  microProof: { n: 225, label: "rezervací z e-mailu", sub: "Nextlevel · od spuštění" },
+  microProof: { n: 225, label: "rezervací navíc", sub: "Barbershop · Praha · od spuštění" },
 };
 
 // "Co pro vás děláme" — triáda (méně zaměřeno na peníze, víc na víc věcí najednou)
@@ -63,11 +63,11 @@ export const HP_SEG: Segment[] = [
 ];
 
 export const HP_PROOF = [
-  { shop: "Nextlevel", cat: "Barbershop · Praha", bookings: 225, revenue: "176 575 Kč", period: "od spuštění", photo: "/proof/nextlevel.webp" },
-  { shop: "MNB", cat: "Barbershop · Praha", bookings: 247, revenue: "145 500 Kč", period: "od spuštění", photo: "/proof/mnb.webp" },
+  { shop: "Barbershop", cat: "Praha", bookings: 225, revenue: "176 575 Kč", period: "od spuštění", photo: "/proof/barber1.webp" },
+  { shop: "Barbershop", cat: "Praha · 3 pobočky", bookings: 247, revenue: "145 500 Kč", period: "od spuštění", photo: "/proof/barber2.jpg" },
 ];
 export const HP_HONEST =
-  "Poctivá nota: klienty, kteří by přišli tak jako tak, si do výsledků nepočítáme. Měříme jen rezervace, které vznikly po našem e-mailu.";
+  "Reálná čísla z provozoven, které vedeme. Berte je jako odhad přínosu naší kampaně, ne striktně izolovaný efekt jednoho kanálu — klienty, kteří by přišli tak jako tak, si nepřičítáme.";
 export const HP_EXPECT = "Každý provoz je jiný. Berte to jako reálnou ukázku, ne slib.";
 export const HP_INTEGRATIONS = ["Reservio", "Reservanto", "MyFox", "SmartEmailing", "GoHighLevel"];
 

@@ -186,44 +186,6 @@ function MentorFeed() {
   );
 }
 
-// ── MINI CALC ──
-function MiniCalc() {
-  const [db, setDb] = useState(1500);
-  const [aov, setAov] = useState(600);
-  // Data: ~9–12 rezervací / 1000 kontaktů měsíčně. Kalkulačka počítá ZÁMĚRNĚ pod tímhle
-  // rozpětím (7,2/1000 = 9/1000 − 20 %), ať číslo spíš překvapí nahoru. Medián útraty ~600 Kč.
-  const RATE = 7.2 / 1000;
-  const monthly = db * RATE * aov;
-  const yearly = monthly * 12;
-  const slider = (label: string, val: number, set: (n: number) => void, min: number, max: number, step: number, fmt: (v: number) => string) => (
-    <div style={{ marginBottom: 18 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.62)" }}>{label}</span>
-        <span style={{ fontSize: 13, fontFamily: HP.mono, fontWeight: 600, color: "#fff" }}>{fmt(val)}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={val} onChange={(e) => set(+e.target.value)} style={{ width: "100%", accentColor: HP.accent }} />
-    </div>
-  );
-  return (
-    <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16, padding: 22 }}>
-      <div style={{ fontFamily: HP.mono, fontSize: 11, letterSpacing: 1.5, color: HP.accent, marginBottom: 4, fontWeight: 600 }}>KALKULAČKA · POTENCIÁL DATABÁZE</div>
-      <div style={{ fontSize: 19, fontWeight: 700, color: "#fff", marginBottom: 20, letterSpacing: "-0.02em" }}>Kolik z vaší databáze umíme vrátit</div>
-      {slider("Zákazníků v databázi", db, setDb, 200, 6000, 100, (v) => fmtNum(v) + " lidí")}
-      {slider("Průměrná útrata za návštěvu", aov, setAov, 200, 2000, 50, fmtCZK)}
-      <div className="hp-calc-out" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, padding: 16, background: "rgba(26,90,218,0.15)", borderRadius: 12, border: "1px solid rgba(26,90,218,0.2)" }}>
-        <div style={{ minWidth: 0 }}>
-          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.62)", marginBottom: 4 }}>MĚSÍČNĚ · PO NÁBĚHU</div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: "#7aa2f0", fontFamily: HP.mono }}>od {fmtCZK(monthly)}</div>
-        </div>
-        <div style={{ minWidth: 0 }}>
-          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.62)", marginBottom: 4 }}>ROČNĚ · PO NÁBĚHU</div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: "#7aa2f0", fontFamily: HP.mono }}>od {fmtCZK(yearly)}</div>
-        </div>
-      </div>
-      <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginTop: 12 }}>Orientační odhad, ne závazek. Naše provozovny (barbershopy a kosmetika) dělají ~9–12 rezervací na 1000 kontaktů měsíčně po náběhu (medián útraty ~600 Kč); kalkulačka počítá záměrně pod tím, ať spíš překvapí nahoru. U jiných oborů se liší podle frekvence návštěv. Přesně spočítáme z vašeho exportu.</div>
-    </div>
-  );
-}
 
 // ── FAQ ──
 function Faq() {
@@ -340,13 +302,10 @@ export default function Homepage() {
         {/* 03 — PROBLÉM / KALKULAČKA */}
         <section style={{ padding: "72px 56px", background: HP.dark, color: "#fff", position: "relative", overflow: "hidden" }}>
           <DotGrid dark />
-          <div style={{ ...wrapC, position: "relative", display: "grid", gridTemplateColumns: "1.25fr 0.75fr", gap: 56, alignItems: "center" }} className="hp-problem-grid">
-            <div>
-              <Mono n="03" text="Problém" dark />
-              <h2 style={{ fontSize: 70, fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 0.96, margin: "18px 0 24px" }}>Lidé, co se <em style={{ fontWeight: 400, color: "#7aa2f0", fontStyle: "normal" }}>nevrátili.</em></h2>
-              <p style={{ fontSize: 19, color: "rgba(255,255,255,0.72)", lineHeight: 1.55, maxWidth: 520 }}>Prázdná okna, která do večera nikdo nezaplní. Zákazníci, co přišli jednou a zmizeli. To není smůla. To je obrat, který vám leží v databázi.</p>
-            </div>
-            <MiniCalc />
+          <div style={{ ...wrapB, position: "relative", textAlign: "center", maxWidth: 760, margin: "0 auto" }}>
+            <Mono n="03" text="Problém" dark center />
+            <h2 style={{ fontSize: 64, fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 0.98, margin: "14px 0 22px" }}>Lidé, co se <em style={{ fontWeight: 400, color: "#7aa2f0", fontStyle: "normal" }}>nevrátili.</em></h2>
+            <p style={{ fontSize: 20, color: "rgba(255,255,255,0.72)", lineHeight: 1.55, maxWidth: 580, margin: "0 auto" }}>Prázdná okna, která do večera nikdo nezaplní. Zákazníci, co přišli jednou a zmizeli. To není smůla. To je obrat, který vám leží v databázi — a my ho umíme vrátit.</p>
           </div>
         </section>
 
@@ -372,7 +331,7 @@ export default function Homepage() {
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: `1px solid ${HP.line}` }}>
                     <div style={{ padding: "20px 22px", borderRight: `1px solid ${HP.line}` }}>
                       <div style={{ fontSize: 42, fontWeight: 800, color: HP.accent, fontFamily: HP.mono, lineHeight: 1 }}><Count to={p.bookings} /></div>
-                      <div style={{ fontSize: 13, color: "rgba(0,0,0,0.6)", marginTop: 6 }}>rezervací z e-mailu</div>
+                      <div style={{ fontSize: 13, color: "rgba(0,0,0,0.6)", marginTop: 6 }}>rezervací navíc</div>
                     </div>
                     <div style={{ padding: "20px 22px" }}>
                       <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1, marginTop: 6 }}><Count to={parseInt(p.revenue.replace(/\D/g, ""), 10)} format={fmtCZK} /></div>

@@ -86,7 +86,6 @@ body {
   .hp-triad, .hp-steps { grid-template-columns: 1fr !important; }
   .hp-seg-cards { grid-template-columns: 1fr 1fr !important; }
   .hp-footer-grid { grid-template-columns: 1fr !important; }
-  .hp-calc-out { grid-template-columns: 1fr !important; }
   section, nav, footer > div { padding-left: 18px !important; padding-right: 18px !important; }
   h1 { font-size: 44px !important; line-height: 1.04 !important; }
   h2 { font-size: clamp(28px, 8vw, 40px) !important; line-height: 1.06 !important; }
