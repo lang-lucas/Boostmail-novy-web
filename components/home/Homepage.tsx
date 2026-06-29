@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { CustomerLoop } from "@/components/home/CustomerLoop";
 import {
   HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_PROOF, HP_HONEST, HP_EXPECT,
   HP_INTEGRATIONS, HP_STEPS, HP_MENTOR, HP_FAQ, HP_FOUNDERS, HP_DEMO_GET, HP_FOOTER_NAV, HP_LEGAL, CONTACT,
@@ -35,17 +36,6 @@ function Mono({ n, text, center, dark }: { n: string; text: string; center?: boo
 function DotGrid({ dark, opacity }: { dark?: boolean; opacity?: number }) {
   const o = opacity ?? (dark ? 0.14 : 0.06);
   return <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: `radial-gradient(circle at 1px 1px, ${dark ? `rgba(255,255,255,${o})` : `rgba(0,0,0,${o})`} 1px, transparent 0)`, backgroundSize: "22px 22px" }} />;
-}
-function PhotoSlot({ label, height = 320, rounded = 16, style = {} }: { label: string; height?: number; rounded?: number; style?: React.CSSProperties }) {
-  return (
-    <div className="hp-photo" style={{ position: "relative", width: "100%", height, borderRadius: rounded, overflow: "hidden", background: "#e9edf6", border: "1px solid rgba(26,90,218,0.14)", ...style }}>
-      <div className="hp-photo-tex" style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(135deg, rgba(26,90,218,0.06) 0 2px, transparent 2px 14px)" }} />
-      <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
-        <div style={{ width: 44, height: 44, borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", background: "#fff", border: "1px solid rgba(26,90,218,0.18)", color: HP.accent, fontSize: 20 }}>◳</div>
-        <div style={{ fontFamily: HP.mono, fontSize: 11, letterSpacing: 1.5, textTransform: "uppercase", color: "rgba(26,90,218,0.7)", fontWeight: 600 }}>{label}</div>
-      </div>
-    </div>
-  );
 }
 function CTA({ children = HP_CTA, big, onClick, style = {} }: { children?: React.ReactNode; big?: boolean; onClick?: () => void; style?: React.CSSProperties }) {
   return (
@@ -340,7 +330,7 @@ export default function Homepage() {
                   <div style={{ fontSize: 12, color: "rgba(0,0,0,0.55)" }}>{HERO.microProof.sub}</div>
                 </div>
               </div>
-              <PhotoSlot label="fotka barbershopu / kosmetiky" height={340} />
+              <CustomerLoop />
             </div>
           </div>
         </section>
