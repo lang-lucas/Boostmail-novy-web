@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { HeroShowcase } from "@/components/home/HeroShowcase";
 import { ContactBooking } from "@/components/home/ContactBooking";
 import {
-  HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_PROOF, HP_HONEST, HP_EXPECT,
+  HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_PROOF, HP_HONEST, HP_EXPECT, HP_PROOF_TICKER,
   HP_INTEGRATIONS, HP_STEPS, HP_MENTOR, HP_FAQ, HP_FOUNDERS, HP_DEMO_GET, HP_FOOTER_NAV, HP_LEGAL, CONTACT,
 } from "@/lib/hp-data";
 
@@ -345,6 +345,19 @@ export default function Homepage() {
               <span style={{ fontFamily: HP.mono, fontSize: 11, fontWeight: 700, color: HP.accent, letterSpacing: 1, padding: "4px 8px", background: "#fff", borderRadius: 6, border: `1px solid ${HP.line}`, whiteSpace: "nowrap" }}>POCTIVÁ NOTA</span>
               <span style={{ fontSize: 14, color: "rgba(0,0,0,0.65)", lineHeight: 1.5, flex: 1, minWidth: 240 }}>{HP_HONEST} {HP_EXPECT}</span>
             </div>
+          </div>
+        </section>
+
+        {/* 04b — DŮKAZ MARQUEE */}
+        <section style={{ padding: "28px 0", background: HP.dark, color: "#fff", overflow: "hidden" }}>
+          <div className="hp-marquee" style={{ display: "flex", gap: 56, whiteSpace: "nowrap" }}>
+            {[...HP_PROOF_TICKER, ...HP_PROOF_TICKER].map((s, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
+                <span style={{ fontSize: 44, fontWeight: 800, color: "#7aa2f0", fontFamily: HP.mono, letterSpacing: "-0.02em" }}>{s.v}</span>
+                <span style={{ fontSize: 15, color: "rgba(255,255,255,0.6)" }}>{s.l}</span>
+                <span aria-hidden style={{ fontSize: 22, color: "rgba(255,255,255,0.22)", marginLeft: 28 }}>✦</span>
+              </div>
+            ))}
           </div>
         </section>
 
