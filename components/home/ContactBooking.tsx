@@ -29,8 +29,8 @@ function buildDays(): Day[] {
 }
 
 const inputStyle = (err: boolean): CSSProperties => ({
-  display: "block", width: "100%", marginTop: 6, padding: "12px 14px",
-  border: `1px solid ${err ? "#dc2626" : HP.line}`, borderRadius: 10,
+  display: "block", width: "100%", marginTop: 4, padding: "9px 12px",
+  border: `1px solid ${err ? "#dc2626" : HP.line}`, borderRadius: 9,
   fontSize: 14, fontFamily: "inherit", boxSizing: "border-box", outline: "none", background: "#fff",
 });
 const labelStyle: CSSProperties = { display: "block", fontSize: 11, fontFamily: HP.mono, letterSpacing: 1, color: "rgba(0,0,0,0.55)" };
@@ -141,19 +141,19 @@ export function ContactBooking() {
 
   return (
     <div>
-      <div style={{ display: "inline-flex", padding: 4, borderRadius: 999, background: HP.soft, border: `1px solid ${HP.line}`, marginBottom: 22 }}>
+      <div style={{ display: "inline-flex", padding: 4, borderRadius: 999, background: HP.soft, border: `1px solid ${HP.line}`, marginBottom: 16 }}>
         {tabBtn("form", "Napsat zprávu")}
         {tabBtn("cal", "Vybrat termín")}
       </div>
 
       {tab === "form" ? (
         fDone ? okBox(`Díky, ${fd.name.split(" ")[0] || "ozveme se"}!`, <>Ozveme se vám do 24 hodin na <b>{fd.email}</b>.</>) : (
-          <form onSubmit={submitForm} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <form onSubmit={submitForm} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {[
               { k: "name", l: "JMÉNO", t: "text", p: "Jan Novák" },
               { k: "email", l: "E-MAIL", t: "email", p: "jan@provozovna.cz" },
               { k: "phone", l: "TELEFON", t: "tel", p: "+420 …" },
-              { k: "project", l: "NÁZEV PROVOZOVNY", t: "text", p: "Např. Barbershop Vodňany" },
+              { k: "project", l: "NÁZEV PROVOZOVNY", t: "text", p: "Název vaší provozovny" },
             ].map((f) => (
               <label key={f.k} style={labelStyle}>
                 {f.l}
@@ -164,7 +164,7 @@ export function ContactBooking() {
             ))}
             <label style={labelStyle}>
               ZPRÁVA (NEPOVINNÉ)
-              <textarea rows={4} value={fd.msg} placeholder="Co řešíte? Kolik máte zákazníků v systému?"
+              <textarea rows={3} value={fd.msg} placeholder="Co řešíte? Kolik máte zákazníků v systému?"
                 onChange={(ev) => setFd({ ...fd, msg: ev.target.value })} style={{ ...inputStyle(false), resize: "vertical" }} />
             </label>
             {failLine(fFail)}
@@ -188,7 +188,7 @@ export function ContactBooking() {
             { k: "name", l: "JMÉNO", t: "text", p: "Jan Novák" },
             { k: "email", l: "E-MAIL", t: "email", p: "jan@provozovna.cz" },
             { k: "phone", l: "TELEFON", t: "tel", p: "+420 …" },
-            { k: "company", l: "NÁZEV PROVOZOVNY", t: "text", p: "Např. Barbershop Vodňany" },
+            { k: "company", l: "NÁZEV PROVOZOVNY", t: "text", p: "Název vaší provozovny" },
           ].map((f) => (
             <div key={f.k} style={{ marginBottom: 12 }}>
               <label style={labelStyle}>{f.l}</label>

@@ -423,13 +423,13 @@ export default function Homepage() {
 
         {/* 07 — REVERSE DEMO */}
         <section id="final-demo" style={{ padding: "72px 48px", borderTop: `1px solid ${HP.line}` }}>
-          <div style={{ maxWidth: 1040, margin: "0 auto" }}>
+          <div style={{ maxWidth: 920, margin: "0 auto" }}>
             <div style={{ textAlign: "center", marginBottom: 36 }}>
               <Mono n="07" text="Ozvěte se · nezávazně" center />
               <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 12px", lineHeight: 1 }}>Napište nám, nebo si vyberte termín</h2>
               <p style={{ fontSize: 17, color: "rgba(0,0,0,0.62)", maxWidth: 560, margin: "0 auto", lineHeight: 1.5 }}>Řekněte nám pár údajů o své provozovně. Ozveme se, projdeme vaše čísla a řekneme rovnou, jestli pro vás dává smysl s námi spolupracovat. Zdarma a nezávazně.</p>
             </div>
-            <div className="hp-card hp-demo-card" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", overflow: "hidden" }}>
+            <div className="hp-card hp-demo-card" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden" }}>
               <div style={{ padding: 32 }}><ContactBooking /></div>
               <div style={{ padding: 32, background: HP.soft, borderLeft: `1px solid ${HP.line}` }}>
                 <div style={{ fontSize: 13, fontFamily: HP.mono, letterSpacing: 1, color: HP.accent, marginBottom: 16, fontWeight: 600 }}>CO DOSTANETE</div>
