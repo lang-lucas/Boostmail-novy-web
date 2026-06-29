@@ -11,18 +11,17 @@ import { HP } from "@/lib/hp-data";
 type Tab = "form" | "cal";
 type Day = { i: number; label: string; num: number; full: string };
 
-const SLOTS = ["09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+const SLOTS = ["14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
 const WD = ["ne", "po", "út", "st", "čt", "pá", "so"];
 const MON = ["led", "úno", "bře", "dub", "kvě", "čvn", "čvc", "srp", "zář", "říj", "lis", "pro"];
 
 function buildDays(): Day[] {
   const out: Day[] = [];
   const base = new Date();
-  for (let k = 1; out.length < 10 && k < 30; k++) {
+  for (let k = 1; out.length < 10 && k < 20; k++) {
     const d = new Date(base);
     d.setDate(base.getDate() + k);
     const wd = d.getDay();
-    if (wd === 0 || wd === 6) continue;
     out.push({ i: k, label: WD[wd], num: d.getDate(), full: `${WD[wd]} ${d.getDate()}. ${MON[d.getMonth()]}` });
   }
   return out;
@@ -225,7 +224,7 @@ export function ContactBooking() {
               Pokračovat ({slot}) →
             </button>
           )}
-          <div style={{ fontSize: 12, color: "rgba(0,0,0,0.5)", marginTop: 12, lineHeight: 1.5 }}>15 minut, zdarma. Projdeme vaše čísla a řekneme rovnou, jestli to dává smysl.</div>
+          <div style={{ fontSize: 12, color: "rgba(0,0,0,0.5)", marginTop: 12, lineHeight: 1.5 }}>Krátký 20minutový videohovor, zdarma. Projdeme vaši situaci, zkušenosti z oboru i odhad přínosu.</div>
         </div>
       )}
     </div>

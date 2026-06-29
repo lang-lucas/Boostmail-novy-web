@@ -427,7 +427,7 @@ export default function Homepage() {
             <div style={{ textAlign: "center", marginBottom: 36 }}>
               <Mono n="07" text="Ozvěte se · nezávazně" center />
               <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 12px", lineHeight: 1 }}>Napište nám, nebo si vyberte termín</h2>
-              <p style={{ fontSize: 17, color: "rgba(0,0,0,0.62)", maxWidth: 560, margin: "0 auto", lineHeight: 1.5 }}>Řekněte nám pár údajů o své provozovně. Ozveme se, projdeme vaše čísla a řekneme rovnou, jestli pro vás dává smysl s námi spolupracovat. Zdarma a nezávazně.</p>
+              <p style={{ fontSize: 17, color: "rgba(0,0,0,0.62)", maxWidth: 580, margin: "0 auto", lineHeight: 1.5 }}>Krátký 20minutový videohovor, kde spolu projdeme vaši situaci: jak by u vás naše řešení vypadalo v praxi, jaké už máme zkušenosti ve vašem oboru a hlavně odhad finančního přínosu. Zdarma a nezávazně.</p>
             </div>
             <div className="hp-card hp-demo-card" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden" }}>
               <div style={{ padding: 32 }}><ContactBooking /></div>

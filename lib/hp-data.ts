@@ -100,9 +100,9 @@ export const HP_FOUNDERS = [
 ];
 
 export const HP_DEMO_GET = [
-  ["Odhad rezervací a obratu", "Kolik rezervací a korun z vaší databáze reálně dostaneme za měsíc."],
-  ["První kampaně na míru", "Které situace bychom u vás spustili jako první."],
-  ["Hovor, kde to projdeme", "Sejdeme se na pár minut a probereme čísla i další kroky."],
+  ["Analýza vaší databáze", "Společně se podíváme, kolik klientů vám aktuálně propadává sítem."],
+  ["Propočet zisku", "Zjistíme, kolik peněz navíc vám náš systém může reálně přinést."],
+  ["Plán nasazení", "Pokud to dává smysl, ukážeme, jak to do 72 hodin spustit i u vás."],
 ];
 
 export const HP_FOOTER_NAV: { label: string; links: [string, string][] }[] = [
