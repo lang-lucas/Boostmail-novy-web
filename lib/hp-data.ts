@@ -14,10 +14,10 @@ export const HP = {
   sans: "var(--font-space-grotesk), system-ui, sans-serif",
 } as const;
 
-export const HP_CTA = "Poslat export";
-export const HP_CTA_LONG = "Poslat export a získat odhad";
+export const HP_CTA = "Nezávazná poptávka";
+export const HP_CTA_LONG = "Chci nezávaznou poptávku";
 export const HP_CTA_CALL = "Domluvit hovor";
-export const HP_CTA_SUB = "Pošlete export, zdarma odhadneme, co vám e-maily přinesou";
+export const HP_CTA_SUB = "Napište nám nebo si rovnou vyberte termín hovoru — ozveme se a vše probereme. Zdarma a nezávazně";
 
 export const HERO = {
   kicker: "E-mail marketing pro lokální provozovny",
@@ -85,8 +85,8 @@ export const HP_MENTOR = [
 ];
 
 export const HP_FAQ = [
-  { q: "Kolik to stojí?", a: "Nastavení od 15 000 Kč, péče od 5 000 Kč měsíčně podle velikosti databáze. Žádné procento z tržeb. Přesnou cenu řekneme, jakmile nám pošlete export." },
-  { q: "Musím něco dělat?", a: "Ne. Pošlete export, zbytek nastavíme my. Žádná instalace, žádná práce navíc." },
+  { q: "Kolik to stojí?", a: "Nastavení od 15 000 Kč, péče od 5 000 Kč měsíčně podle velikosti databáze. Žádné procento z tržeb. Přesnou cenu řekneme, jakmile budeme znát velikost vaší databáze." },
+  { q: "Musím něco dělat?", a: "Ne. Řeknete nám pár údajů o provozovně, zbytek nastavíme my. Žádná instalace, žádná práce navíc." },
   { q: "Co když nemám rezervační systém?", a: "Stačí seznam zákazníků s kontaktem a datem poslední návštěvy, klidně Excel. Napojení doděláme později." },
   { q: "Nebudete mi spamovat zákazníky?", a: "Ne. Píšeme jen ve správný moment, lidsky a v tónu, který schválíte. Žádné plošné slevové letáky." },
   { q: "Jak rychle uvidím výsledky?", a: "První rezervace obvykle během pár týdnů od spuštění." },

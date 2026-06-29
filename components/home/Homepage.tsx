@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { HeroShowcase } from "@/components/home/HeroShowcase";
+import { ContactBooking } from "@/components/home/ContactBooking";
 import {
   HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_PROOF, HP_HONEST, HP_EXPECT,
   HP_INTEGRATIONS, HP_STEPS, HP_MENTOR, HP_FAQ, HP_FOUNDERS, HP_DEMO_GET, HP_FOOTER_NAV, HP_LEGAL, CONTACT,
@@ -14,10 +15,10 @@ const fmtCZK = (n: number) =>
 const fmtNum = (n: number) => Math.round(n).toLocaleString("cs-CZ").replace(/ /g, " ");
 
 const scrollToDemo = () => {
-  document.getElementById("final-demo")?.scrollIntoView({ behavior: "smooth" });
+  window.dispatchEvent(new CustomEvent("bm-open-contact", { detail: { tab: "form" } }));
 };
 const scrollToContact = () => {
-  document.getElementById("kontakt")?.scrollIntoView({ behavior: "smooth" });
+  window.dispatchEvent(new CustomEvent("bm-open-contact", { detail: { tab: "cal" } }));
 };
 
 // Statické číslo (v SSR HTML kvůli AEO; žádný count-up od nuly).
@@ -104,7 +105,7 @@ function Nav() {
         <a href={`tel:${CONTACT.phoneHref}`} aria-label="Zavolat" className="hp-link-u" style={{ fontSize: 13, fontWeight: 600, color: "#0a0a0a", textDecoration: "none", whiteSpace: "nowrap" }}>Zavolat</a>
         <button onClick={scrollToDemo} className="hp-cta hp-nav-cta" style={{ padding: "11px 20px", fontSize: 13, fontWeight: 700, background: "#0a0a0a", color: "#fff", border: "none", borderRadius: 999, cursor: "pointer", fontFamily: "inherit", display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" }}>
           <span className="hp-nav-cta-full">{HP_CTA}</span>
-          <span className="hp-nav-cta-short">Export</span>
+          <span className="hp-nav-cta-short">Poptávka</span>
           <span aria-hidden className="hp-arr">→</span>
         </button>
       </div>
@@ -189,7 +190,10 @@ function MentorFeed() {
 function MiniCalc() {
   const [db, setDb] = useState(1500);
   const [aov, setAov] = useState(600);
-  const monthly = db * 0.01 * aov;
+  // Vychází z reálných dat provozoven, které vedeme: ~9–12 rezervací / 1000 kontaktů měsíčně.
+  // Headline = konzervativní spodní hranice (9 / 1000), medián útraty ~600 Kč.
+  const RATE = 9 / 1000;
+  const monthly = db * RATE * aov;
   const yearly = monthly * 12;
   const slider = (label: string, val: number, set: (n: number) => void, min: number, max: number, step: number, fmt: (v: number) => string) => (
     <div style={{ marginBottom: 18 }}>
@@ -202,68 +206,21 @@ function MiniCalc() {
   );
   return (
     <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16, padding: 22 }}>
-      <div style={{ fontFamily: HP.mono, fontSize: 11, letterSpacing: 1.5, color: HP.accent, marginBottom: 4, fontWeight: 600 }}>KALKULAČKA · KOLIK VÁM UTÍKÁ</div>
-      <div style={{ fontSize: 19, fontWeight: 700, color: "#fff", marginBottom: 20, letterSpacing: "-0.02em" }}>Kolik vám měsíčně leží v databázi</div>
-      {slider("Zákazníků v databázi", db, setDb, 200, 12000, 100, (v) => fmtNum(v) + " lidí")}
-      {slider("Průměrná útrata za návštěvu", aov, setAov, 200, 3000, 50, fmtCZK)}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, padding: 16, background: "rgba(26,90,218,0.15)", borderRadius: 12, border: "1px solid rgba(26,90,218,0.2)" }}>
-        <div>
-          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.62)", marginBottom: 4 }}>UNIKÁ MĚSÍČNĚ</div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: "#7aa2f0", fontFamily: HP.mono }}>{fmtCZK(monthly)}</div>
+      <div style={{ fontFamily: HP.mono, fontSize: 11, letterSpacing: 1.5, color: HP.accent, marginBottom: 4, fontWeight: 600 }}>KALKULAČKA · POTENCIÁL DATABÁZE</div>
+      <div style={{ fontSize: 19, fontWeight: 700, color: "#fff", marginBottom: 20, letterSpacing: "-0.02em" }}>Kolik z vaší databáze umíme vrátit</div>
+      {slider("Zákazníků v databázi", db, setDb, 200, 6000, 100, (v) => fmtNum(v) + " lidí")}
+      {slider("Průměrná útrata za návštěvu", aov, setAov, 200, 2000, 50, fmtCZK)}
+      <div className="hp-calc-out" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, padding: 16, background: "rgba(26,90,218,0.15)", borderRadius: 12, border: "1px solid rgba(26,90,218,0.2)" }}>
+        <div style={{ minWidth: 0 }}>
+          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.62)", marginBottom: 4 }}>MĚSÍČNĚ · PO NÁBĚHU</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: "#7aa2f0", fontFamily: HP.mono }}>od {fmtCZK(monthly)}</div>
         </div>
-        <div>
-          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.62)", marginBottom: 4 }}>ZA ROK</div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: "#7aa2f0", fontFamily: HP.mono }}>{fmtCZK(yearly)}</div>
+        <div style={{ minWidth: 0 }}>
+          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.62)", marginBottom: 4 }}>ROČNĚ · PO NÁBĚHU</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: "#7aa2f0", fontFamily: HP.mono }}>od {fmtCZK(yearly)}</div>
         </div>
       </div>
-      <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginTop: 12 }}>Konzervativní odhad podle našich dat (~10 rezervací na 1000 kontaktů). Přesně spočítáme z vašeho exportu.</div>
-    </div>
-  );
-}
-
-// ── REVERSE DEMO zone ──
-function ReverseDemoZone() {
-  const [ready, setReady] = useState(false);
-  const [hover, setHover] = useState(false);
-  const [fname, setFname] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const accept = (name?: string) => { setFname(name || "export.csv"); setReady(true); };
-  return (
-    <div>
-      <input ref={inputRef} type="file" accept=".csv,.xlsx,.xls" style={{ display: "none" }} onChange={(e) => accept(e.target.files?.[0]?.name)} />
-      {!ready ? (
-        <div
-          onClick={() => inputRef.current?.click()}
-          onDragOver={(e) => { e.preventDefault(); setHover(true); }}
-          onDragLeave={() => setHover(false)}
-          onDrop={(e) => { e.preventDefault(); setHover(false); accept(e.dataTransfer.files?.[0]?.name); }}
-          style={{ border: `2px dashed ${hover ? HP.accent : "rgba(26,90,218,0.4)"}`, background: hover ? HP.accentSoft : "rgba(26,90,218,0.03)", borderRadius: 18, padding: "32px 24px", textAlign: "center", cursor: "pointer", transition: "all .18s" }}>
-          <div className="hp-float" style={{ width: 56, height: 56, borderRadius: 16, margin: "0 auto 18px", background: HP.accent, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, boxShadow: "0 12px 28px -8px rgba(26,90,218,0.6)" }}>↑</div>
-          <div style={{ fontSize: 19, fontWeight: 700, color: "#0a0a0a", marginBottom: 8, letterSpacing: "-0.02em" }}>Přetáhněte sem export z rezervačního systému</div>
-          <div style={{ fontSize: 14, color: "rgba(0,0,0,0.6)", lineHeight: 1.5, maxWidth: 420, margin: "0 auto 18px" }}>CSV nebo XLSX z Reservia, Reservanta nebo MyFoxu. Nebo klikněte a vyberte soubor.</div>
-          <span style={{ fontSize: 13, fontWeight: 700, color: HP.accent, fontFamily: HP.mono, letterSpacing: 0.5 }}>VYBRAT SOUBOR</span>
-        </div>
-      ) : (
-        <div style={{ border: `1px solid ${HP.line}`, background: "#fff", borderRadius: 18, padding: 24, textAlign: "center" }}>
-          <div style={{ width: 60, height: 60, borderRadius: "50%", margin: "0 auto 16px", background: "#10b981", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, animation: "hpPulse 2s ease-in-out infinite" }}>✓</div>
-          <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Soubor připravený k odhadu</div>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 14px", borderRadius: 999, background: HP.soft, border: `1px solid ${HP.line}`, fontFamily: HP.mono, fontSize: 12, color: "rgba(0,0,0,0.6)", marginBottom: 16 }}>
-            <span style={{ color: HP.accent }}>▦</span> {fname}
-          </div>
-          <div style={{ fontSize: 14, color: "rgba(0,0,0,0.6)", lineHeight: 1.55, maxWidth: 400, margin: "0 auto 18px" }}>Hotovo. Vyhodnotíme ho a do 2 pracovních dnů se ozveme. Pak si na krátkém hovoru projdeme, kolik vám to přinese. Data po vyhodnocení mažeme.</div>
-          <button onClick={() => { setReady(false); setFname(""); }} style={{ background: "none", border: "none", color: HP.accent, fontSize: 13, fontWeight: 600, cursor: "pointer", textDecoration: "underline", fontFamily: "inherit" }}>Nahrát jiný soubor</button>
-        </div>
-      )}
-      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center", marginTop: 16 }}>
-        {["Zdarma a nezávazně", "Data po odhadu mažeme", "Odhad do 2 pracovních dnů"].map((c) => (
-          <span key={c} style={{ display: "inline-flex", alignItems: "center", gap: 7, fontSize: 12.5, fontWeight: 600, padding: "7px 13px", borderRadius: 999, background: "#fff", border: `1px solid ${HP.line}`, color: "rgba(0,0,0,0.7)" }}>
-            <span style={{ color: "#10b981" }}>✓</span> {c}
-          </span>
-        ))}
-      </div>
-      <div style={{ textAlign: "center", marginTop: 18, fontSize: 14, color: "rgba(0,0,0,0.6)" }}>
-        Nechce se vám exportovat? <a href={`tel:${CONTACT.phoneHref}`} className="hp-link-u" style={{ color: HP.accent, fontWeight: 700, textDecoration: "none" }}>Domluvte si rovnou hovor →</a>
-      </div>
+      <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginTop: 12 }}>Orientační odhad, ne závazek. Opřený o naše provozovny (barbershopy a kosmetika): ~9–12 rezervací na 1000 kontaktů měsíčně po náběhu, medián útraty ~600 Kč. U jiných oborů se liší podle frekvence návštěv. Přesně spočítáme z vašeho exportu.</div>
     </div>
   );
 }
@@ -468,12 +425,12 @@ export default function Homepage() {
         <section id="final-demo" style={{ padding: "72px 48px", borderTop: `1px solid ${HP.line}` }}>
           <div style={{ maxWidth: 1040, margin: "0 auto" }}>
             <div style={{ textAlign: "center", marginBottom: 36 }}>
-              <Mono n="07" text="Reverse demo · hlavní krok" center />
-              <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 12px", lineHeight: 1 }}>Zjistěte, co vám e-maily přinesou</h2>
-              <p style={{ fontSize: 17, color: "rgba(0,0,0,0.62)", maxWidth: 560, margin: "0 auto", lineHeight: 1.5 }}>Pošlete export ze svého rezervačního systému. Vyhodnotíme ho a na krátkém hovoru spolu projdeme, kolik vám to přinese. Zdarma a nezávazně.</p>
+              <Mono n="07" text="Ozvěte se · nezávazně" center />
+              <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 12px", lineHeight: 1 }}>Napište nám, nebo si vyberte termín</h2>
+              <p style={{ fontSize: 17, color: "rgba(0,0,0,0.62)", maxWidth: 560, margin: "0 auto", lineHeight: 1.5 }}>Řekněte nám pár údajů o své provozovně. Ozveme se, projdeme vaše čísla a řekneme rovnou, jestli pro vás dává smysl s námi spolupracovat. Zdarma a nezávazně.</p>
             </div>
             <div className="hp-card hp-demo-card" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", overflow: "hidden" }}>
-              <div style={{ padding: 32 }}><ReverseDemoZone /></div>
+              <div style={{ padding: 32 }}><ContactBooking /></div>
               <div style={{ padding: 32, background: HP.soft, borderLeft: `1px solid ${HP.line}` }}>
                 <div style={{ fontSize: 13, fontFamily: HP.mono, letterSpacing: 1, color: HP.accent, marginBottom: 16, fontWeight: 600 }}>CO DOSTANETE</div>
                 {HP_DEMO_GET.map((r, i) => (
@@ -526,7 +483,7 @@ export default function Homepage() {
         <section style={{ padding: "100px 56px", background: HP.accent, color: "#fff", position: "relative", overflow: "hidden" }}>
           <DotGrid dark opacity={0.1} />
           <div style={{ ...wrapC, textAlign: "center", position: "relative" }}>
-            <h2 style={{ fontSize: 92, fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 0.86, margin: "0 0 24px" }} className="hp-final-h2">Plný kalendář<br />začíná exportem.</h2>
+            <h2 style={{ fontSize: 92, fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 0.86, margin: "0 0 24px" }} className="hp-final-h2">Pojďme naplnit<br />váš kalendář.</h2>
             <p style={{ fontSize: 20, color: "rgba(255,255,255,0.88)", marginBottom: 36, maxWidth: 600, marginLeft: "auto", marginRight: "auto" }}>{HP_CTA_SUB}.</p>
             <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", alignItems: "center" }}>
               <button onClick={scrollToDemo} className="hp-cta" style={{ padding: "20px 36px", background: "#fff", color: HP.accent, border: "none", borderRadius: 999, fontSize: 18, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>{HP_CTA} →</button>
