@@ -1088,6 +1088,8 @@ function V7ContactForm({ accent }) {
   const [data, setData] = React.useState({ name: '', email: '', phone: '', project: '', db: '', msg: '' });
   const [errors, setErrors] = React.useState({});
   const [sent, setSent] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState(null);
   const [picked, setPicked] = React.useState(null);
 
   const validate = () => {
@@ -1099,11 +1101,30 @@ function V7ContactForm({ accent }) {
     return e;
   };
 
-  const submit = (ev) => {
+  const submit = async (ev) => {
     ev.preventDefault();
     const e = validate();
     setErrors(e);
-    if (Object.keys(e).length === 0) setSent(true);
+    if (Object.keys(e).length !== 0) return;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, source: 'homepage-form' }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.ok) {
+        setSubmitError(json.error || 'Něco se pokazilo, zkuste to prosím znovu nebo nám napište na lang@boostmail.cz');
+      } else {
+        setSent(true);
+      }
+    } catch (err) {
+      setSubmitError('Nepodařilo se odeslat. Zkuste to prosím znovu.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   // Smart hint based on db size
@@ -1222,12 +1243,20 @@ function V7ContactForm({ accent }) {
               style={{ ...inputBase, resize: 'vertical', fontFamily: 'inherit' }}
             />
           </div>
-          <button type="submit" style={{
+          {submitError && (
+            <div style={{
+              padding: '12px 14px', marginBottom: 12,
+              background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8,
+              fontSize: 13, color: '#991b1b', lineHeight: 1.5,
+            }}>{submitError}</div>
+          )}
+          <button type="submit" disabled={submitting} style={{
             width: '100%', padding: '16px 20px', fontSize: 15, fontWeight: 700,
-            background: accent, color: '#fff', border: 'none', borderRadius: 8,
-            cursor: 'pointer', fontFamily: 'inherit', letterSpacing: 0.2,
+            background: submitting ? 'rgba(0,0,0,0.4)' : accent, color: '#fff', border: 'none', borderRadius: 8,
+            cursor: submitting ? 'wait' : 'pointer', fontFamily: 'inherit', letterSpacing: 0.2,
+            transition: 'background 0.15s',
           }}>
-            Spočítáme, kolik vám utíká →
+            {submitting ? 'Odesílám…' : 'Spočítáme, kolik vám utíká →'}
           </button>
         </form>
       )}
@@ -1243,6 +1272,8 @@ function InlineCalendar({ accent, onPick }) {
   const [pickedSlot, setPickedSlot] = React.useState(null);
   const [lead, setLead] = React.useState({ name: '', email: '', phone: '', company: '' });
   const [errors, setErrors] = React.useState({});
+  const [submitting, setSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState(null);
 
   // Generate next 14 days
   const days = React.useMemo(() => {
@@ -1267,7 +1298,7 @@ function InlineCalendar({ accent, onPick }) {
 
   const slots = ['09:00', '10:30', '13:00', '14:30', '16:00', '17:30'];
 
-  const confirm = () => {
+  const confirm = async () => {
     const e = {};
     if (!lead.name.trim()) e.name = 'Jméno je povinné';
     if (!lead.email.trim()) e.email = 'Email je povinný';
@@ -1275,7 +1306,29 @@ function InlineCalendar({ accent, onPick }) {
     if (!lead.phone.trim()) e.phone = 'Telefon je povinný';
     if (!lead.company.trim()) e.company = 'Název podniku je povinný';
     setErrors(e);
-    if (Object.keys(e).length === 0) onPick(days[selectedDay].full, pickedSlot, lead);
+    if (Object.keys(e).length !== 0) return;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: lead.name, email: lead.email, phone: lead.phone, company: lead.company,
+          day: days[selectedDay].full, slot: pickedSlot, source: 'homepage-calendar',
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.ok) {
+        setSubmitError(json.error || 'Něco se pokazilo, zkuste to prosím znovu.');
+      } else {
+        onPick(days[selectedDay].full, pickedSlot, lead);
+      }
+    } catch (err) {
+      setSubmitError('Nepodařilo se odeslat. Zkuste to prosím znovu.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   // Step 3: lead capture form
@@ -1357,16 +1410,24 @@ function InlineCalendar({ accent, onPick }) {
           {errors.company && <div style={{ color: '#dc2626', fontSize: 12, marginTop: 4 }}>{errors.company}</div>}
         </div>
 
-        <button onClick={confirm} style={{
+        {submitError && (
+          <div style={{
+            padding: '12px 14px', marginBottom: 12,
+            background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8,
+            fontSize: 13, color: '#991b1b', lineHeight: 1.5,
+          }}>{submitError}</div>
+        )}
+        <button onClick={confirm} disabled={submitting} style={{
           width: '100%', padding: '16px 20px', fontSize: 15, fontWeight: 700,
-          background: accent, color: '#fff', border: 'none', borderRadius: 8,
-          cursor: 'pointer', fontFamily: 'inherit', letterSpacing: 0.2,
+          background: submitting ? 'rgba(0,0,0,0.4)' : accent, color: '#fff', border: 'none', borderRadius: 8,
+          cursor: submitting ? 'wait' : 'pointer', fontFamily: 'inherit', letterSpacing: 0.2,
+          transition: 'background 0.15s',
         }}>
-          📅 Potvrdit termín →
+          {submitting ? 'Odesílám…' : '📅 Potvrdit termín →'}
         </button>
 
         <div style={{ marginTop: 12, fontSize: 11, color: 'rgba(0,0,0,0.45)', textAlign: 'center', lineHeight: 1.5 }}>
-          Po potvrzení dostanete pozvánku do kalendáře a krátký dotazník (3 otázky), ať jsme na hovor připravení.
+          Po potvrzení vám zavoláme nebo pošleme pozvánku do kalendáře. Pokud termín nesedí, ozvěte se přes formulář.
         </div>
       </div>
     );

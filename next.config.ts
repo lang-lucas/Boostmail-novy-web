@@ -3,10 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async rewrites() {
     return [
-      // Homepage — Boostmail.html prototype (handoff bundle)
-      { source: "/", destination: "/Boostmail.html" },
+      // Homepage nyní servíruje app/page.tsx (Next.js SSR). Rewrite zrušen.
 
-      // Top-level pages
+      // Top-level pages (zatím staré prototypy, postupně přepíšeme)
       { source: "/cenik", destination: "/pages/cenik.html" },
       { source: "/akademie", destination: "/pages/akademie.html" },
       { source: "/akademie-clanek", destination: "/pages/akademie-clanek.html" },
@@ -22,17 +21,13 @@ const nextConfig: NextConfig = {
       { source: "/reseni-wellness", destination: "/pages/reseni-wellness.html" },
       { source: "/reseni-auto", destination: "/pages/reseni-auto.html" },
 
-      // Case studies
-      { source: "/pripadovky", destination: "/pages/pripadovky.html" },
+      // Case studies (/pripadovky nyní servíruje app/pripadovky)
       { source: "/pripadovky-barberhaus", destination: "/pages/pripadovky-barberhaus.html" },
       { source: "/pripadovky-mirek", destination: "/pages/pripadovky-mirek.html" },
       { source: "/pripadovky-oldschool", destination: "/pages/pripadovky-oldschool.html" },
       { source: "/pripadovky-sharp", destination: "/pages/pripadovky-sharp.html" },
 
-      // Legal
-      { source: "/gdpr", destination: "/pages/gdpr.html" },
-      { source: "/cookies", destination: "/pages/cookies.html" },
-      { source: "/obchodni-podminky", destination: "/pages/obchodni-podminky.html" },
+      // Legal stránky nyní servíruje app/ (ochrana-udaju, cookies, obchodni-podminky).
 
       // External proxies (preserved from earlier branches)
       {

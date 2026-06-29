@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Uložené snímky starého Webflow webu (jen reference; obsahují 3rd-party public klíče)
+docs/*.html
+docs/*_files/
