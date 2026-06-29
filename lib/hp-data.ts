@@ -69,12 +69,12 @@ export const HP_PROOF = [
 export const HP_HONEST =
   "Reálná čísla z provozoven, které vedeme. Berte je jako odhad přínosu naší kampaně, ne striktně izolovaný efekt jednoho kanálu — klienty, kteří by přišli tak jako tak, si nepřičítáme.";
 export const HP_EXPECT = "Každý provoz je jiný. Berte to jako reálnou ukázku, ne slib.";
-export const HP_PROOF_TICKER: { v: string; l: string }[] = [
-  { v: "225", l: "rezervací navíc" },
-  { v: "176 575 Kč", l: "obrat navíc" },
-  { v: "247", l: "rezervací navíc" },
-  { v: "145 500 Kč", l: "obrat navíc" },
-  { v: "8", l: "provozoven" },
+export const HP_REVIEWS: { text: string; name: string }[] = [
+  { text: "Objednal jsem se na jeden klik, hned jak přišla připomínka. Paráda.", name: "Marek" },
+  { text: "Vrátil jsem se po půl roce — e-mail dorazil přesně ve správnou chvíli.", name: "Tomáš" },
+  { text: "Konečně mi někdo připomněl, že je čas. Žádný spam, jen to podstatné.", name: "Honza" },
+  { text: "Rychlé, milé a hned volný termín. Rezervace mi zabrala minutu.", name: "Petra" },
+  { text: "Sedl mi navržený termín i čas, rovnou jsem si rezervovala. Doporučuju.", name: "Lucie" },
 ];
 export const HP_INTEGRATIONS = ["Reservio", "Reservanto", "MyFox", "SmartEmailing", "GoHighLevel"];
 

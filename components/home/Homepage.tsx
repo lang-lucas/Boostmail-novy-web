@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { HeroShowcase } from "@/components/home/HeroShowcase";
 import { ContactBooking } from "@/components/home/ContactBooking";
 import {
-  HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_PROOF, HP_HONEST, HP_EXPECT, HP_PROOF_TICKER,
+  HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_PROOF, HP_HONEST, HP_EXPECT, HP_REVIEWS,
   HP_INTEGRATIONS, HP_STEPS, HP_MENTOR, HP_FAQ, HP_FOUNDERS, HP_DEMO_GET, HP_FOOTER_NAV, HP_LEGAL, CONTACT,
 } from "@/lib/hp-data";
 
@@ -72,12 +72,12 @@ function Nav() {
   const links: [string, string][] = [["Pro koho", "pro-koho"], ["Důkaz", "dukaz"], ["Jak to funguje", "jak"], ["Mentor", "mentor"], ["FAQ", "faq"]];
   const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   return (
-    <nav style={{ padding: "18px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 30, background: "rgba(244,244,244,0.82)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
+    <nav style={{ padding: "18px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 30, background: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/assets/boostmail-logo-black.png" alt="BoostMail" style={{ height: 30, width: "auto", display: "block" }} />
+      <img src="/assets/boostmail-logo-white.png" alt="BoostMail" style={{ height: 30, width: "auto", display: "block" }} />
       <div className="hp-nav-links" style={{ display: "flex", gap: 26, fontSize: 14, fontWeight: 500, alignItems: "center" }}>
         <div onMouseEnter={() => { if (t.current) clearTimeout(t.current); setOpen(true); }} onMouseLeave={() => { t.current = setTimeout(() => setOpen(false), 130); }} style={{ position: "relative" }}>
-          <span onClick={() => go("pro-koho")} style={{ color: "#0a0a0a", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 5 }}>
+          <span onClick={() => go("pro-koho")} style={{ color: "#fff", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 5 }}>
             Řešení <span style={{ fontSize: 8, transition: "transform .2s", transform: open ? "rotate(180deg)" : "none" }}>▼</span>
           </span>
           {open && (
@@ -98,12 +98,12 @@ function Nav() {
           )}
         </div>
         {links.map(([l, id]) => (
-          <span key={id} onClick={() => go(id)} style={{ color: "#0a0a0a", cursor: "pointer" }}>{l}</span>
+          <span key={id} onClick={() => go(id)} style={{ color: "rgba(255,255,255,0.82)", cursor: "pointer" }}>{l}</span>
         ))}
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <a href={`tel:${CONTACT.phoneHref}`} aria-label="Zavolat" className="hp-link-u" style={{ fontSize: 13, fontWeight: 600, color: "#0a0a0a", textDecoration: "none", whiteSpace: "nowrap" }}>Zavolat</a>
-        <button onClick={scrollToDemo} className="hp-cta hp-nav-cta" style={{ padding: "11px 20px", fontSize: 13, fontWeight: 700, background: "#0a0a0a", color: "#fff", border: "none", borderRadius: 999, cursor: "pointer", fontFamily: "inherit", display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" }}>
+        <a href={`tel:${CONTACT.phoneHref}`} aria-label="Zavolat" className="hp-link-u" style={{ fontSize: 13, fontWeight: 600, color: "#fff", textDecoration: "none", whiteSpace: "nowrap" }}>Zavolat</a>
+        <button onClick={scrollToDemo} className="hp-cta hp-nav-cta" style={{ padding: "11px 20px", fontSize: 13, fontWeight: 700, background: HP.accent, color: "#fff", border: "none", borderRadius: 999, cursor: "pointer", fontFamily: "inherit", display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" }}>
           <span className="hp-nav-cta-full">{HP_CTA}</span>
           <span className="hp-nav-cta-short">Poptávka</span>
           <span aria-hidden className="hp-arr">→</span>
@@ -116,7 +116,7 @@ function Nav() {
 // ── EMAIL preview ──
 function EmailPreview({ seg }: { seg: string }) {
   const isBarber = seg === "barber";
-  const from = isBarber ? "BARBERSHOP NEXTLEVEL" : "STUDIO · KOSMETIKA";
+  const from = isBarber ? "VÁŠ BARBERSHOP" : "STUDIO · KOSMETIKA";
   const subject = isBarber ? "Pavle, je čas na další fade 💈" : "Je čas na další ošetření ✨";
   const pre = isBarber ? "Stejný střih, váš obvyklý termín. Rezervace na jeden klik." : "Vaše péče má svůj cyklus, máme pro vás termín.";
   const slot = isBarber ? "Pátek 18:30 · Miroslav" : "Čtvrtek 16:00 · Tereza";
@@ -317,8 +317,8 @@ export default function Homepage() {
               <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 0", lineHeight: 1 }}>Reálná čísla, ne sliby.</h2>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }} className="hp-proof-grid">
-              {HP_PROOF.map((p) => (
-                <div key={p.shop} className="hp-card" style={{ overflow: "hidden" }}>
+              {HP_PROOF.map((p, i) => (
+                <div key={i} className="hp-card" style={{ overflow: "hidden" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
                     <div style={{ position: "relative", height: 150, borderRight: `1px solid ${HP.line}` }}>
                       <Image src={p.photo} alt={p.shop} fill sizes="(max-width: 1000px) 50vw, 300px" style={{ objectFit: "cover" }} />
@@ -348,14 +348,15 @@ export default function Homepage() {
           </div>
         </section>
 
-        {/* 04b — DŮKAZ MARQUEE */}
-        <section style={{ padding: "28px 0", background: HP.dark, color: "#fff", overflow: "hidden" }}>
-          <div className="hp-marquee" style={{ display: "flex", gap: 56, whiteSpace: "nowrap" }}>
-            {[...HP_PROOF_TICKER, ...HP_PROOF_TICKER].map((s, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
-                <span style={{ fontSize: 44, fontWeight: 800, color: "#7aa2f0", fontFamily: HP.mono, letterSpacing: "-0.02em" }}>{s.v}</span>
-                <span style={{ fontSize: 15, color: "rgba(255,255,255,0.6)" }}>{s.l}</span>
-                <span aria-hidden style={{ fontSize: 22, color: "rgba(255,255,255,0.22)", marginLeft: 28 }}>✦</span>
+        {/* 04b — RECENZE MARQUEE */}
+        <section style={{ padding: "44px 0", background: HP.soft, overflow: "hidden", borderTop: `1px solid ${HP.line}`, borderBottom: `1px solid ${HP.line}` }}>
+          <div style={{ textAlign: "center", marginBottom: 24, padding: "0 24px", fontFamily: HP.mono, fontSize: 11, letterSpacing: 1.6, color: HP.accent, fontWeight: 600, textTransform: "uppercase" }}>Recenze, které vám pomáháme sbírat</div>
+          <div className="hp-marquee" style={{ display: "flex", gap: 18, whiteSpace: "nowrap" }}>
+            {[...HP_REVIEWS, ...HP_REVIEWS].map((r, i) => (
+              <div key={i} className="hp-card" style={{ flex: "0 0 320px", padding: 22, whiteSpace: "normal", display: "flex", flexDirection: "column", gap: 10 }}>
+                <div aria-hidden style={{ color: "#f5a623", fontSize: 14, letterSpacing: 3 }}>★★★★★</div>
+                <div style={{ fontSize: 14.5, color: HP.ink, lineHeight: 1.5, fontWeight: 500 }}>„{r.text}"</div>
+                <div style={{ fontSize: 13, color: "rgba(0,0,0,0.5)", fontFamily: HP.mono }}>— {r.name}</div>
               </div>
             ))}
           </div>
