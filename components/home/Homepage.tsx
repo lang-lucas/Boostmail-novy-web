@@ -307,7 +307,7 @@ export default function Homepage() {
         {/* 01 — HERO */}
         <section style={{ padding: "64px 56px 56px", position: "relative", overflow: "hidden", background: "linear-gradient(180deg, #eaf0fd 0%, #f4f4f4 62%)" }}>
           <div aria-hidden className="hp-hero-orbit" />
-          <div style={{ ...wrapA, position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: 56, alignItems: "end" }} className="hp-hero-grid">
+          <div style={{ ...wrapA, position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: 56, alignItems: "center" }} className="hp-hero-grid">
             <div>
               <Mono n="01" text={HERO.kicker} />
               <h1 style={{ fontSize: 78, lineHeight: 0.96, fontWeight: 700, letterSpacing: "-0.04em", margin: "22px 0 0" }}>
@@ -323,7 +323,7 @@ export default function Homepage() {
               <IntegrationRow />
             </div>
             <div>
-              <div className="hp-card hp-float" style={{ padding: "16px 18px", marginBottom: 16, display: "flex", alignItems: "center", gap: 14 }}>
+              <div className="hp-card hp-float" style={{ padding: "16px 18px", marginBottom: 20, display: "flex", alignItems: "center", gap: 14 }}>
                 <div style={{ fontSize: 34, fontWeight: 800, color: HP.accent, fontFamily: HP.mono, lineHeight: 1 }}><Count to={HERO.microProof.n} /></div>
                 <div style={{ borderLeft: `1px solid ${HP.line}`, paddingLeft: 14 }}>
                   <div style={{ fontSize: 13, fontWeight: 700 }}>{HERO.microProof.label}</div>
