@@ -72,10 +72,10 @@ export const HP_EXPECT = "Každý provoz je jiný. Berte to jako reálnou ukázk
 
 export type HpCase = { cat: string; name: string; summary: string; metric?: string; metricUnit?: string; placeholder?: boolean; anonymous?: boolean };
 export const HP_CASES: HpCase[] = [
-  { cat: "Reálný klient · Praha", name: "Barbershop · Praha", summary: "225 rezervací navíc z databáze, kterou už dávno měl. Bez zbytečných slev.", metric: "176 575 Kč", metricUnit: "obrat navíc / od spuštění" },
-  { cat: "Reálný klient · Praha", name: "Barbershop · 3 pobočky", summary: "247 rezervací navíc napříč třemi pobočkami. Stálí klienti zpátky v křesle.", metric: "145 500 Kč", metricUnit: "obrat navíc / od spuštění" },
-  { cat: "Barbershop · anonymizováno", name: "Barbershop, Brno", summary: "Reálný klient, jméno zatím nezveřejňujeme. Detailní případovka v přípravě.", placeholder: true, anonymous: true },
-  { cat: "Kosmetika · anonymizováno", name: "Kosmetické studio", summary: "Reálný klient, jméno zatím nezveřejňujeme. Případovka v přípravě.", placeholder: true, anonymous: true },
+  { cat: "Barbershop · Praha · 3 pobočky", name: "MNB", summary: "247 rezervací navíc napříč třemi pobočkami. Stálí klienti zpátky v křesle.", metric: "145 500 Kč", metricUnit: "obrat navíc / od spuštění" },
+  { cat: "Reálný klient · Praha", name: "Barbershop v Praze", summary: "225 rezervací navíc z databáze, kterou už dávno měl. Jméno na přání neuvádíme.", metric: "176 575 Kč", metricUnit: "obrat navíc / od spuštění" },
+  { cat: "Barbershop · anonymizováno", name: "Barbershop, Brno", summary: "Reálný klient, jméno nezveřejňujeme. Detailní případovka v přípravě.", placeholder: true, anonymous: true },
+  { cat: "Kosmetika · anonymizováno", name: "Kosmetické studio", summary: "Reálný klient, jméno nezveřejňujeme. Případovka v přípravě.", placeholder: true, anonymous: true },
 ];
 export const HP_INTEGRATIONS = ["Reservio", "Reservanto", "MyFox", "SmartEmailing", "GoHighLevel"];
 
