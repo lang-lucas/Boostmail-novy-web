@@ -41,7 +41,7 @@ export function HeroShowcase({ style = {} }: { style?: CSSProperties }) {
           <div key={s.label} style={{ position: "relative", width: `${100 / n}%`, height: "100%" }}>
             <Image
               src={s.img}
-              alt={`${s.label} — BoostMail`}
+              alt={`${s.label} · BoostMail`}
               fill
               sizes="(max-width: 1000px) 90vw, 480px"
               style={{ objectFit: "cover" }}
