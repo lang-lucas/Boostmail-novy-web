@@ -17,7 +17,7 @@ export const HP = {
 export const HP_CTA = "Nezávazná poptávka";
 export const HP_CTA_LONG = "Chci nezávaznou poptávku";
 export const HP_CTA_CALL = "Domluvit hovor";
-export const HP_CTA_SUB = "Napište nám nebo si rovnou vyberte termín hovoru — ozveme se a vše probereme. Zdarma a nezávazně";
+export const HP_CTA_SUB = "Napište nám nebo si rovnou vyberte termín hovoru. Ozveme se a vše probereme. Zdarma a nezávazně";
 
 export const HERO = {
   kicker: "E-mail marketing pro lokální provozovny",
@@ -67,7 +67,7 @@ export const HP_PROOF = [
   { shop: "Barbershop", cat: "Praha · 3 pobočky", bookings: 247, revenue: "145 500 Kč", period: "od spuštění", photo: "/proof/barber2.jpg" },
 ];
 export const HP_HONEST =
-  "Reálná čísla z provozoven, které vedeme. Berte je jako odhad přínosu naší kampaně, ne striktně izolovaný efekt jednoho kanálu — klienty, kteří by přišli tak jako tak, si nepřičítáme.";
+  "Reálná čísla z provozoven, které vedeme. Berte je jako odhad přínosu naší kampaně, ne striktně izolovaný efekt jednoho kanálu. Klienty, kteří by přišli tak jako tak, si nepřičítáme.";
 export const HP_EXPECT = "Každý provoz je jiný. Berte to jako reálnou ukázku, ne slib.";
 
 export type HpCase = { cat: string; name: string; summary: string; metric?: string; metricUnit?: string; placeholder?: boolean; anonymous?: boolean };

@@ -9,7 +9,7 @@
 - Mentor vrstva: vyhodnocuje data provozovny a dává konkrétní doporučení (cena, otevírací doba, vytížení týmu).
 
 ## Pro koho
-Lokální služby, kam lidé chodí pravidelně — barbershopy, kosmetika, wellness, autoservisy. Hodí se provozovnám s alespoň ~300 zákazníky v databázi.
+Lokální služby, kam lidé chodí pravidelně: barbershopy, kosmetika, wellness, autoservisy. Hodí se provozovnám s alespoň ~300 zákazníky v databázi.
 
 ## Ceník
 Nastavení od 15 000 Kč, péče od 5 000 Kč měsíčně podle velikosti databáze. Žádné procento z tržeb. Přesná cena podle počtu kontaktů.

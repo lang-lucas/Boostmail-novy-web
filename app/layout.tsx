@@ -11,7 +11,7 @@ const DESC =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "BoostMail — e-mail marketing pro barbershopy a kosmetiku",
+    default: "BoostMail · e-mail marketing pro barbershopy a kosmetiku",
     template: "%s | BoostMail",
   },
   description: DESC,
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     locale: "cs_CZ",
     url: SITE,
     siteName: "BoostMail",
-    title: "BoostMail — aby se vám zákazníci vraceli",
+    title: "BoostMail · aby se vám zákazníci vraceli",
     description: DESC,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BoostMail — e-mail marketing pro lokální provozovny" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BoostMail · e-mail marketing pro lokální provozovny" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BoostMail — aby se vám zákazníci vraceli",
+    title: "BoostMail · aby se vám zákazníci vraceli",
     description: DESC,
     images: ["/og.png"],
   },
@@ -59,8 +59,8 @@ const ORG_LD = {
         name: "Služby BoostMail",
         itemListElement: [
           { "@type": "Offer", itemOffered: { "@type": "Service", name: "Retenční e-mail marketing", description: "E-maily a SMS, které vracejí zákazníky a plní kalendář lokálním provozovnám." } },
-          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Automatické sbírání recenzí", description: "Žádost o recenzi po návštěvě — víc hodnocení na Googlu, samo." } },
-          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Mentor — poradenství z dat", description: "Vyhodnocení dat a konkrétní doporučení, kde a o kolik růst." } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Automatické sbírání recenzí", description: "Žádost o recenzi po návštěvě, víc hodnocení na Googlu samo." } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Mentor: poradenství z dat", description: "Vyhodnocení dat a konkrétní doporučení, kde a o kolik růst." } },
         ],
       },
     },

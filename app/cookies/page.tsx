@@ -15,8 +15,8 @@ export default function Page() {
       <p>Potřebné k základnímu fungování webu a k zapamatování vaší volby. Běží vždy, není k nim potřeba souhlas.</p>
 
       <H2>Analytické a měřicí</H2>
-      <p><strong>Google Analytics 4</strong> (ID G-LR5VFLP6C9) — anonymizované statistiky návštěvnosti. Běží v režimu Google Consent Mode; pokud měření vypnete, neukládá cookies ani identifikátory.</p>
-      <p><strong>Microsoft Clarity</strong> — anonymizované heatmapy a přehrávky relací pro vylepšení webu. Načítá se ve výchozím stavu; po vypnutí měření se při dalších návštěvách nenačítá.</p>
+      <p><strong>Google Analytics 4</strong> (ID G-LR5VFLP6C9): anonymizované statistiky návštěvnosti. Běží v režimu Google Consent Mode; pokud měření vypnete, neukládá cookies ani identifikátory.</p>
+      <p><strong>Microsoft Clarity</strong>: anonymizované heatmapy a přehrávky relací pro vylepšení webu. Načítá se ve výchozím stavu; po vypnutí měření se při dalších návštěvách nenačítá.</p>
       <p>Nepoužíváme reklamní cookies (Google Ads, Meta) ani Google Tag Manager.</p>
 
       <H2>Jak měření vypnout</H2>

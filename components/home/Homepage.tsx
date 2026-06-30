@@ -28,7 +28,7 @@ function Count({ to, format }: { to: number; format?: (n: number) => string }) {
 function Mono({ n, text, center, dark }: { n: string; text: string; center?: boolean; dark?: boolean }) {
   return (
     <div style={{ fontSize: 11, fontFamily: HP.mono, letterSpacing: 2, fontWeight: 500, color: HP.accent, textAlign: center ? "center" : "left", textTransform: "uppercase" }}>
-      [{n}]<span style={{ color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)" }}> — {text}</span>
+      [{n}]<span style={{ color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)" }}> · {text}</span>
     </div>
   );
 }
@@ -233,7 +233,7 @@ function CaseCard({ cs }: { cs: (typeof HP_CASES)[number] }) {
       )}
       <div style={{ marginTop: "auto", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(0,0,0,0.06)", paddingTop: 12 }}>
         <div style={{ fontSize: 11, fontFamily: HP.mono, color: "rgba(0,0,0,0.4)", letterSpacing: 1 }}>{ph ? "KLIENT" : "PŘÍPADOVKA"}</div>
-        <div style={{ fontSize: 13, color: HP.accent, fontWeight: 600 }}>{ph ? "–" : "Detail →"}</div>
+        <div style={{ fontSize: 13, color: HP.accent, fontWeight: 600 }}>{ph ? "brzy" : "Detail →"}</div>
       </div>
     </div>
   );
@@ -341,7 +341,7 @@ export default function Homepage() {
           <div style={{ ...wrapB, position: "relative", textAlign: "center", maxWidth: 760, margin: "0 auto" }}>
             <Mono n="03" text="Problém" dark center />
             <h2 style={{ fontSize: 64, fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 0.98, margin: "14px 0 22px" }}>Lidé, co se <em style={{ fontWeight: 400, color: "#7aa2f0", fontStyle: "normal" }}>nevrátili.</em></h2>
-            <p style={{ fontSize: 20, color: "rgba(255,255,255,0.72)", lineHeight: 1.55, maxWidth: 580, margin: "0 auto" }}>Prázdná okna, která do večera nikdo nezaplní. Zákazníci, co přišli jednou a zmizeli. To není smůla. To je obrat, který vám leží v databázi — a my ho umíme vrátit.</p>
+            <p style={{ fontSize: 20, color: "rgba(255,255,255,0.72)", lineHeight: 1.55, maxWidth: 580, margin: "0 auto" }}>Prázdná okna, která do večera nikdo nezaplní. Zákazníci, co přišli jednou a zmizeli. To není smůla. To je obrat, který vám leží v databázi. A umíme ho vrátit.</p>
           </div>
         </section>
 
@@ -350,7 +350,7 @@ export default function Homepage() {
           <div style={{ ...wrapA, padding: "0 56px", marginBottom: 30 }} className="hp-pad">
             <Mono n="04" text="Výsledky" />
             <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 10px", lineHeight: 1 }}>Reálná čísla, ne sliby.</h2>
-            <p style={{ fontSize: 16, color: "rgba(0,0,0,0.55)", maxWidth: 620, lineHeight: 1.5 }}>Z provozoven, které vedeme. Jména klientů zveřejníme s jejich souhlasem — detailní případovky připravujeme.</p>
+            <p style={{ fontSize: 16, color: "rgba(0,0,0,0.55)", maxWidth: 620, lineHeight: 1.5 }}>Z provozoven, které vedeme. Jména klientů zveřejníme s jejich souhlasem. Detailní případovky připravujeme.</p>
           </div>
           <div className="hp-marquee" style={{ display: "flex", gap: 20, whiteSpace: "nowrap", padding: "8px 0", alignItems: "stretch" }}>
             {[...HP_CASES, ...HP_CASES].map((cs, i) => <CaseCard key={i} cs={cs} />)}
