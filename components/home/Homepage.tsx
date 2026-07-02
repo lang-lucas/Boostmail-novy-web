@@ -206,6 +206,37 @@ function Faq() {
   );
 }
 
+// ── KOSMETIKA e-maily (reálné, 1:1 v rámečku telefonu) ──
+const KOS_EMAILS = [
+  { file: "01_pripominka_plet", tab: "Připomínka", subject: "Nedopřeješ si zase ošetření, Terezo?" },
+  { file: "02_reaktivace", tab: "Reaktivace", subject: "Dlouho jsme se neviděly, Terezo" },
+];
+function KosmetikaEmails() {
+  const [i, setI] = useState(0);
+  const e = KOS_EMAILS[i];
+  return (
+    <div style={{ width: "100%", maxWidth: 330 }}>
+      <div style={{ display: "flex", justifyContent: "center", marginBottom: 14 }}>
+        <div style={{ display: "inline-flex", padding: 4, borderRadius: 999, background: "#fff", border: `1px solid ${HP.line}` }}>
+          {KOS_EMAILS.map((em, idx) => (
+            <button key={em.file} onClick={() => setI(idx)} style={{ padding: "8px 16px", border: "none", borderRadius: 999, fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", background: idx === i ? HP.accent : "transparent", color: idx === i ? "#fff" : HP.ink }}>{em.tab}</button>
+          ))}
+        </div>
+      </div>
+      <div style={{ borderRadius: 30, background: "#0a0a0a", padding: 9, boxShadow: "0 30px 60px -26px rgba(0,0,0,0.45)" }}>
+        <div style={{ borderRadius: 22, overflow: "hidden", background: "#fff" }}>
+          <div style={{ padding: "13px 16px", borderBottom: `1px solid ${HP.line}`, background: HP.soft }}>
+            <div style={{ fontSize: 10.5, fontFamily: HP.mono, letterSpacing: 0.8, color: "rgba(0,0,0,0.45)", marginBottom: 4 }}>OD · STUDIO N</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: HP.ink, lineHeight: 1.3 }}>{e.subject}</div>
+          </div>
+          <iframe key={e.file} src={`/emails/kosmetika/${e.file}.html`} title={e.subject} loading="lazy" style={{ width: "100%", height: 400, border: "none", display: "block", background: "#fff" }} />
+        </div>
+      </div>
+      <div style={{ textAlign: "center", fontSize: 12, color: "rgba(0,0,0,0.5)", marginTop: 12, lineHeight: 1.5 }}>Skutečný e-mail, který za vás pošleme. Personalizovaný, ve správný moment.</div>
+    </div>
+  );
+}
+
 // ── CASE STUDY CARD (marquee) ──
 function CaseCard({ cs }: { cs: (typeof HP_CASES)[number] }) {
   const ph = !!cs.placeholder;
@@ -330,8 +361,17 @@ export default function Homepage() {
                   <span key={f} className="hp-chip" style={{ fontSize: 12.5, fontWeight: 600, padding: "7px 13px", borderRadius: 999, background: "#fff", border: `1px solid ${HP.line}`, color: "rgba(0,0,0,0.7)" }}>{f}</span>
                 ))}
               </div>
+              {seg === "beauty" && (
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 22 }}>
+                  {["kosmetika-1.jpg", "kosmetika-2.jpg"].map((p) => (
+                    <div key={p} style={{ position: "relative", aspectRatio: "4 / 3", borderRadius: 12, overflow: "hidden", border: `1px solid ${HP.line}` }}>
+                      <Image src={`/segments/${p}`} alt="Kosmetika" fill sizes="(max-width: 1000px) 45vw, 220px" style={{ objectFit: "cover" }} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-            <div style={{ display: "flex", justifyContent: "center" }}><EmailPreview seg={seg} /></div>
+            <div style={{ display: "flex", justifyContent: "center" }}>{seg === "beauty" ? <KosmetikaEmails /> : <EmailPreview seg={seg} />}</div>
           </div>
         </section>
 
