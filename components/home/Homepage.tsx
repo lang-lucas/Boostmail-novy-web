@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { HeroShowcase } from "@/components/home/HeroShowcase";
 import { ContactBooking } from "@/components/home/ContactBooking";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { SiteNav } from "@/components/site/SiteNav";
 import {
   HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_CASES, HP_HONEST, HP_EXPECT,
   HP_INTEGRATIONS, HP_STEPS, HP_MENTOR, HP_FAQ, HP_FOUNDERS, HP_DEMO_GET, CONTACT,
@@ -61,61 +62,6 @@ function IntegrationRow({ label = "NAPOJÍME SE NA" }: { label?: string }) {
         ))}
       </div>
     </div>
-  );
-}
-
-// ── NAV ──
-function Nav() {
-  const [open, setOpen] = useState(false);
-  const t = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const links: [string, string][] = [["Pro koho", "pro-koho"], ["Důkaz", "dukaz"], ["Jak to funguje", "jak"], ["Mentor", "mentor"], ["FAQ", "faq"]];
-  const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  return (
-    <nav style={{ padding: "18px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 30, background: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/assets/boostmail-logo-white.png" alt="BoostMail" style={{ height: 30, width: "auto", display: "block" }} />
-      <div className="hp-nav-links" style={{ display: "flex", gap: 26, fontSize: 14, fontWeight: 500, alignItems: "center" }}>
-        <div onMouseEnter={() => { if (t.current) clearTimeout(t.current); setOpen(true); }} onMouseLeave={() => { t.current = setTimeout(() => setOpen(false), 130); }} style={{ position: "relative" }}>
-          <span onClick={() => go("pro-koho")} style={{ color: "#fff", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 5 }}>
-            Řešení <span style={{ fontSize: 8, transition: "transform .2s", transform: open ? "rotate(180deg)" : "none" }}>▼</span>
-          </span>
-          {open && (
-            <div style={{ position: "absolute", top: "calc(100% + 12px)", left: -16, background: "#fff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 14, boxShadow: "0 24px 60px -20px rgba(0,0,0,0.25)", padding: 8, minWidth: 300, animation: "hpFade .18s ease-out" }}>
-              {HP_SEG.map((s) => {
-                const inner = (
-                  <>
-                    <span style={{ fontSize: 20 }}>{s.emoji}</span>
-                    <span style={{ flex: 1 }}>
-                      <span style={{ fontSize: 14, fontWeight: 600, display: "flex", alignItems: "center", gap: 8 }}>
-                        {s.label}
-                        {s.id === "beauty" && <span style={{ fontSize: 9, fontFamily: HP.mono, letterSpacing: 0.8, padding: "2px 6px", background: HP.accentSoft, color: HP.accent, borderRadius: 999, fontWeight: 700 }}>DETAIL</span>}
-                        {s.soon && <span style={{ fontSize: 9, fontFamily: HP.mono, letterSpacing: 0.8, padding: "2px 6px", background: "rgba(0,0,0,0.06)", color: "rgba(0,0,0,0.5)", borderRadius: 999, fontWeight: 700 }}>BRZY</span>}
-                      </span>
-                      <span style={{ fontSize: 12, color: "rgba(0,0,0,0.5)", display: "block" }}>{s.promise}</span>
-                    </span>
-                  </>
-                );
-                const st: React.CSSProperties = { display: "flex", alignItems: "center", gap: 12, padding: "11px 13px", borderRadius: 10, color: s.soon ? "rgba(0,0,0,0.5)" : "#0a0a0a", cursor: s.soon ? "default" : "pointer", textDecoration: "none" };
-                return s.id === "beauty"
-                  ? <Link key={s.id} href="/reseni-kosmetika" style={st}>{inner}</Link>
-                  : <div key={s.id} onClick={() => !s.soon && go("pro-koho")} style={st}>{inner}</div>;
-              })}
-            </div>
-          )}
-        </div>
-        {links.map(([l, id]) => (
-          <span key={id} onClick={() => go(id)} style={{ color: "rgba(255,255,255,0.82)", cursor: "pointer" }}>{l}</span>
-        ))}
-      </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <a href={`tel:${CONTACT.phoneHref}`} aria-label="Zavolat" className="hp-link-u" style={{ fontSize: 13, fontWeight: 600, color: "#fff", textDecoration: "none", whiteSpace: "nowrap" }}>Zavolat</a>
-        <button onClick={scrollToDemo} className="hp-cta hp-nav-cta" style={{ padding: "11px 20px", fontSize: 13, fontWeight: 700, background: HP.accent, color: "#fff", border: "none", borderRadius: 999, cursor: "pointer", fontFamily: "inherit", display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" }}>
-          <span className="hp-nav-cta-full">{HP_CTA}</span>
-          <span className="hp-nav-cta-short">Poptávka</span>
-          <span aria-hidden className="hp-arr">→</span>
-        </button>
-      </div>
-    </nav>
   );
 }
 
@@ -296,7 +242,7 @@ export default function Homepage() {
     <div style={{ position: "relative", background: HP.bg, color: HP.ink, minHeight: "100vh" }}>
       <DotGrid />
       <div style={{ position: "relative", zIndex: 1 }}>
-        <Nav />
+        <SiteNav />
 
         {/* 01 — HERO */}
         <section style={{ padding: "64px 56px 56px", position: "relative", overflow: "hidden", background: "linear-gradient(180deg, #eaf0fd 0%, #f4f4f4 62%)" }}>

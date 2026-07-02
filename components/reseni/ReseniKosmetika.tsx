@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CONTACT } from "@/lib/hp-data";
+import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import {
   BEAUTY, BEAUTY_DEEP, BEAUTY_SOFT,
@@ -67,21 +67,6 @@ function BeautyEmails() {
   );
 }
 
-// ── nav + footer (lehké, v duchu webu) ──
-function BeautyNav() {
-  return (
-    <nav style={{ padding: "16px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 30, background: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-      <Link href="/" aria-label="BoostMail">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/boostmail-logo-white.png" alt="BoostMail" style={{ height: 28, display: "block" }} />
-      </Link>
-      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-        <a href={`tel:${CONTACT.phoneHref}`} style={{ fontSize: 13, fontWeight: 600, color: "#fff", textDecoration: "none", whiteSpace: "nowrap" }}>Zavolat</a>
-        <Link href="/#final-demo" style={{ padding: "11px 20px", fontSize: 13, fontWeight: 700, background: BEAUTY, color: "#fff", borderRadius: 999, textDecoration: "none", whiteSpace: "nowrap" }}>Nezávazná poptávka →</Link>
-      </div>
-    </nav>
-  );
-}
 
 const CAPABILITIES = [
   { n: "01", kind: "rytmus", title: "Rytmus u každé služby", desc: "Připomeneme ošetření ve správný čas, službu po službě." },
@@ -124,7 +109,7 @@ export function ReseniKosmetika() {
         @media (max-width: 640px) { .bm-grid-4 { grid-template-columns: 1fr !important; } section { padding-left: 20px !important; padding-right: 20px !important; } }
       `}</style>
 
-      <BeautyNav />
+      <SiteNav subpage />
 
       {/* HERO */}
       <section style={{ padding: "64px 48px 48px", background: "linear-gradient(180deg, #fdf0f6 0%, #f4f4f4 62%)" }}>
