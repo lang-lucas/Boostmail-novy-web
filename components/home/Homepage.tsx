@@ -80,18 +80,25 @@ function Nav() {
           </span>
           {open && (
             <div style={{ position: "absolute", top: "calc(100% + 12px)", left: -16, background: "#fff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 14, boxShadow: "0 24px 60px -20px rgba(0,0,0,0.25)", padding: 8, minWidth: 300, animation: "hpFade .18s ease-out" }}>
-              {HP_SEG.map((s) => (
-                <div key={s.id} onClick={() => !s.soon && go("pro-koho")} style={{ display: "flex", alignItems: "center", gap: 12, padding: "11px 13px", borderRadius: 10, color: s.soon ? "rgba(0,0,0,0.5)" : "#0a0a0a", cursor: s.soon ? "default" : "pointer" }}>
-                  <span style={{ fontSize: 20 }}>{s.emoji}</span>
-                  <span style={{ flex: 1 }}>
-                    <span style={{ fontSize: 14, fontWeight: 600, display: "flex", alignItems: "center", gap: 8 }}>
-                      {s.label}
-                      {s.soon && <span style={{ fontSize: 9, fontFamily: HP.mono, letterSpacing: 0.8, padding: "2px 6px", background: "rgba(0,0,0,0.06)", color: "rgba(0,0,0,0.5)", borderRadius: 999, fontWeight: 700 }}>BRZY</span>}
+              {HP_SEG.map((s) => {
+                const inner = (
+                  <>
+                    <span style={{ fontSize: 20 }}>{s.emoji}</span>
+                    <span style={{ flex: 1 }}>
+                      <span style={{ fontSize: 14, fontWeight: 600, display: "flex", alignItems: "center", gap: 8 }}>
+                        {s.label}
+                        {s.id === "beauty" && <span style={{ fontSize: 9, fontFamily: HP.mono, letterSpacing: 0.8, padding: "2px 6px", background: HP.accentSoft, color: HP.accent, borderRadius: 999, fontWeight: 700 }}>DETAIL</span>}
+                        {s.soon && <span style={{ fontSize: 9, fontFamily: HP.mono, letterSpacing: 0.8, padding: "2px 6px", background: "rgba(0,0,0,0.06)", color: "rgba(0,0,0,0.5)", borderRadius: 999, fontWeight: 700 }}>BRZY</span>}
+                      </span>
+                      <span style={{ fontSize: 12, color: "rgba(0,0,0,0.5)", display: "block" }}>{s.promise}</span>
                     </span>
-                    <span style={{ fontSize: 12, color: "rgba(0,0,0,0.5)", display: "block" }}>{s.promise}</span>
-                  </span>
-                </div>
-              ))}
+                  </>
+                );
+                const st: React.CSSProperties = { display: "flex", alignItems: "center", gap: 12, padding: "11px 13px", borderRadius: 10, color: s.soon ? "rgba(0,0,0,0.5)" : "#0a0a0a", cursor: s.soon ? "default" : "pointer", textDecoration: "none" };
+                return s.id === "beauty"
+                  ? <Link key={s.id} href="/reseni-kosmetika" style={st}>{inner}</Link>
+                  : <div key={s.id} onClick={() => !s.soon && go("pro-koho")} style={st}>{inner}</div>;
+              })}
             </div>
           )}
         </div>
@@ -369,6 +376,11 @@ export default function Homepage() {
                     </div>
                   ))}
                 </div>
+              )}
+              {seg === "beauty" && (
+                <Link href="/reseni-kosmetika" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 22, padding: "13px 22px", background: HP.accent, color: "#fff", borderRadius: 999, fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
+                  Celé řešení pro kosmetiku →
+                </Link>
               )}
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>{seg === "beauty" ? <KosmetikaEmails /> : <EmailPreview seg={seg} />}</div>
