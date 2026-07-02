@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { CONTACT } from "@/lib/hp-data";
+import { SiteFooter } from "@/components/site/SiteFooter";
 import {
   BEAUTY, BEAUTY_DEEP, BEAUTY_SOFT,
   BeautyLabel, BeautyPhoto,
@@ -80,25 +80,6 @@ function BeautyNav() {
         <Link href="/#final-demo" style={{ padding: "11px 20px", fontSize: 13, fontWeight: 700, background: BEAUTY, color: "#fff", borderRadius: 999, textDecoration: "none", whiteSpace: "nowrap" }}>Nezávazná poptávka →</Link>
       </div>
     </nav>
-  );
-}
-function BeautyFooter() {
-  return (
-    <footer style={{ background: "#0a0a0a", color: "rgba(255,255,255,0.6)", padding: "40px 48px" }}>
-      <div style={{ maxWidth: 1300, margin: "0 auto", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 20, alignItems: "center" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/boostmail-logo-white.png" alt="BoostMail" style={{ height: 26 }} />
-          <span style={{ fontSize: 12, color: "rgba(255,255,255,0.4)" }}>Lukáš Lang · IČO {CONTACT.ico} · neplátce DPH</span>
-        </div>
-        <div style={{ display: "flex", gap: 18, flexWrap: "wrap", fontSize: 13, alignItems: "center" }}>
-          <Link href="/" style={{ color: "rgba(255,255,255,0.62)", textDecoration: "none" }}>Hlavní web</Link>
-          <a href={`mailto:${CONTACT.email}`} style={{ color: "rgba(255,255,255,0.62)", textDecoration: "none" }}>{CONTACT.email}</a>
-          <a href={`tel:${CONTACT.phoneHref}`} style={{ color: "rgba(255,255,255,0.62)", textDecoration: "none" }}>{CONTACT.phone}</a>
-          <Link href="/ochrana-udaju" style={{ color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>Ochrana údajů</Link>
-        </div>
-      </div>
-    </footer>
   );
 }
 
@@ -338,7 +319,7 @@ export function ReseniKosmetika() {
         </div>
       </section>
 
-      <BeautyFooter />
+      <SiteFooter />
     </div>
   );
 }
