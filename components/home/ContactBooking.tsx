@@ -100,7 +100,7 @@ export function ContactBooking() {
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json.ok) setBFail(json.error || "Něco se pokazilo, zkuste to prosím znovu.");
-      else { setBDone(true); trackLead("booking"); }
+      else { setBDone(true); trackLead("booking", { email: bLead.email, phone: bLead.phone }); }
     } catch {
       setBFail("Nepodařilo se odeslat. Zkuste to prosím znovu.");
     } finally { setBBusy(false); }
@@ -123,7 +123,7 @@ export function ContactBooking() {
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json.ok) setFFail(json.error || "Něco se pokazilo, zkuste to prosím znovu.");
-      else { setFDone(true); trackLead("form"); }
+      else { setFDone(true); trackLead("form", { email: fd.email, phone: fd.phone }); }
     } catch {
       setFFail("Nepodařilo se odeslat. Zkuste to prosím znovu.");
     } finally { setFBusy(false); }

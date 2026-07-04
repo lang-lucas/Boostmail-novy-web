@@ -5,6 +5,7 @@
 const ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID; // "AW-XXXXXXXXX"
 const ADS_LEAD_LABEL = process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL; // konverzní label
 const SKLIK_ID = process.env.NEXT_PUBLIC_SKLIK_ID; // Sklik retargeting/konverze ID
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID; // pro Meta advanced matching
 
 type Gtag = (...a: unknown[]) => void;
 type Fbq = (...a: unknown[]) => void;
@@ -48,13 +49,34 @@ export function utmSummary(): string {
   return [parts.join(" / "), clicks.length ? `(${clicks.join(",")})` : ""].filter(Boolean).join(" ") || "přímý / neznámý";
 }
 
-/** Konverze: pošle událost do GA4 + Meta Pixel + Google Ads + Sklik naráz. Volat po úspěšném odeslání. */
-export function trackLead(kind: "form" | "booking"): void {
+/**
+ * Konverze: pošle událost do GA4 + Meta Pixel + Google Ads + Sklik naráz. Volat po úspěšném odeslání.
+ * user (e-mail/telefon) zapne Enhanced Conversions (Google) a advanced matching (Meta) — obojí
+ * si hodnoty samo hashuje, surové se posílají jen přes HTTPS. Respektuje consent (ad_user_data).
+ */
+export function trackLead(kind: "form" | "booking", user?: { email?: string; phone?: string }): void {
   try {
     const w = window as unknown as { gtag?: Gtag; fbq?: Fbq; sklik?: { conversion?: SklikConv } };
+    const email = user?.email?.trim().toLowerCase() || "";
+    const phone = user?.phone?.replace(/[\s()-]/g, "") || "";
+
+    // Enhanced Conversions (Google) + advanced matching (Meta)
+    if (email || phone) {
+      const ud: Record<string, string> = {};
+      if (email) ud.email = email;
+      if (phone) ud.phone_number = phone;
+      w.gtag?.("set", "user_data", ud);
+      if (META_PIXEL_ID) {
+        const am: Record<string, string> = {};
+        if (email) am.em = email;
+        if (phone) am.ph = phone;
+        w.fbq?.("init", META_PIXEL_ID, am); // Meta merge advanced matching dat
+      }
+    }
+
     // GA4 — standardní událost pro leady
     w.gtag?.("event", "generate_lead", { method: kind });
-    // Google Ads konverze (jen když je vyplněné ID i label)
+    // Google Ads konverze (jen když je vyplněné vlastní ID i label)
     if (ADS_ID && ADS_LEAD_LABEL) {
       w.gtag?.("event", "conversion", { send_to: `${ADS_ID}/${ADS_LEAD_LABEL}` });
     }
