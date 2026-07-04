@@ -12,6 +12,7 @@ type ContactPayload = {
   db?: string;
   msg?: string;
   source?: string;
+  utm?: string;
 };
 
 export async function POST(request: Request) {
@@ -29,6 +30,7 @@ export async function POST(request: Request) {
   const db = (body.db ?? "").trim();
   const msg = (body.msg ?? "").trim();
   const source = (body.source ?? "homepage").trim().slice(0, 80);
+  const utm = (body.utm ?? "").trim().slice(0, 200);
 
   if (!name) return NextResponse.json({ ok: false, error: "Jméno je povinné" }, { status: 400 });
   if (!email || !isValidEmail(email))
@@ -51,8 +53,9 @@ export async function POST(request: Request) {
     msg || "(bez zprávy)",
     ``,
     `─────`,
-    `Zdroj: ${source}`,
-    `Čas:   ${ts}`,
+    `Zdroj:  ${source}`,
+    `Kampaň: ${utm || "—"}`,
+    `Čas:    ${ts}`,
   ].join("\n");
 
   const html = `
@@ -73,7 +76,7 @@ export async function POST(request: Request) {
         </div>
       ` : ""}
       <div style="margin-top: 28px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.08); font-size: 12px; color: rgba(0,0,0,0.45); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.3px;">
-        Zdroj: ${escapeHtml(source)} · ${ts}
+        Zdroj: ${escapeHtml(source)} · Kampaň: ${escapeHtml(utm) || "—"} · ${ts}
       </div>
     </div>
   `;

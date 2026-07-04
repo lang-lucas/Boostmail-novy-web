@@ -211,12 +211,12 @@ export function ReseniBarber() {
       <section style={{ padding: "72px 56px", background: "#fff", borderTop: "1px solid rgba(0,0,0,0.06)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <div className="b-split" style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: 52, alignItems: "center" }}>
-            <BarberPhone single />
+            <BarberPhone />
             <div>
               <BarberLabel n="05" text="TAK VYPADÁ NÁŠ E-MAIL" />
               <h2 style={{ fontSize: 46, fontWeight: 700, margin: "12px 0 8px", letterSpacing: "-0.03em", lineHeight: 1.05 }}>Osobní, mužským rodem, o věci.</h2>
               <div style={{ fontSize: 16, color: "rgba(0,0,0,0.65)", lineHeight: 1.6, margin: "8px 0 22px", maxWidth: 520 }}>
-                Žádné slevové letáky, žádný plošný newsletter. Jen krátká, osobní zpráva ve chvíli, kdy dává smysl. Jménem barbera, ke kterému klient chodí.
+                Žádné slevové letáky, žádný plošný newsletter. Jen krátká, osobní zpráva ve chvíli, kdy dává smysl. Vyberte si situaci a přečtěte si celý e-mail tak, jak ho klient dostane.
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", fontFamily: MONO, fontSize: 12 }}>
                 {["mužský rod", "jméno barbera", "reálný termín", "bez slev"].map((t) => (

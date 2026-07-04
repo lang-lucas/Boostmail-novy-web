@@ -77,6 +77,7 @@ const ORG_LD = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const ga = process.env.NEXT_PUBLIC_GA_ID || "G-LR5VFLP6C9";
+  const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID; // "AW-XXXXXXXXX" — Google Ads konverze
   return (
     <html
       lang="cs"
@@ -88,15 +89,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_LD) }}
         />
-        {/* Google Consent Mode (opt-out): analytika běží ve výchozím stavu, reklamní úložiště DENIED. Pokud návštěvník měření vypnul (bm-consent=denied), zůstane DENIED. */}
+        {/* Google Consent Mode (opt-out): analytika i reklama běží ve výchozím stavu (granted). Pokud návštěvník vypnul (bm-consent=denied), vše DENIED. */}
         <Script id="consent-default" strategy="beforeInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var __bm='granted';try{if(localStorage.getItem('bm-consent')==='denied')__bm='denied';}catch(e){}gtag('consent','default',{ad_storage:'denied',analytics_storage:__bm,ad_user_data:'denied',ad_personalization:'denied'});`}
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var __bm='granted';try{if(localStorage.getItem('bm-consent')==='denied')__bm='denied';}catch(e){}gtag('consent','default',{ad_storage:__bm,analytics_storage:__bm,ad_user_data:__bm,ad_personalization:__bm});`}
         </Script>
         {ga && (
           <>
             <Script src={`https://www.googletagmanager.com/gtag/js?id=${ga}`} strategy="afterInteractive" />
             <Script id="ga4" strategy="afterInteractive">
-              {`gtag('js',new Date());gtag('config','${ga}');`}
+              {`gtag('js',new Date());gtag('config','${ga}');${adsId ? `gtag('config','${adsId}');` : ""}`}
             </Script>
           </>
         )}

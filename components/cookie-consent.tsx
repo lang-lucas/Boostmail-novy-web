@@ -2,14 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { loadConsentedScripts } from "@/lib/analytics";
+import { captureUtm } from "@/lib/tracking";
 
 const KEY = "bm-consent";
 
 type Gtag = (...args: unknown[]) => void;
 
+// Opt-out pro vše: analytika i reklama. „Odmítnout" vypne obojí.
 function setConsent(granted: boolean) {
   const g = (window as unknown as { gtag?: Gtag }).gtag;
-  g?.("consent", "update", { analytics_storage: granted ? "granted" : "denied" });
+  const v = granted ? "granted" : "denied";
+  g?.("consent", "update", { analytics_storage: v, ad_storage: v, ad_user_data: v, ad_personalization: v });
 }
 
 export function ConsentReopenButton({ style }: { style?: React.CSSProperties }) {
@@ -27,8 +30,9 @@ export function CookieConsent() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
+    captureUtm(); // zachytí utm_* / gclid / fbclid z URL (nezávisle na consentu)
     const v = localStorage.getItem(KEY);
-    // Opt-out: analytika běží ve výchozím stavu. Clarity načteme, pokud návštěvník měření nevypnul.
+    // Opt-out: měření běží ve výchozím stavu. Clarity + Meta Pixel načteme, pokud návštěvník nevypnul.
     if (v !== "denied") loadConsentedScripts();
     if (v === null) setShow(true);
     const open = () => setShow(true);

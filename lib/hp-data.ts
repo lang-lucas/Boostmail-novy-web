@@ -70,10 +70,6 @@ export const HP_PROOF = [
   { shop: "Barbershop", cat: "Praha", bookings: 225, revenue: "176 575 Kč", period: "od spuštění", photo: "/proof/barber1.webp" },
   { shop: "Barbershop", cat: "Praha · 3 pobočky", bookings: 247, revenue: "145 500 Kč", period: "od spuštění", photo: "/proof/barber2.jpg" },
 ];
-export const HP_HONEST =
-  "Reálná čísla z provozoven, které vedeme. Berte je jako odhad přínosu naší kampaně, ne striktně izolovaný efekt jednoho kanálu. Klienty, kteří by přišli tak jako tak, si nepřičítáme.";
-export const HP_EXPECT = "Každý provoz je jiný. Berte to jako reálnou ukázku, ne slib.";
-
 export type HpCase = { cat: string; name: string; summary: string; metric?: string; metricUnit?: string; placeholder?: boolean; anonymous?: boolean; href?: string };
 export const HP_CASES: HpCase[] = [
   { cat: "Barbershop · Praha · 3 pobočky", name: "MNB", summary: "247 rezervací navíc napříč třemi pobočkami. Stálí klienti zpátky v křesle.", metric: "145 500 Kč", metricUnit: "obrat navíc / od spuštění", href: "/pripadovky" },
@@ -85,7 +81,7 @@ export const HP_INTEGRATIONS = ["Reservio", "Reservanto", "MyFox", "SmartEmailin
 export const HP_STEPS = [
   { n: "01", emoji: "🔌", title: "Napojíme se na váš systém", desc: "Připojíme se na váš rezervační systém (Reservio, Reservanto, MyFox…). Nic neinstalujete.", tag: "VY · KRÁTCE" },
   { n: "02", emoji: "⚙️", title: "Připravíme a spustíme kampaně", desc: "Nastavíme e-maily, co chodí ve správný moment. Texty schválíte vy.", tag: "MY · DO TÝDNE" },
-  { n: "03", emoji: "📈", title: "Vidíte rezervace a doporučení", desc: "V reportu máte rezervace, obrat a co u vás zlepšit. Víc neřešíte.", tag: "VÝSLEDEK · KAŽDÝ MĚSÍC" },
+  { n: "03", emoji: "📈", title: "Vidíte rezervace a doporučení", desc: "V přehledu máte rezervace, obrat a co u vás zlepšit. Víc neřešíte.", tag: "VÝSLEDEK · KAŽDÝ MĚSÍC" },
 ];
 
 export const HP_MENTOR = [

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 import { HP } from "@/lib/hp-data";
+import { trackLead, utmSummary } from "@/lib/tracking";
 
 // Kontaktní modul: taby [Napsat zprávu | Vybrat termín].
 // Formulář → /api/contact, rezervační okno (den + čas → lead) → /api/booking.
@@ -95,11 +96,11 @@ export function ContactBooking() {
     try {
       const res = await fetch("/api/booking", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...bLead, day: selectedDay?.full, slot, source: "homepage-booking" }),
+        body: JSON.stringify({ ...bLead, day: selectedDay?.full, slot, source: "homepage-booking", utm: utmSummary() }),
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json.ok) setBFail(json.error || "Něco se pokazilo, zkuste to prosím znovu.");
-      else setBDone(true);
+      else { setBDone(true); trackLead("booking"); }
     } catch {
       setBFail("Nepodařilo se odeslat. Zkuste to prosím znovu.");
     } finally { setBBusy(false); }
@@ -118,11 +119,11 @@ export function ContactBooking() {
     try {
       const res = await fetch("/api/contact", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...fd, source: "homepage-form" }),
+        body: JSON.stringify({ ...fd, source: "homepage-form", utm: utmSummary() }),
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json.ok) setFFail(json.error || "Něco se pokazilo, zkuste to prosím znovu.");
-      else setFDone(true);
+      else { setFDone(true); trackLead("form"); }
     } catch {
       setFFail("Nepodařilo se odeslat. Zkuste to prosím znovu.");
     } finally { setFBusy(false); }

@@ -190,11 +190,11 @@ export function BarberReturnBars() {
   );
 }
 
-// Telefon s e-mailem — pracovní vzorové maily (reálné se dodají)
+// Telefon s e-mailem — REÁLNÉ barber šablony z produkce (public/emails/barber/, neutrální brand)
 export const BARBER_MAILS = [
-  { tab: "Rytmus střihu", kind: "připomínka", subject: "Tome, čtyři týdny utekly", body: ["Zdravím Tome, od posledního střihu jsou to zhruba čtyři týdny. Přesně teď fade začíná ztrácet tvar.", "Dan má tento týden ještě volno ve čtvrtek a v pátek. Vezmete jeden?"], cta: "Vybrat termín" },
-  { tab: "Reaktivace", kind: "spící klient", subject: "Dlouho jsme se neviděli, Petře", body: ["Nebyl jste u nás přes tři měsíce. Nic se neděje, jen se ozývám. Křeslo je pořád tady a Dan si vás pamatuje.", "Kdyby se hodilo se zase ukázat, stačí kliknout. Bez slev, bez řečí."], cta: "Rezervovat střih" },
-  { tab: "Volné okno", kind: "last minute", subject: "Zítra odpoledne máme volno", body: ["Zítra se u nás uvolnilo odpoledne. Máte to k nám kousek a blíží se vám termín, tak posílám dřív, než to zabere někdo jiný.", "Volno je v 15:30 a v 16:15. Berete?"], cta: "Vzít termín" },
+  { tab: "Rytmus střihu", subject: "Nebyl bys pro střih, Honzo?", file: "01_rytmus" },
+  { tab: "Reaktivace", subject: "Dlouho jsme se neviděli, Honzo", file: "02_reaktivace" },
+  { tab: "Volné okno", subject: "Volný termín tento týden", file: "03_okno" },
 ];
 
 export function BarberPhone({ single }: { single?: boolean }) {
@@ -203,42 +203,28 @@ export function BarberPhone({ single }: { single?: boolean }) {
   return (
     <div>
       {!single && (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 22 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 18 }}>
           {BARBER_MAILS.map((msg, idx) => {
             const active = idx === i;
             return (
-              <button key={msg.tab} onClick={() => setI(idx)} style={{ padding: "9px 16px", borderRadius: 999, cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit", border: active ? `1px solid ${BARBER}` : "1px solid rgba(0,0,0,0.14)", background: active ? BARBER : "#fff", color: active ? "#fff" : "rgba(0,0,0,0.7)", transition: "all 0.15s" }}>{msg.tab}</button>
+              <button key={msg.file} onClick={() => setI(idx)} style={{ padding: "8px 14px", borderRadius: 999, cursor: "pointer", fontSize: 12.5, fontWeight: 600, fontFamily: "inherit", border: active ? `1px solid ${BARBER}` : "1px solid rgba(0,0,0,0.14)", background: active ? BARBER : "#fff", color: active ? "#fff" : "rgba(0,0,0,0.7)", transition: "all 0.15s" }}>{msg.tab}</button>
             );
           })}
         </div>
       )}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div style={{ width: 320, maxWidth: "100%", background: "#0a0a0a", borderRadius: 40, padding: 10, boxShadow: "0 40px 90px -40px rgba(0,0,0,0.6)" }}>
-          <div style={{ position: "relative", background: BARBER_SOFT, borderRadius: 30, overflow: "hidden", minHeight: 520 }}>
-            <div style={{ position: "relative", height: 40, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 22px", fontFamily: MONO, fontSize: 11, color: "#0a0a0a", fontWeight: 600 }}>
+          <div style={{ position: "relative", background: "#fff", borderRadius: 30, overflow: "hidden" }}>
+            <div style={{ position: "relative", height: 40, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 22px", fontFamily: MONO, fontSize: 11, color: "#0a0a0a", fontWeight: 600, background: BARBER_SOFT }}>
               <span>9:41</span>
               <div style={{ position: "absolute", left: "50%", top: 9, transform: "translateX(-50%)", width: 90, height: 20, background: "#0a0a0a", borderRadius: 999 }} />
               <span>▪▪▪ ▮</span>
             </div>
-            <div style={{ background: "#fff", margin: "6px 10px 0", borderRadius: "18px 18px 0 0", padding: "16px 18px 14px", borderBottom: "1px solid rgba(0,0,0,0.06)", display: "flex", alignItems: "center", gap: 11 }}>
-              <div style={{ width: 36, height: 36, borderRadius: "50%", background: `linear-gradient(135deg, ${BARBER}, ${BARBER_DEEP})`, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 15, flexShrink: 0 }}>B</div>
-              <div style={{ minWidth: 0, flex: 1 }}>
-                <div style={{ fontSize: 13.5, fontWeight: 700 }}>Váš barbershop</div>
-                <div style={{ fontSize: 11.5, color: "rgba(0,0,0,0.45)" }}>rezervace@barbershop.cz</div>
-              </div>
-              <div style={{ fontFamily: MONO, fontSize: 9, letterSpacing: 1, color: BARBER, background: `${BARBER}14`, padding: "4px 8px", borderRadius: 999, whiteSpace: "nowrap" }}>{m.kind.toUpperCase()}</div>
+            <div style={{ padding: "13px 18px 11px", borderBottom: "1px solid rgba(0,0,0,0.08)", background: "#fff" }}>
+              <div style={{ fontSize: 10.5, fontFamily: MONO, letterSpacing: 0.8, color: BARBER_DEEP, marginBottom: 4, fontWeight: 600 }}>OD · VÁŠ BARBERSHOP</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#0a0a0a", lineHeight: 1.3 }}>{m.subject}</div>
             </div>
-            <div style={{ background: "#fff", margin: "0 10px", padding: "4px 18px 22px" }}>
-              <div style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.02em", margin: "10px 0 14px" }}>{m.subject}</div>
-              {m.body.map((p, idx) => (
-                <p key={idx} style={{ fontSize: 13.5, lineHeight: 1.6, color: "rgba(0,0,0,0.72)", margin: "0 0 12px" }}>{p}</p>
-              ))}
-              <a href="/#final-demo" style={{ display: "inline-block", marginTop: 6, padding: "11px 20px", background: BARBER, color: "#fff", borderRadius: 999, fontSize: 13.5, fontWeight: 600, textDecoration: "none" }}>{m.cta} →</a>
-              <div style={{ marginTop: 18, paddingTop: 12, borderTop: "1px solid rgba(0,0,0,0.06)", fontSize: 10.5, color: "rgba(0,0,0,0.4)" }}>
-                Váš barbershop · Jinak už vás nebudeme obtěžovat · <span style={{ textDecoration: "underline" }}>odhlásit</span>
-              </div>
-            </div>
-            <div style={{ background: "#fff", margin: "0 10px 10px", borderRadius: "0 0 18px 18px", height: 12 }} />
+            <iframe key={m.file} src={`/emails/barber/${m.file}.html`} title={m.subject} loading="lazy" style={{ width: "100%", height: 452, border: "none", display: "block", background: "#fff", colorScheme: "light" }} />
           </div>
         </div>
       </div>

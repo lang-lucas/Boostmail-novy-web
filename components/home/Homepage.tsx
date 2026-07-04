@@ -350,7 +350,7 @@ export default function Homepage() {
           <div style={{ ...wrapA, padding: "0 56px", marginBottom: 30 }} className="hp-pad">
             <Mono n="04" text="Výsledky" />
             <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 10px", lineHeight: 1 }}>Reálná čísla, ne sliby.</h2>
-            <p style={{ fontSize: 16, color: "rgba(0,0,0,0.55)", maxWidth: 620, lineHeight: 1.5 }}>Z provozoven, které vedeme. Jména klientů zveřejníme s jejich souhlasem.</p>
+            <p style={{ fontSize: 16, color: "rgba(0,0,0,0.55)", maxWidth: 620, lineHeight: 1.5 }}>Z provozoven, se kterými spolupracujeme. Jména klientů zveřejníme s jejich souhlasem.</p>
           </div>
           <div className="hp-marquee" style={{ display: "flex", gap: 20, whiteSpace: "nowrap", padding: "8px 0", alignItems: "stretch" }}>
             {[...HP_CASES, ...HP_CASES].map((cs, i) => <CaseCard key={i} cs={cs} />)}
@@ -391,9 +391,9 @@ export default function Homepage() {
           <DotGrid dark />
           <div style={{ ...wrapC, position: "relative", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }} className="hp-mentor-grid">
             <div>
-              <Mono n="06" text="Mentor vrstva" dark />
+              <Mono n="06" text="Mentor" dark />
               <h2 style={{ fontSize: 120, fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 0.82, margin: "20px 0 0", background: "linear-gradient(180deg, #fff, #7aa2f0)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} className="hp-mentor-word">MENTOR</h2>
-              <p style={{ fontSize: 20, color: "rgba(255,255,255,0.72)", lineHeight: 1.55, maxWidth: 480, marginTop: 26 }}>Máme vaše data a vyhodnotíme je za vás. Řekneme konkrétně, <em style={{ color: "#7aa2f0", fontStyle: "italic" }}>co změnit, abyste vydělali víc.</em> Od ceny a otevírací doby po vytížení lidí. A co umíme, doladíme sami.</p>
+              <p style={{ fontSize: 20, color: "rgba(255,255,255,0.72)", lineHeight: 1.55, maxWidth: 480, marginTop: 26 }}>Vidíme vaše data a vyhodnotíme je za vás. Řekneme konkrétně, <em style={{ color: "#7aa2f0", fontStyle: "italic" }}>co změnit, abyste vydělali víc.</em> Od ceny a otevírací doby po vytížení lidí. A co umíme, doladíme sami.</p>
             </div>
             <MentorFeed />
           </div>
