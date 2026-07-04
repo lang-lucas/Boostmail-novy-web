@@ -56,12 +56,12 @@ export function CookieConsent() {
       padding: "18px 20px", display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap",
     }}>
       <div style={{ fontSize: 13.5, lineHeight: 1.55, flex: 1, minWidth: 240 }}>
-        Web používá nezbytné cookies a ve výchozím stavu i analytické (Google Analytics, Microsoft Clarity), abychom ho vylepšovali. Měření můžete vypnout. Detail v{" "}
+        Používáme cookies, aby web dobře fungoval a abychom ho mohli vylepšovat. Víc v{" "}
         <a href="/cookies" style={{ color: "#7aa2f0", textDecoration: "underline" }}>zásadách cookies</a>.
       </div>
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-        <button onClick={reject} style={btn("transparent", "rgba(255,255,255,0.85)", "1px solid rgba(255,255,255,0.25)")}>Vypnout měření</button>
-        <button onClick={accept} style={btn("#1a5ada", "#fff", "none")}>Souhlasím</button>
+        <button onClick={reject} style={btn("transparent", "rgba(255,255,255,0.85)", "1px solid rgba(255,255,255,0.25)")}>Odmítnout</button>
+        <button onClick={accept} style={btn("#1a5ada", "#fff", "none")}>Přijmout</button>
       </div>
     </div>
   );

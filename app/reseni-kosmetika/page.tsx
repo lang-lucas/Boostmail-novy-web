@@ -18,6 +18,22 @@ export const metadata: Metadata = {
   },
 };
 
+const SERVICE_LD = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Retenční e-mail marketing pro kosmetické salony",
+  provider: { "@type": "Organization", name: "BoostMail", url: "https://boostmail.cz" },
+  areaServed: { "@type": "Country", name: "Česko" },
+  audience: { "@type": "Audience", audienceType: "Kosmetické salony" },
+  description: DESC,
+  url: "https://boostmail.cz/reseni-kosmetika",
+};
+
 export default function Page() {
-  return <ReseniKosmetika />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_LD) }} />
+      <ReseniKosmetika />
+    </>
+  );
 }

@@ -58,7 +58,7 @@ export function SiteNav({ subpage = false }: { subpage?: boolean }) {
                     <span style={{ flex: 1 }}>
                       <span style={{ fontSize: 14, fontWeight: 600, display: "flex", alignItems: "center", gap: 8 }}>
                         {s.label}
-                        {s.id === "beauty" && <span style={{ fontSize: 9, fontFamily: HP.mono, letterSpacing: 0.8, padding: "2px 6px", background: HP.accentSoft, color: HP.accent, borderRadius: 999, fontWeight: 700 }}>DETAIL</span>}
+                        {s.detail && <span style={{ fontSize: 9, fontFamily: HP.mono, letterSpacing: 0.8, padding: "2px 6px", background: HP.accentSoft, color: HP.accent, borderRadius: 999, fontWeight: 700 }}>DETAIL</span>}
                         {s.soon && <span style={{ fontSize: 9, fontFamily: HP.mono, letterSpacing: 0.8, padding: "2px 6px", background: "rgba(0,0,0,0.06)", color: "rgba(0,0,0,0.5)", borderRadius: 999, fontWeight: 700 }}>BRZY</span>}
                       </span>
                       <span style={{ fontSize: 12, color: "rgba(0,0,0,0.5)", display: "block" }}>{s.promise}</span>
@@ -66,8 +66,8 @@ export function SiteNav({ subpage = false }: { subpage?: boolean }) {
                   </>
                 );
                 const st: CSSProperties = { display: "flex", alignItems: "center", gap: 12, padding: "11px 13px", borderRadius: 10, color: s.soon ? "rgba(0,0,0,0.5)" : "#0a0a0a", cursor: s.soon ? "default" : "pointer", textDecoration: "none" };
-                return s.id === "beauty"
-                  ? <Link key={s.id} href="/reseni-kosmetika" style={st}>{inner}</Link>
+                return s.detail
+                  ? <Link key={s.id} href={s.detail} style={st}>{inner}</Link>
                   : <div key={s.id} onClick={() => !s.soon && go("pro-koho")} style={st}>{inner}</div>;
               })}
             </div>

@@ -91,7 +91,7 @@ const PROCESS = [
 ];
 const TRUST = [
   { v: "5–15 %", k: "Konverze připomínek", s: "nejúčinnější automatické zprávy" },
-  { v: "−85 %", k: "Méně nedorazivších", s: "co dokážou dobré připomínky (benchmark)" },
+  { v: "−85 %", k: "Méně nedorazivších", s: "co dokážou dobré připomínky (oborový průměr)" },
   { v: "≈ 6 týdnů", k: "Cyklus pleťové péče", s: "na to sedí načasování připomínky" },
   { v: "Na klíč", k: "Na váš stávající systém", s: "Reservio, Reservanto, MyFox" },
 ];
@@ -279,7 +279,7 @@ export function ReseniKosmetika() {
         <div style={wrap}>
           <BeautyLabel n="09" text="Čísla a důvěra" />
           <h2 style={{ fontSize: 46, fontWeight: 700, margin: "12px 0 8px", letterSpacing: "-0.03em", lineHeight: 1.05 }}>Není to experiment. Je to standard.</h2>
-          <div style={{ fontSize: 16, color: "rgba(0,0,0,0.6)", marginBottom: 34, maxWidth: 680, lineHeight: 1.5 }}>Co umí Fresha, Booksy nebo Phorest, přinášíme českým salonům na jejich stávající systém. Na klíč. Čísla níže jsou oborové benchmarky, ne konkrétní klient.</div>
+          <div style={{ fontSize: 16, color: "rgba(0,0,0,0.6)", marginBottom: 34, maxWidth: 680, lineHeight: 1.5 }}>Co umí Fresha, Booksy nebo Phorest, přinášíme českým salonům na jejich stávající systém. Na klíč. Čísla níže jsou oborové průměry, ne konkrétní klient.</div>
           <div className="bm-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
             {TRUST.map((t) => (
               <div key={t.k} style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 14, padding: 24 }}>

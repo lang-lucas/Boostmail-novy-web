@@ -8,7 +8,7 @@ import { ContactBooking } from "@/components/home/ContactBooking";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteNav } from "@/components/site/SiteNav";
 import {
-  HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_CASES, HP_HONEST, HP_EXPECT,
+  HP, HP_CTA, HP_CTA_LONG, HP_CTA_CALL, HP_CTA_SUB, HERO, HP_TRIAD, HP_SEG, HP_CASES,
   HP_INTEGRATIONS, HP_STEPS, HP_MENTOR, HP_FAQ, HP_FOUNDERS, HP_DEMO_GET, CONTACT,
 } from "@/lib/hp-data";
 
@@ -217,15 +217,16 @@ function CaseCard({ cs }: { cs: (typeof HP_CASES)[number] }) {
         <div style={{ padding: "14px 16px", borderRadius: 10, background: "rgba(0,0,0,0.03)", border: "1px dashed rgba(0,0,0,0.15)", fontSize: 12, color: "rgba(0,0,0,0.55)", fontFamily: HP.mono, letterSpacing: 0.5, textAlign: "center" }}>PŘÍPADOVKA V PŘÍPRAVĚ</div>
       )}
       <div style={{ marginTop: "auto", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(0,0,0,0.06)", paddingTop: 12 }}>
-        <div style={{ fontSize: 11, fontFamily: HP.mono, color: "rgba(0,0,0,0.4)", letterSpacing: 1 }}>{ph ? "KLIENT" : "PŘÍPADOVKA"}</div>
-        <div style={{ fontSize: 13, color: HP.accent, fontWeight: 600 }}>{ph ? "brzy" : "Detail →"}</div>
+        <div style={{ fontSize: 11, fontFamily: HP.mono, color: "rgba(0,0,0,0.4)", letterSpacing: 1 }}>{ph ? "KLIENT" : cs.href ? "PŘÍPADOVKA" : "VÝSLEDEK"}</div>
+        {cs.href && <div style={{ fontSize: 13, color: HP.accent, fontWeight: 600 }}>Detail →</div>}
+        {ph && <div style={{ fontSize: 13, color: HP.accent, fontWeight: 600 }}>brzy</div>}
       </div>
     </div>
   );
-  return ph ? (
-    <div style={{ flexShrink: 0, width: 300 }}>{card}</div>
+  return cs.href ? (
+    <Link href={cs.href} style={{ flexShrink: 0, width: 300, display: "block", textDecoration: "none", color: "inherit" }}>{card}</Link>
   ) : (
-    <Link href="/pripadovky" style={{ flexShrink: 0, width: 300, display: "block", textDecoration: "none", color: "inherit" }}>{card}</Link>
+    <div style={{ flexShrink: 0, width: 300 }}>{card}</div>
   );
 }
 
@@ -324,9 +325,9 @@ export default function Homepage() {
                   ))}
                 </div>
               )}
-              {seg === "beauty" && (
-                <Link href="/reseni-kosmetika" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 22, padding: "13px 22px", background: HP.accent, color: "#fff", borderRadius: 999, fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
-                  Celé řešení pro kosmetiku →
+              {S.detail && (
+                <Link href={S.detail} style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 22, padding: "13px 22px", background: HP.accent, color: "#fff", borderRadius: 999, fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
+                  {S.detailCta}
                 </Link>
               )}
             </div>
@@ -349,16 +350,20 @@ export default function Homepage() {
           <div style={{ ...wrapA, padding: "0 56px", marginBottom: 30 }} className="hp-pad">
             <Mono n="04" text="Výsledky" />
             <h2 style={{ fontSize: 50, fontWeight: 700, letterSpacing: "-0.03em", margin: "16px 0 10px", lineHeight: 1 }}>Reálná čísla, ne sliby.</h2>
-            <p style={{ fontSize: 16, color: "rgba(0,0,0,0.55)", maxWidth: 620, lineHeight: 1.5 }}>Z provozoven, které vedeme. Jména klientů zveřejníme s jejich souhlasem. Detailní případovky připravujeme.</p>
+            <p style={{ fontSize: 16, color: "rgba(0,0,0,0.55)", maxWidth: 620, lineHeight: 1.5 }}>Z provozoven, které vedeme. Jména klientů zveřejníme s jejich souhlasem.</p>
           </div>
           <div className="hp-marquee" style={{ display: "flex", gap: 20, whiteSpace: "nowrap", padding: "8px 0", alignItems: "stretch" }}>
             {[...HP_CASES, ...HP_CASES].map((cs, i) => <CaseCard key={i} cs={cs} />)}
           </div>
           <div style={{ ...wrapA, padding: "0 56px", marginTop: 26 }} className="hp-pad">
-            <div style={{ padding: "16px 20px", background: HP.soft, border: `1px solid ${HP.line}`, borderRadius: 12, display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
-              <span style={{ fontFamily: HP.mono, fontSize: 11, fontWeight: 700, color: HP.accent, letterSpacing: 1, padding: "4px 8px", background: "#fff", borderRadius: 6, border: `1px solid ${HP.line}`, whiteSpace: "nowrap" }}>POCTIVÁ NOTA</span>
-              <span style={{ fontSize: 14, color: "rgba(0,0,0,0.65)", lineHeight: 1.5, flex: 1, minWidth: 240 }}>{HP_HONEST} {HP_EXPECT}</span>
-            </div>
+            <Link href="/pripadovky" className="hp-lift" style={{ display: "flex", gap: 24, alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "24px 28px", background: HP.dark, color: "#fff", borderRadius: 16, textDecoration: "none" }}>
+              <div style={{ minWidth: 240, flex: 1 }}>
+                <div style={{ fontFamily: HP.mono, fontSize: 11, letterSpacing: 1, color: "rgba(255,255,255,0.5)", marginBottom: 8 }}>PŘÍPADOVÁ STUDIE · MNB BARBERSHOP</div>
+                <div style={{ fontSize: 23, fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.25 }}>U MNB jsme za pět měsíců přinesli <span style={{ color: "#7aa2f0" }}>247 rezervací navíc</span> a <span style={{ color: "#7aa2f0" }}>145 500 Kč</span>.</div>
+                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", marginTop: 8, lineHeight: 1.5 }}>Počítáme jen rezervace navíc, ne ty, co by přišly tak jako tak.</div>
+              </div>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 24px", background: HP.accent, color: "#fff", borderRadius: 999, fontSize: 15, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0 }}>Otevřít celou případovku →</span>
+            </Link>
           </div>
         </section>
 

@@ -43,6 +43,8 @@ export type Segment = {
   soon?: boolean;
   result?: string;
   flows?: string[];
+  detail?: string;
+  detailCta?: string;
 };
 
 export const HP_SEG: Segment[] = [
@@ -51,12 +53,14 @@ export const HP_SEG: Segment[] = [
     promise: "Stálí klienti zpátky v křesle",
     result: "Stálý klient se vrací po 4 až 6 týdnech. Připomeneme se přesně v ten moment a okno se zaplní, bez zbytečných slev.",
     flows: ["Den po střihu", "Čas na další střih", "Volné okno zítra", "Zrušený termín", "Tři měsíce bez návštěvy"],
+    detail: "/reseni-barber", detailCta: "Celé řešení pro barbershopy →",
   },
   {
     id: "beauty", emoji: "💅", label: "Kosmetika", live: true,
     promise: "Kalendář plný dopředu",
     result: "Každé ošetření má svůj cyklus. Připomeneme se, přesně když je čas na další. Bez nepříjemného spamu.",
     flows: ["Po ošetření", "Čas na další péči", "Volný termín tento týden", "Zrušení", "Dlouho se neukázala"],
+    detail: "/reseni-kosmetika", detailCta: "Celé řešení pro kosmetiku →",
   },
   { id: "wellness", emoji: "🧖", label: "Wellness", soon: true, promise: "Naplněné víkendy" },
   { id: "auto", emoji: "🚗", label: "Autoservis", soon: true, promise: "Připomínky STK a servisu" },
@@ -70,12 +74,11 @@ export const HP_HONEST =
   "Reálná čísla z provozoven, které vedeme. Berte je jako odhad přínosu naší kampaně, ne striktně izolovaný efekt jednoho kanálu. Klienty, kteří by přišli tak jako tak, si nepřičítáme.";
 export const HP_EXPECT = "Každý provoz je jiný. Berte to jako reálnou ukázku, ne slib.";
 
-export type HpCase = { cat: string; name: string; summary: string; metric?: string; metricUnit?: string; placeholder?: boolean; anonymous?: boolean };
+export type HpCase = { cat: string; name: string; summary: string; metric?: string; metricUnit?: string; placeholder?: boolean; anonymous?: boolean; href?: string };
 export const HP_CASES: HpCase[] = [
-  { cat: "Barbershop · Praha · 3 pobočky", name: "MNB", summary: "247 rezervací navíc napříč třemi pobočkami. Stálí klienti zpátky v křesle.", metric: "145 500 Kč", metricUnit: "obrat navíc / od spuštění" },
+  { cat: "Barbershop · Praha · 3 pobočky", name: "MNB", summary: "247 rezervací navíc napříč třemi pobočkami. Stálí klienti zpátky v křesle.", metric: "145 500 Kč", metricUnit: "obrat navíc / od spuštění", href: "/pripadovky" },
   { cat: "Reálný klient · Praha", name: "Barbershop v Praze", summary: "225 rezervací navíc z databáze, kterou už dávno měl. Jméno na přání neuvádíme.", metric: "176 575 Kč", metricUnit: "obrat navíc / od spuštění" },
   { cat: "Barbershop · anonymizováno", name: "Barbershop, Brno", summary: "Reálný klient, jméno nezveřejňujeme. Detailní případovka v přípravě.", placeholder: true, anonymous: true },
-  { cat: "Kosmetika · anonymizováno", name: "Kosmetické studio", summary: "Reálný klient, jméno nezveřejňujeme. Případovka v přípravě.", placeholder: true, anonymous: true },
 ];
 export const HP_INTEGRATIONS = ["Reservio", "Reservanto", "MyFox", "SmartEmailing", "GoHighLevel"];
 
