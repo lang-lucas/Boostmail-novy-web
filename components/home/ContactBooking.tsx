@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 import { HP } from "@/lib/hp-data";
-import { trackLead, utmSummary } from "@/lib/tracking";
+import { trackLead, utmSummary, newEventId, getFbCookies } from "@/lib/tracking";
 
 // Kontaktní modul: taby [Napsat zprávu | Vybrat termín].
 // Formulář → /api/contact, rezervační okno (den + čas → lead) → /api/booking.
@@ -93,14 +93,16 @@ export function ContactBooking() {
     setBErr(e);
     if (Object.keys(e).length) return;
     setBBusy(true); setBFail(null);
+    const eventId = newEventId();
+    const fb = getFbCookies();
     try {
       const res = await fetch("/api/booking", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...bLead, day: selectedDay?.full, slot, source: "homepage-booking", utm: utmSummary() }),
+        body: JSON.stringify({ ...bLead, day: selectedDay?.full, slot, source: "homepage-booking", utm: utmSummary(), eventId, fbp: fb.fbp, fbc: fb.fbc }),
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json.ok) setBFail(json.error || "Něco se pokazilo, zkuste to prosím znovu.");
-      else { setBDone(true); trackLead("booking", { email: bLead.email, phone: bLead.phone }); }
+      else { setBDone(true); trackLead("booking", { email: bLead.email, phone: bLead.phone }, eventId); }
     } catch {
       setBFail("Nepodařilo se odeslat. Zkuste to prosím znovu.");
     } finally { setBBusy(false); }
@@ -116,14 +118,16 @@ export function ContactBooking() {
     setFErr(e);
     if (Object.keys(e).length) return;
     setFBusy(true); setFFail(null);
+    const eventId = newEventId();
+    const fb = getFbCookies();
     try {
       const res = await fetch("/api/contact", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...fd, source: "homepage-form", utm: utmSummary() }),
+        body: JSON.stringify({ ...fd, source: "homepage-form", utm: utmSummary(), eventId, fbp: fb.fbp, fbc: fb.fbc }),
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json.ok) setFFail(json.error || "Něco se pokazilo, zkuste to prosím znovu.");
-      else { setFDone(true); trackLead("form", { email: fd.email, phone: fd.phone }); }
+      else { setFDone(true); trackLead("form", { email: fd.email, phone: fd.phone }, eventId); }
     } catch {
       setFFail("Nepodařilo se odeslat. Zkuste to prosím znovu.");
     } finally { setFBusy(false); }

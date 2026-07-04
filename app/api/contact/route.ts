@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendNotification, escapeHtml, isValidEmail } from "@/lib/mailer";
+import { sendMetaLead } from "@/lib/meta-capi";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -13,6 +14,9 @@ type ContactPayload = {
   msg?: string;
   source?: string;
   utm?: string;
+  eventId?: string;
+  fbp?: string;
+  fbc?: string;
 };
 
 export async function POST(request: Request) {
@@ -31,6 +35,9 @@ export async function POST(request: Request) {
   const msg = (body.msg ?? "").trim();
   const source = (body.source ?? "homepage").trim().slice(0, 80);
   const utm = (body.utm ?? "").trim().slice(0, 200);
+  const eventId = (body.eventId ?? "").trim().slice(0, 100);
+  const fbp = (body.fbp ?? "").trim().slice(0, 256);
+  const fbc = (body.fbc ?? "").trim().slice(0, 256);
 
   if (!name) return NextResponse.json({ ok: false, error: "Jméno je povinné" }, { status: 400 });
   if (!email || !isValidEmail(email))
@@ -83,6 +90,18 @@ export async function POST(request: Request) {
 
   try {
     await sendNotification({ subject, text, html, replyTo: email });
+    if (eventId) {
+      await sendMetaLead({
+        eventId,
+        email,
+        phone,
+        fbp,
+        fbc,
+        ip: request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || undefined,
+        userAgent: request.headers.get("user-agent") || undefined,
+        sourceUrl: request.headers.get("referer") || undefined,
+      });
+    }
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("contact send failed", err);

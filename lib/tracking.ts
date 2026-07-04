@@ -40,6 +40,29 @@ export function getUtm(): Record<string, string> {
   }
 }
 
+/** Nové event_id pro dedup browser Pixel ↔ server CAPI (stejné ID na obou stranách). */
+export function newEventId(): string {
+  try {
+    return window.crypto.randomUUID();
+  } catch {
+    return `bm-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+}
+
+function getCookie(name: string): string {
+  try {
+    const m = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)"));
+    return m ? decodeURIComponent(m[1]) : "";
+  } catch {
+    return "";
+  }
+}
+
+/** _fbp / _fbc cookies od Meta Pixelu — pro spárování server CAPI se stejným uživatelem/klikem. */
+export function getFbCookies(): { fbp: string; fbc: string } {
+  return { fbp: getCookie("_fbp"), fbc: getCookie("_fbc") };
+}
+
 /** Lidsky čitelný zdroj leadu pro e-mail Vojtovi (např. "google / cpc / barber-praha"). */
 export function utmSummary(): string {
   const u = getUtm();
@@ -54,7 +77,7 @@ export function utmSummary(): string {
  * user (e-mail/telefon) zapne Enhanced Conversions (Google) a advanced matching (Meta) — obojí
  * si hodnoty samo hashuje, surové se posílají jen přes HTTPS. Respektuje consent (ad_user_data).
  */
-export function trackLead(kind: "form" | "booking", user?: { email?: string; phone?: string }): void {
+export function trackLead(kind: "form" | "booking", user?: { email?: string; phone?: string }, eventId?: string): void {
   try {
     const w = window as unknown as { gtag?: Gtag; fbq?: Fbq; sklik?: { conversion?: SklikConv } };
     const email = user?.email?.trim().toLowerCase() || "";
@@ -80,8 +103,8 @@ export function trackLead(kind: "form" | "booking", user?: { email?: string; pho
     if (ADS_ID && ADS_LEAD_LABEL) {
       w.gtag?.("event", "conversion", { send_to: `${ADS_ID}/${ADS_LEAD_LABEL}` });
     }
-    // Meta Pixel — standardní událost Lead
-    w.fbq?.("track", "Lead", { content_name: kind });
+    // Meta Pixel — standardní událost Lead (eventID = dedup se server CAPI)
+    w.fbq?.("track", "Lead", { content_name: kind }, eventId ? { eventID: eventId } : undefined);
     // Seznam Sklik konverze (respektuje consent přes ad_storage)
     if (SKLIK_ID && w.sklik?.conversion) {
       w.sklik.conversion({ id: Number(SKLIK_ID), consent: 1 });
