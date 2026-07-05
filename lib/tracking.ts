@@ -6,6 +6,8 @@ const ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID; // "AW-XXXXXXXXX"
 const ADS_LEAD_LABEL = process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL; // konverzní label
 const SKLIK_ID = process.env.NEXT_PUBLIC_SKLIK_ID; // Sklik retargeting/konverze ID
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID; // pro Meta advanced matching
+// Google Ads dedikovaná konverze (event-based přes Google tag) — z ručně vytvořené konverzní akce
+const ADS_CONVERSION_EVENT = "conversion_event_submit_lead_form";
 
 type Gtag = (...a: unknown[]) => void;
 type Fbq = (...a: unknown[]) => void;
@@ -99,7 +101,9 @@ export function trackLead(kind: "form" | "booking", user?: { email?: string; pho
 
     // GA4 — standardní událost pro leady
     w.gtag?.("event", "generate_lead", { method: kind });
-    // Google Ads konverze (jen když je vyplněné vlastní ID i label)
+    // Google Ads dedikovaná konverze (event-based přes Google tag na webu)
+    w.gtag?.("event", ADS_CONVERSION_EVENT);
+    // Google Ads konverze staré cesty (jen když je vyplněné vlastní ID i label)
     if (ADS_ID && ADS_LEAD_LABEL) {
       w.gtag?.("event", "conversion", { send_to: `${ADS_ID}/${ADS_LEAD_LABEL}` });
     }
