@@ -20,14 +20,26 @@ export function loadConsentedScripts() {
   loadMetaPixel();
 }
 
+type ClarityFn = ((...a: unknown[]) => void) & { q?: unknown[] };
+
 function loadClarity() {
-  const w = window as unknown as { __bmClarity?: boolean };
+  const w = window as unknown as { __bmClarity?: boolean; clarity?: ClarityFn };
   if (w.__bmClarity) return;
   w.__bmClarity = true;
-  const s = document.createElement("script");
-  s.async = true;
-  s.src = "https://www.clarity.ms/tag/" + CLARITY_ID;
-  document.head.appendChild(s);
+  // Oficiální Clarity snippet: nejdřív queue funkce (window.clarity), pak tag.
+  // Bez té queue funkce se tag načte, ale relace se nenahrávají.
+  if (!w.clarity) {
+    const fn = function (...args: unknown[]) {
+      (w.clarity!.q = w.clarity!.q || []).push(args);
+    } as ClarityFn;
+    w.clarity = fn;
+  }
+  const t = document.createElement("script");
+  t.async = true;
+  t.src = "https://www.clarity.ms/tag/" + CLARITY_ID;
+  const first = document.getElementsByTagName("script")[0];
+  if (first && first.parentNode) first.parentNode.insertBefore(t, first);
+  else document.head.appendChild(t);
 }
 
 function loadMetaPixel() {
