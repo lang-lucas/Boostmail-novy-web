@@ -359,7 +359,7 @@ export default function Homepage() {
             <Link href="/pripadovky" className="hp-lift" style={{ display: "flex", gap: 24, alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "24px 28px", background: HP.dark, color: "#fff", borderRadius: 16, textDecoration: "none" }}>
               <div style={{ minWidth: 240, flex: 1 }}>
                 <div style={{ fontFamily: HP.mono, fontSize: 11, letterSpacing: 1, color: "rgba(255,255,255,0.5)", marginBottom: 8 }}>PŘÍPADOVÁ STUDIE · MNB BARBERSHOP</div>
-                <div style={{ fontSize: 23, fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.25 }}>U MNB jsme za pět měsíců přinesli <span style={{ color: "#7aa2f0" }}>247 rezervací navíc</span> a <span style={{ color: "#7aa2f0" }}>145 500 Kč</span>.</div>
+                <div style={{ fontSize: 23, fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.25 }}>Přehled MNB k 7. 7. 2026 ukazuje <span style={{ color: "#7aa2f0" }}>přes 300 rezervací navíc</span> a <span style={{ color: "#7aa2f0" }}>přibližně 180 000 Kč</span>.</div>
                 <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", marginTop: 8, lineHeight: 1.5 }}>Počítáme jen rezervace navíc, ne ty, co by přišly tak jako tak.</div>
               </div>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 24px", background: HP.accent, color: "#fff", borderRadius: 999, fontSize: 15, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0 }}>Otevřít celou případovku →</span>

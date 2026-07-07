@@ -104,8 +104,8 @@ const MNB_CAMPAIGNS = [
   { n: "06", kind: "perbarber", title: "Ke svému holiči", desc: "Zpráva jménem holiče, ke kterému klient reálně chodí." },
 ];
 const MNB_HEROSTATS = [
-  { v: "247", k: "rezervací navíc" },
-  { v: "145 500 Kč", k: "ověřený přínos" },
+  { v: "přes 300", k: "rezervací navíc" },
+  { v: "~180 000 Kč", k: "odhad přínosu" },
   { v: "2,1 %", k: "míra prokliku" },
 ];
 const MNB_RAMP_CARDS = [
@@ -116,7 +116,7 @@ const MNB_RAMP_CARDS = [
 const MNB_RESULT_META = [
   { v: "6 kampaní", k: "v provozu" },
   { v: "2,1 %", k: "míra prokliku" },
-  { v: "~5 měsíců", k: "sledované období" },
+  { v: "~3,5 měsíce", k: "spolupráce (od pol. března 2026)" },
 ];
 const MNB_NOTE = [
   "Klienty, co by přišli tak jako tak, nepočítáme.",
@@ -134,7 +134,7 @@ const MNB_NOCOUNT = [
   "SMS (naostro se neposílá) ani recenze (výsledek se netrackuje) do čísla nedáváme.",
 ];
 const MNB_QA = [
-  { q: "Kolik rezervací navíc e-maily přinesly?", a: "247 rezervací navíc za zhruba pět měsíců, v přepočtu 145 500 Kč ověřeného přínosu z reálného přehledu klienta.", link: null as null | { href: string; label: string } },
+  { q: "Kolik rezervací navíc e-maily přinesly?", a: "Přehled MNB k 7. 7. 2026 ukazuje přes 300 rezervací navíc po našich kampaních, v přepočtu přibližně 180 000 Kč odhadovaného přínosu. Bereme to z reálného přehledu klienta.", link: null as null | { href: string; label: string } },
   { q: "Jak dlouho trvá, než se výsledek projeví?", a: "Náběh je vidět po ~30 dnech, plný efekt nastupuje mezi 60. a 90. dnem. První měsíc je zahřívání.", link: null },
   { q: "Kolik to stojí?", a: "Nasazení od 15 000 Kč, měsíční provoz podle velikosti databáze. Přesně po exportu.", link: { href: "/#faq", label: "Podrobnosti v FAQ →" } },
   { q: "Pro koho to funguje?", a: "Pro barbershopy se zaběhnutou databází (stovky klientů a více) a rezervačním systémem. U MNB to byl Reservanto a SmartEmailing.", link: null },
@@ -214,10 +214,10 @@ export function PripadovkaMnb() {
           <div>
             <MnbByline />
             <h1 style={{ fontSize: 66, lineHeight: 0.98, fontWeight: 700, margin: "18px 0 20px", letterSpacing: "-0.035em" }}>
-              247 rezervací navíc a <em style={{ fontWeight: 400, fontStyle: "italic", color: BARBER }}>145 500 Kč</em> z e-mailů.
+              Přes 300 rezervací navíc a přibližně <em style={{ fontWeight: 400, fontStyle: "italic", color: BARBER }}>180 000 Kč</em> z e-mailů.
             </h1>
             <div style={{ fontSize: 17.5, lineHeight: 1.5, color: "rgba(0,0,0,0.7)", maxWidth: 540, marginBottom: 28 }}>
-              MNB Barbershop: tři pobočky v Praze se zaběhnutou klientelou. Za pět měsíců e-mailů, co vracejí zákazníky, přišlo 247 rezervací navíc. Číslo je z reálného přehledu, ne odhad na ubrousku.
+              MNB Barbershop: tři pobočky v Praze se zaběhnutou klientelou. S námi jede od druhé poloviny března 2026. Jejich přehled k 7. 7. 2026 ukazuje přes 300 rezervací navíc, které přišly po našich kampaních. Bereme to přímo z jejich přehledu, ne z odhadu na koleni.
             </div>
             <HeroStatRow />
           </div>
@@ -296,12 +296,12 @@ export function PripadovkaMnb() {
           <BarberLabel n="05" text="VÝSLEDEK" dark />
           <div className="m-res-a" style={{ display: "flex", gap: 64, flexWrap: "wrap", alignItems: "flex-end", margin: "24px 0 30px" }}>
             <div>
-              <div style={{ fontSize: 160, fontWeight: 700, color: BARBER, letterSpacing: "-0.05em", lineHeight: 0.82 }}>247</div>
+              <div style={{ fontSize: 160, fontWeight: 700, color: BARBER, letterSpacing: "-0.05em", lineHeight: 0.82 }}>300+</div>
               <div style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", marginTop: 10, fontFamily: MONO, letterSpacing: 0.5 }}>REZERVACÍ NAVÍC</div>
             </div>
             <div>
-              <div style={{ fontSize: 96, fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 0.85 }}>145 500 <span style={{ fontSize: 44, color: "rgba(255,255,255,0.6)" }}>Kč</span></div>
-              <div style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", marginTop: 10, fontFamily: MONO, letterSpacing: 0.5 }}>OVĚŘENÝ PŘÍNOS</div>
+              <div style={{ fontSize: 96, fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 0.85 }}>~180 000 <span style={{ fontSize: 44, color: "rgba(255,255,255,0.6)" }}>Kč</span></div>
+              <div style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", marginTop: 10, fontFamily: MONO, letterSpacing: 0.5 }}>ODHAD PŘÍNOSU</div>
             </div>
           </div>
           <div style={{ display: "flex", gap: 40, flexWrap: "wrap", marginBottom: 30 }}>

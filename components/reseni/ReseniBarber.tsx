@@ -36,7 +36,7 @@ const CAMPAIGNS = [
   { n: "08", kind: "prehled", title: "Přehled pro majitele", desc: "Vidíte černé na bílém, jak si držíte klientelu." },
 ];
 const PROOF = [
-  { name: "MNB Barbershop", place: "3 pobočky · Praha", named: true, resv: "247", rev: "145 500 Kč", link: "/pripadovky", agg: false },
+  { name: "MNB Barbershop", place: "3 pobočky · Praha", named: true, resv: "300+", rev: "~180 000 Kč", link: "/pripadovky", agg: false },
   { name: "Barbershop v Praze", place: "bez uvedení jména", named: false, resv: "225", rev: "176 575 Kč", link: null, agg: false },
   { name: "8 barbershopů", place: "agregát napříč obory", named: false, resv: "tisíce", rev: "~27 500 kontaktů", link: null, agg: true },
 ];

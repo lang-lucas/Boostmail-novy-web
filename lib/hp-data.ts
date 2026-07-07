@@ -68,11 +68,11 @@ export const HP_SEG: Segment[] = [
 
 export const HP_PROOF = [
   { shop: "Barbershop", cat: "Praha", bookings: 225, revenue: "176 575 Kč", period: "od spuštění", photo: "/proof/barber1.webp" },
-  { shop: "Barbershop", cat: "Praha · 3 pobočky", bookings: 247, revenue: "145 500 Kč", period: "od spuštění", photo: "/proof/barber2.jpg" },
+  { shop: "Barbershop", cat: "Praha · 3 pobočky", bookings: 310, revenue: "~180 000 Kč", period: "k 7. 7. 2026", photo: "/proof/barber2.jpg" },
 ];
 export type HpCase = { cat: string; name: string; summary: string; metric?: string; metricUnit?: string; placeholder?: boolean; anonymous?: boolean; href?: string };
 export const HP_CASES: HpCase[] = [
-  { cat: "Barbershop · Praha · 3 pobočky", name: "MNB", summary: "247 rezervací navíc napříč třemi pobočkami. Stálí klienti zpátky v křesle.", metric: "145 500 Kč", metricUnit: "obrat navíc / od spuštění", href: "/pripadovky" },
+  { cat: "Barbershop · Praha · 3 pobočky", name: "MNB", summary: "Přes 300 rezervací navíc napříč třemi pobočkami. Stálí klienti zpátky v křesle.", metric: "~180 000 Kč", metricUnit: "odhad přínosu · k 7. 7. 2026", href: "/pripadovky" },
   { cat: "Reálný klient · Praha", name: "Barbershop v Praze", summary: "225 rezervací navíc z databáze, kterou už dávno měl. Jméno na přání neuvádíme.", metric: "176 575 Kč", metricUnit: "obrat navíc / od spuštění" },
   { cat: "Barbershop · anonymizováno", name: "Barbershop, Brno", summary: "Reálný klient, jméno nezveřejňujeme. Detailní případovka v přípravě.", placeholder: true, anonymous: true },
 ];

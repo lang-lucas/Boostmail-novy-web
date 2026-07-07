@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ReseniBarber } from "@/components/reseni/ReseniBarber";
 
-const DESC = "Retenční e-mail marketing pro barbershopy. Vrátíme stálého klienta ve správný týden, zaplníme volná okna a sebereme recenze. Připomínka v cyklu střihu, reaktivace spících, naplnění oken. Reálné výsledky: MNB 247 rezervací navíc.";
+const DESC = "Retenční e-mail marketing pro barbershopy. Vrátíme stálého klienta ve správný týden, zaplníme volná okna a sebereme recenze. Připomínka v cyklu střihu, reaktivace spících, naplnění oken. Reálné výsledky: MNB přes 300 rezervací navíc.";
 
 export const metadata: Metadata = {
   title: "Retence pro barbershopy: stálí klienti zpátky v křesle",
