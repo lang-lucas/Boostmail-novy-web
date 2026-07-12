@@ -10,7 +10,6 @@ type ContactPayload = {
   email?: string;
   phone?: string;
   project?: string;
-  db?: string;
   msg?: string;
   source?: string;
   utm?: string;
@@ -31,7 +30,6 @@ export async function POST(request: Request) {
   const email = (body.email ?? "").trim();
   const phone = (body.phone ?? "").trim();
   const project = (body.project ?? "").trim();
-  const db = (body.db ?? "").trim();
   const msg = (body.msg ?? "").trim();
   const source = (body.source ?? "homepage").trim().slice(0, 80);
   const utm = (body.utm ?? "").trim().slice(0, 200);
@@ -53,8 +51,7 @@ export async function POST(request: Request) {
     `Jméno:       ${name}`,
     `Email:       ${email}`,
     `Telefon:     ${phone || "—"}`,
-    `Barbershop:  ${project}`,
-    `Velikost DB: ${db || "—"}`,
+    `Provozovna:  ${project}`,
     ``,
     `Zpráva:`,
     msg || "(bez zprávy)",
@@ -74,7 +71,7 @@ export async function POST(request: Request) {
       <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #0a0a0a;">
         <tr><td style="padding: 10px 0; color: rgba(0,0,0,0.55); width: 110px;">Email</td><td style="padding: 10px 0; font-weight: 600;"><a href="mailto:${escapeHtml(email)}" style="color: #1a5ada; text-decoration: none;">${escapeHtml(email)}</a></td></tr>
         <tr><td style="padding: 10px 0; color: rgba(0,0,0,0.55);">Telefon</td><td style="padding: 10px 0;">${phone ? `<a href="tel:${escapeHtml(phone)}" style="color: #0a0a0a; text-decoration: none; font-weight: 600;">${escapeHtml(phone)}</a>` : "—"}</td></tr>
-        <tr><td style="padding: 10px 0; color: rgba(0,0,0,0.55);">Velikost DB</td><td style="padding: 10px 0; font-weight: 600;">${escapeHtml(db) || "—"}</td></tr>
+        <tr><td style="padding: 10px 0; color: rgba(0,0,0,0.55);">Provozovna</td><td style="padding: 10px 0; font-weight: 600;">${escapeHtml(project)}</td></tr>
       </table>
       ${msg ? `
         <div style="margin-top: 24px; padding: 18px; background: #f4f4f4; border-radius: 10px;">

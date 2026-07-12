@@ -162,14 +162,14 @@ export function ContactBooking() {
               <label key={f.k} style={labelStyle}>
                 {f.l}
                 <input type={f.t} value={(fd as Record<string, string>)[f.k]} placeholder={f.p}
-                  onChange={(ev) => setFd({ ...fd, [f.k]: ev.target.value })} style={inputStyle(!!fErr[f.k])} />
+                  onChange={(ev) => { const v = ev.target.value; setFd((prev) => ({ ...prev, [f.k]: v })); }} style={inputStyle(!!fErr[f.k])} />
                 {errLine(fErr[f.k])}
               </label>
             ))}
             <label style={labelStyle}>
               ZPRÁVA (NEPOVINNÉ)
               <textarea rows={3} value={fd.msg} placeholder="Co řešíte? Kolik máte zákazníků v systému?"
-                onChange={(ev) => setFd({ ...fd, msg: ev.target.value })} style={{ ...inputStyle(false), resize: "vertical" }} />
+                onChange={(ev) => { const v = ev.target.value; setFd((prev) => ({ ...prev, msg: v })); }} style={{ ...inputStyle(false), resize: "vertical" }} />
             </label>
             {failLine(fFail)}
             <button type="submit" disabled={fBusy} className="hp-cta" style={{ marginTop: 4, padding: "14px 20px", background: fBusy ? "rgba(26,90,218,0.5)" : HP.accent, color: "#fff", border: "none", borderRadius: 999, fontSize: 15, fontWeight: 700, cursor: fBusy ? "wait" : "pointer", fontFamily: "inherit" }}>
@@ -197,7 +197,7 @@ export function ContactBooking() {
             <div key={f.k} style={{ marginBottom: 12 }}>
               <label style={labelStyle}>{f.l}</label>
               <input type={f.t} value={(bLead as Record<string, string>)[f.k]} placeholder={f.p}
-                onChange={(ev) => setBLead({ ...bLead, [f.k]: ev.target.value })} style={inputStyle(!!bErr[f.k])} />
+                onChange={(ev) => { const v = ev.target.value; setBLead((prev) => ({ ...prev, [f.k]: v })); }} style={inputStyle(!!bErr[f.k])} />
               {errLine(bErr[f.k])}
             </div>
           ))}

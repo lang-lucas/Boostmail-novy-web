@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     `Jméno:      ${name}`,
     `Email:      ${email}`,
     `Telefon:    ${phone}`,
-    `Barbershop: ${company || "—"}`,
+    `Provozovna: ${company || "—"}`,
     ``,
     `─────`,
     `Zdroj:  ${source}`,
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
       <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #0a0a0a;">
         <tr><td style="padding: 10px 0; color: rgba(0,0,0,0.55); width: 110px;">Email</td><td style="padding: 10px 0; font-weight: 600;"><a href="mailto:${escapeHtml(email)}" style="color: #1a5ada; text-decoration: none;">${escapeHtml(email)}</a></td></tr>
         <tr><td style="padding: 10px 0; color: rgba(0,0,0,0.55);">Telefon</td><td style="padding: 10px 0;"><a href="tel:${escapeHtml(phone)}" style="color: #0a0a0a; text-decoration: none; font-weight: 600;">${escapeHtml(phone)}</a></td></tr>
-        ${company ? `<tr><td style="padding: 10px 0; color: rgba(0,0,0,0.55);">Podnik</td><td style="padding: 10px 0; font-weight: 600;">${escapeHtml(company)}</td></tr>` : ""}
+        ${company ? `<tr><td style="padding: 10px 0; color: rgba(0,0,0,0.55);">Provozovna</td><td style="padding: 10px 0; font-weight: 600;">${escapeHtml(company)}</td></tr>` : ""}
       </table>
       <div style="margin-top: 24px; padding: 14px 16px; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 10px; font-size: 13px; color: #9a3412; line-height: 1.55;">
         ⚠️ Vlož termín do Google Calu a pošli pozvánku na <strong>${escapeHtml(email)}</strong>.
